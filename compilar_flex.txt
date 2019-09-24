@@ -1,0 +1,3 @@
+Compilar archivo flex: $lex (-o nombre.yy.cc) nombre.l
+Compilar archivo c: $gcc nombre.yy.c -lfl (-o nombre)
+Manual flex: https://westes.github.io/flex/manual/
