@@ -2,10 +2,11 @@ a + b
 S
 4 34
 verdadero
-"asdf"
+"a"
 -2.2e23
 -4e5657
 MiEntrAs
 mientras
 MIENTRAS
+'adf/'asdfasd'
 3

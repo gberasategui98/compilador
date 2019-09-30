@@ -10,12 +10,27 @@ MAY	 [A-Z]
 MIN	 [a-z]
 CARACTER   {MAY}|{MIN}
 ID       {CARACTER}({CARACTER}|{DIGIT})*
-OPERATOR "+"|"-"|"*"|"/"
+DR_OP_ARITMETICO "+"|"-"|"*"|"/"|"%"
+DR_OP_REALACIONALES "<"|"<="|">"|">="|"=="|"!="
+DR_ASIGNACION ":="
+DR_COMP_SECUENCIAL ";"
+DR_SEPARADOR ","
+DR_SUBRANGO ".."
+DR_DEF_TIPO ":"
+DR_IF "->"
+DR_ELSE "[]"
+DR_CREAR_TIPO "="
+DR_INICIO_ARRAY "["
+DR_FIN_ARRAY "]"
 SPACE [ \t\n]+
 LITERAL_ENTERO ("+"|"-")?{DIGIT}+(("e"|"E"){DIGIT}+)?
 LITERAL_REAL ("+"|"-")?{DIGIT}+("."{DIGIT}+)?(("e"|"E"){DIGIT}+)?
 LITERAL_BOOLEANO verdadero|falso
-LITERAL_CARACTER "\""(.)*"\""
+LITERAL_CARACTER "\""({CARACTER})"\""
+LITERAL_CADENA "\'"([^"\'"]|("/""\'"))*"\'"
+COMILLA_SIMPLE "\'"
+COMENTARIO "{"([^"}"]|"/""}")*"}"
+
 %%
 
 {LITERAL_ENTERO}	{printf("Literal entero: %s \n", yytext);}
@@ -32,14 +47,15 @@ mientras {printf(" He leido: %s\n", yytext);}
 
 {ID}        printf( "An identifier: %s\n", yytext );
 
-{OPERATOR}   printf( "An operator: %s\n", yytext );
+{DR_OP_ARITMETICO}   printf( "An operator: %s\n", yytext );
 
-LITERAL_CARACTER {printf( "Comentario: %s\n", yytext);}
+{LITERAL_CARACTER} {printf( "literal caracter: %s\n", yytext);}
+
+{LITERAL_CADENA} {printf( "Literal cadena: %s\n", yytext);}
+
+{COMENTARIO} {printf("Comentario: %s\n", yytext);}
 
 
-"{"[^{}\n]*"}"     /* eat up one-line comments */
-
-[ \t\n]+          /* eat up whitespace */
 
 .           printf( "Unrecognized character: %s\n", yytext );
 
@@ -52,27 +68,5 @@ if ( argc > 0 )
         yyin = fopen( argv[0], "r" );
 else
         yyin = stdin;
-/*
-void main() {
-   FILE *fp1, *fp2;
-   int a;
-
-   // Add rest of your code
-   // ...
-
-   do
-   {
-      a = fgetc(fp1);
-      if ( a != EOF )
-      {
-         a = tolower(a);
-         fputc(a, fp2);
-      }
-   } while (a != EOF);
-
-   // Add rest of your code
-   // ...
-}
-*/
 yylex();
 }
