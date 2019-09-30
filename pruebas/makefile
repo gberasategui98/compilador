@@ -4,4 +4,4 @@ clean: lex.yy.c a.out
 c: lex.yy.c
 	gcc lex.yy.c -lfl
 lex: prueba_scaner_pascal.l
-	lex prueba_scaner_pascal.l
+	lex -i prueba_scaner_pascal.l

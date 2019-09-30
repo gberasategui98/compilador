@@ -1,4 +1,11 @@
 a + b
 S
-34
-23.5
+4 34
+verdadero
+"asdf"
+-2.2e23
+-4e5657
+MiEntrAs
+mientras
+MIENTRAS
+3

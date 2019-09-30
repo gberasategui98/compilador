@@ -8,30 +8,34 @@
 DIGIT    [0-9]
 MAY	 [A-Z]
 MIN	 [a-z]
-LETTER   {MAY}|{MIN}
-ID       {LETTER}[a-z0-9]*
+CARACTER   {MAY}|{MIN}
+ID       {CARACTER}({CARACTER}|{DIGIT})*
 OPERATOR "+"|"-"|"*"|"/"
-
+SPACE [ \t\n]+
+LITERAL_ENTERO ("+"|"-")?{DIGIT}+(("e"|"E"){DIGIT}+)?
+LITERAL_REAL ("+"|"-")?{DIGIT}+("."{DIGIT}+)?(("e"|"E"){DIGIT}+)?
+LITERAL_BOOLEANO verdadero|falso
+LITERAL_CARACTER "\""(.)*"\""
 %%
 
-{DIGIT}+    {
-        printf( "An integer: %s (%d)\n", yytext,
-                atoi( yytext ) );
-        }
+{LITERAL_ENTERO}	{printf("Literal entero: %s \n", yytext);}
 
-{DIGIT}+"."{DIGIT}*        {
-        printf( "A float: %s (%g)\n", yytext,
-                atof( yytext ) );
-        }
-
+{LITERAL_REAL}	{printf("Literal real: %s \n", yytext);}
 
 if|then|begin|end|procedure|function        {
         printf( "A keyword: %s\n", yytext );
         }
 
+{LITERAL_BOOLEANO} {printf("Literal booleano: %s \n", yytext);}
+
+mientras {printf(" He leido: %s\n", yytext);}
+
 {ID}        printf( "An identifier: %s\n", yytext );
 
 {OPERATOR}   printf( "An operator: %s\n", yytext );
+
+LITERAL_CARACTER {printf( "Comentario: %s\n", yytext);}
+
 
 "{"[^{}\n]*"}"     /* eat up one-line comments */
 
