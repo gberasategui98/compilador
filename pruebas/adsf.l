@@ -30,7 +30,6 @@ LITERAL_CARACTER "\""({CARACTER})"\""
 LITERAL_CADENA "\'"([^"\'"]|("/""\'"))*"\'"
 COMILLA_SIMPLE "\'"
 COMENTARIO "{"([^"}"]|"/""}")*"}"
-DR_PALABRA_RESERVADA accion|algoritmo|booleano|cadena|caracter|const|continuar|de|dev|div|ent|entero|"e/s"|faccion|falgoritmo|falso|fconst|ffuncion|fmientras|fpara|fsi|ftipo|ftupla|funcion|fvar|hacer|hasta|mientras|mod|no|o|para|real|ref|sal|si|tabla|tipo|tupla|var|verdadero|y
 
 %%
 
@@ -38,9 +37,13 @@ DR_PALABRA_RESERVADA accion|algoritmo|booleano|cadena|caracter|const|continuar|d
 
 {LITERAL_REAL}	{printf("Literal real: %s \n", yytext);}
 
+if|then|begin|end|procedure|function        {
+        printf( "A keyword: %s\n", yytext );
+        }
+
 {LITERAL_BOOLEANO} {printf("Literal booleano: %s \n", yytext);}
 
-{DR_PALABRA_RESERVADA} {printf( "Palabra reservada: %s\n", yytext );}
+mientras {printf(" He leido: %s\n", yytext);}
 
 {ID}        printf( "An identifier: %s\n", yytext );
 
