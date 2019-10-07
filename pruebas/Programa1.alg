@@ -4,6 +4,9 @@ algoritmo intercambio;
 var
 	aux: entero;
 fvar
+si a==b ->
+	a:=b
+[] b:=a
 aux:=a;
 a:=b;
 b:=aux
