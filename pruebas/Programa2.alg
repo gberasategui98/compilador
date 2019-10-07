@@ -9,8 +9,11 @@ si a >= b y a >= c ->
 		med := c;
 		min := b
 	fsi
+<<<<<<< HEAD
 -34e56
 -34.34E8
+=======
+>>>>>>> e5d8a60f0c508758bb56afb3a953c8de45c57531
 [] b >= a y b >= c ->
 	max := b;
 	si a >= c ->
