@@ -1,0 +1,16 @@
+asignacion: ID T_ASIGNACION expresion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+desc_algoritmo: T_ALGORITMO T_ID T_COMP_SECUENCIAL
