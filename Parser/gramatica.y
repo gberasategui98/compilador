@@ -15,6 +15,10 @@ void yyerror(const char* s);
 	float fval;
 }
 
+%token v_cabecera_alg, v_bloque_alg, v_decl_globales, v_decl_a_f, v_decl_ent_sal
+%token v_bloque, v_declaracion_tipo, v_declaracion_const, v_accion_d
+%token v_declaraciones, v_instrucciones, v_declaracion_var
+%token v_funcion_d, v_lista_d_tipo
 %token<ival> T_ENTERO
 %token<fval> T_FLOAT
 
