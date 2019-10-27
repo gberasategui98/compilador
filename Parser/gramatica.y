@@ -15,16 +15,24 @@ void yyerror(const char* s);
 	float fval;
 }
 
-%token T_ALGORITMO, T_ID, T_COMP_SECUENCIAL, T_FALGORITMO, T_PUNTO, T_COMENTARIO
-%token T_TIPO, T_FTIPO, T_CONST, T_FCONST, T_VAR, T_FVAR
-%token T_CREAR_TIPO, T_TUPLA, T_FTUPLA
-%token T_TABLA, T_INICIO_ARRAY, T_SUBRANGO, T_FIN_ARRAY, T_DE
-%token T_REF, T_TIPO_BASE, T_LITERAL_CARACTER
-%token T_DEF_TIPO, T_LITERAL, T_COMA
-%token T_ENT, T_SAL
-%token T_OP_SUMA, T_OP_RESTA, T_OP_MULTI, T_OP_DIV, T_OP_MOD, T_OP_DIV_ENT
-%token T_PARENTESIS_APERTURA, T_PARENTESIS_CLAUSURA
-%token T_LITERAL_NUMERICO
+%token T_ALGORITMO T_ID T_COMP_SECUENCIAL T_FALGORITMO T_PUNTO T_COMENTARIO
+%token T_TIPO T_FTIPO T_CONST T_FCONST T_VAR T_FVAR
+%token T_CREAR_TIPO T_TUPLA T_FTUPLA
+%token T_TABLA T_INICIO_ARRAY T_SUBRANGO T_FIN_ARRAY T_DE
+%token T_REF T_TIPO_BASE T_LITERAL_CARACTER
+%token T_DEF_TIPO T_LITERAL T_COMA
+%token T_ENT T_SAL
+%token T_OP_SUMA T_OP_RESTA T_OP_MULTI T_OP_DIV T_OP_MOD T_OP_DIV_ENT
+%token T_PARENTESIS_APERTURA T_PARENTESIS_CLAUSURA
+%token T_LITERAL_NUMERICO T_Y T_O T_NO
+%token T_VERDADERO T_FALSO
+%token T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL
+%token T_OP_REL_MENOR_IGUAL T_IDENTIFICADOR T_CONTINUAR T_ASIGNACION
+%token T_SI T_SIMBOLO_BLOQUE_IF T_FSI
+%token T_SIMBOLO_ELSE T_MIENTRAS T_HACER T_FMIENTRAS
+%token T_PARA T_HASTA T_FPARA
+%token T_ACCION T_FACCION T_FUNCION T_DEV T_FFUNCION
+%token T_E_S
 
 
 %%
@@ -39,7 +47,7 @@ v_bloque_alg: v_bloque T_COMENTARIO { printf("v_bloque T_COMENTARIO\n"); }
 ;
 
 v_decl_globales: v_declaracion_tipo v_decl_globales { printf("v_declaracion_tipo v_decl_globales\n"); }
-	| v_declaracion_const v_decl_globales { printf("v_declaracion_const v_decl_globales\n"); }
+	| v_declaracion_cte v_decl_globales { printf("v_declaracion_cte v_decl_globales\n"); }
 	|
 ;
 
@@ -52,7 +60,7 @@ v_bloque: v_declaraciones v_instrucciones { printf("v_declaraciones v_instruccio
 ;
 
 v_declaraciones: v_declaracion_tipo v_declaraciones { printf("v_declaracion_tipo v_declaraciones\n"); }
-	| v_declaracion_const v_declaraciones { printf("v_declaracion_const v_declaraciones\n"); }
+	| v_declaracion_cte v_declaraciones { printf("v_declaracion_cte v_declaraciones\n"); }
 	| v_declaracion_var v_declaraciones { printf("v_declaracion_var v_declaraciones\n"); }
 	|
 ;
@@ -90,8 +98,8 @@ v_lista_d_cte: T_ID T_CREAR_TIPO T_LITERAL T_COMP_SECUENCIAL v_lista_d_cte { pri
 	|
 ;
 
-v_lista_d_var: v_lista_id T_CREAR_TIPO T_ID T_COMP_SECUENCIAL lista_d_var { printf("v_lista_id T_CREAR_TIPO T_ID T_COMP_SECUENCIAL lista_d_var\n"); }
-	| v_lista_id T_CREAR_TIPO d_tipo T_COMP_SECUENCIAL lista_d_var { printf("v_lista_id T_CREAR_TIPO d_tipo T_COMP_SECUENCIAL lista_d_var\n"); }
+v_lista_d_var: v_lista_id T_CREAR_TIPO T_ID T_COMP_SECUENCIAL v_lista_d_var { printf("v_lista_id T_CREAR_TIPO T_ID T_COMP_SECUENCIAL lista_d_var\n"); }
+	| v_lista_id T_CREAR_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_var { printf("v_lista_id T_CREAR_TIPO d_tipo T_COMP_SECUENCIAL lista_d_var\n"); }
 	|
 ;
 
@@ -100,8 +108,8 @@ v_lista_id: T_ID T_COMA v_lista_id { printf("T_ID T_COMA v_lista_id\n"); }
 ;
 
 v_decl_ent_sal: v_decl_ent { printf("v_decl_ent\n"); }
-	| v_delc_ent v_decl_salida { printf("v_delc_ent v_decl_salida\n"); }
-	| v_decl_salida { printf("v_decl_salida\n"); }
+	| v_decl_ent v_decl_sal { printf("v_decl_ent v_decl_sal\n"); }
+	| v_decl_sal { printf("v_decl_sal\n"); }
 ;
 
 v_decl_ent: T_ENT v_lista_d_var { printf("T_ENT v_lista_d_var\n"); }
@@ -182,13 +190,16 @@ v_it_cota_exp: T_MIENTRAS v_expresion T_HACER v_instrucciones T_FMIENTRAS {print
 v_it_cota_fija: T_PARA T_IDENTIFICADOR T_ASIGNACION v_expresion T_HASTA v_expresion T_HACER v_instrucciones T_FPARA {printf("T_PARA T_IDENTIFICADOR T_ASIGNACION v_expresion T_HASTA v_expresion T_HACER v_instrucciones T_FPARA\n")}
 ;
 
-v_accion_d: T_ACCION v_a_cabecera bloque T_FACCION { printf("T_ACCION v_a_cabecera bloque T_FACCION\n"); }
+v_accion_d: T_ACCION v_a_cabecera v_bloque T_FACCION { printf("T_ACCION v_a_cabecera bloque T_FACCION\n"); }
 ;
 
 v_funcion_d: T_FUNCION v_f_cabecera v_bloque T_DEV v_expresion T_FFUNCION { printf("T_FUNCION v_f_cabecera v_bloque T_DEV v_expresion T_FFUNCION\n"); }
 ;
 
 v_a_cabecera: T_ID T_PARENTESIS_APERTURA v_d_par_form T_PARENTESIS_CLAUSURA T_COMP_SECUENCIAL { printf("T_ID T_PARENTESIS_APERTURA v_d_par_form T_PARENTESIS_CLAUSURA T_COMP_SECUENCIAL\n"); }
+;
+
+v_f_cabecera: T_ID T_PARENTESIS_APERTURA v_lista_d_var T_PARENTESIS_CLAUSURA T_DEV v_d_tipo T_COMP_SECUENCIAL
 ;
 
 v_d_par_form: v_d_p_form T_COMP_SECUENCIAL v_d_par_form { printf("v_d_p_form T_COMP_SECUENCIAL v_d_par_form\n"); }
