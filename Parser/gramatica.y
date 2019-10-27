@@ -15,12 +15,16 @@ void yyerror(const char* s);
 	float fval;
 }
 
-%token v_cabecera_alg, v_bloque_alg, v_decl_globales, v_decl_a_f, v_decl_ent_sal
-%token v_bloque, v_declaracion_tipo, v_declaracion_const, v_accion_d
-%token v_declaraciones, v_instrucciones, v_declaracion_var
-%token v_funcion_d, v_lista_d_tipo
-%token<ival> T_ENTERO
-%token<fval> T_FLOAT
+%token T_ALGORITMO, T_ID, T_COMP_SECUENCIAL, T_FALGORITMO, T_PUNTO, T_COMENTARIO
+%token T_TIPO, T_FTIPO, T_CONST, T_FCONST, T_VAR, T_FVAR
+%token T_CREAR_TIPO, T_TUPLA, T_FTUPLA
+%token T_TABLA, T_INICIO_ARRAY, T_SUBRANGO, T_FIN_ARRAY, T_DE
+%token T_REF, T_TIPO_BASE, T_LITERAL_CARACTER
+%token T_DEF_TIPO, T_LITERAL, T_COMA
+%token T_ENT, T_SAL
+%token T_OP_SUMA, T_OP_RESTA, T_OP_MULTI, T_OP_DIV, T_OP_MOD, T_OP_DIV_ENT
+%token T_PARENTESIS_APERTURA, T_PARENTESIS_CLAUSURA
+%token T_LITERAL_NUMERICO
 
 
 %%
