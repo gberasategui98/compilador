@@ -1,0 +1,4 @@
+bison -v -d nombre.y
+flex nombre.l
+gcc -c lex.yy.c
+gcc nombre.tab.c lex.yy.o -lfl -lm
