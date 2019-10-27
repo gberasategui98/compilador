@@ -220,3 +220,20 @@ v_funcion_ll: T_ID T_PARENTESIS_APERTURA v_l_ll T_PARENTESIS_CLAUSURA { printf("
 v_l_ll: v_expresion T_COMA v_l_ll { printf("v_expresion T_COMA v_l_ll\n"); }
 	| v_expresion { printf("v_expresion\n"); }
 ;
+
+%%
+int main( int argc, char **argv ) {
+        ++argv, --argc; 
+	yyin = fopen( argv[0], "r" );
+
+	do {
+		yyparse();
+	} while(!feof(yyin));
+
+	return 0;
+}
+
+void yyerror(const char* s) {
+	fprintf(stderr, "Parse error: %s\n", s);
+	exit(1);
+}
