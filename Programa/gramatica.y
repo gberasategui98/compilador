@@ -10,11 +10,6 @@ extern FILE* yyin;
 void yyerror(const char* s);
 %}
 
-%union {
-	int ival;
-	float fval;
-}
-
 %token T_ALGORITMO T_ID T_COMP_SECUENCIAL T_FALGORITMO T_PUNTO T_COMENTARIO
 %token T_TIPO T_FTIPO T_CONST T_FCONST T_VAR T_FVAR
 %token T_CREAR_TIPO T_TUPLA T_FTUPLA
@@ -34,6 +29,9 @@ void yyerror(const char* s);
 %token T_ACCION T_FACCION T_FUNCION T_DEV T_FFUNCION
 %token T_E_S
 
+%nonassoc T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
+%left T_OP_SUMA T_OP_RESTA
+%left T_OP_MULTI T_OP_DIV T_OP_MOD T_OP_DIV_ENT
 
 %%
 
@@ -118,40 +116,31 @@ v_decl_ent: T_ENT v_lista_d_var { printf("T_ENT v_lista_d_var\n"); }
 v_decl_sal: T_SAL v_lista_d_var  { printf("T_SAL v_lista_d_var\n"); }
 ;
 
-v_expresion: v_exp_a  {printf("v_exp_a\n")}
-           |v_exp_b  {printf("v_exp_b\n")}
+v_expresion: v_exp  {printf("v_exp_a\n")}
            |v_funcion_ll  {printf("v_funcion_ll\n")}
 ;
 
-v_exp_a: v_exp_a T_OP_SUMA v_exp_a {printf("v_exp_a T_OP_SUMA v_exp_a\n")}
-       |v_exp_a T_OP_RESTA v_exp_a {printf("v_exp_a T_OP_RESTA v_exp_a\n")}
-       |v_exp_a T_OP_MULTI v_exp_a {printf("v_exp_a T_OP_MULTI v_exp_a\n")}
-       |v_exp_a T_OP_DIV v_exp_a {printf("v_exp_a T_OP_DIV v_exp_a\n")}
-       |v_exp_a T_OP_MOD v_exp_a {printf("v_exp_a T_OP_MOD v_exp_a\n")}
-;
-
-v_exp_a: v_exp_a T_OP_DIV_ENT v_exp_a {printf("v_exp_a T_OP_DIV_ENT v_exp_a\n")}
-         | T_PARENTESIS_APERTURA v_exp_a T_PARENTESIS_CLAUSURA {printf("T_PARENTESIS_APERTURA v_exp_a T_PARENTESIS_CLAUSURA\n")}
-         | v_operando {printf("v_operando\n")}
-         | T_LITERAL_NUMERICO {printf("T_LITERAL_NUMERICO\n")}
-         | T_OP_RESTA v_exp_a {printf("T_OP_RESTA v_exp_a\n")}
-;
-
-v_exp_b: v_exp_b T_Y v_exp_b {printf("v_exp_b T_Y v_exp_b\n")}
-        | v_exp_b T_O v_exp_b {printf("v_exp_b T_O v_exp_b\n")}
-        | T_NO v_exp_b {printf("T_NO v_exp_b\n")}
-        | v_operando {printf("v_operando\n")}
-        | T_VERDADERO {printf("T_VERDADERO\n")}
-        | T_FALSO {printf("T_FALSO\n")}
-;
-
-v_exp_b: v_exp_b T_OP_REL_MENOR v_exp_b {printf("v_exp_b T_OP_REL_MENOR v_exp_b\n")}
-        | v_exp_b T_OP_REL_MAYOR v_exp_b {printf("v_exp_b T_OP_REL_MAYOR v_exp_b\n")}
-        | v_exp_b T_OP_REL_IGUAL v_exp_b {printf("v_exp_b T_OP_REL_IGUAL v_exp_b\n")}
-        | v_exp_b T_OP_REL_DIF v_exp_b {printf("v_exp_b T_OP_REL_DIF v_exp_b\n")}
-        | v_exp_b T_OP_REL_MAYOR_IGUAL v_exp_b {printf("v_exp_b T_OP_REL_MAYOR_IGUAL v_exp_b\n")}
-        | v_exp_b T_OP_REL_MENOR_IGUAL v_exp_b {printf("v_exp_b T_OP_REL_MENOR_IGUAL v_exp_b\n")}
-        | T_PARENTESIS_APERTURA v_exp_b T_PARENTESIS_CLAUSURA {printf("T_PARENTESIS_APERTURA v_exp_b T_PARENTESIS_CLAUSURA\n")}
+v_exp: v_exp T_OP_SUMA v_exp {printf("v_exp_a T_OP_SUMA v_exp_a\n")}
+       | v_exp T_OP_RESTA v_exp {printf("v_exp_a T_OP_RESTA v_exp_a\n")}
+       | v_exp T_OP_MULTI v_exp {printf("v_exp_a T_OP_MULTI v_exp_a\n")}
+       | v_exp T_OP_DIV v_exp {printf("v_exp_a T_OP_DIV v_exp_a\n")}
+       | v_exp T_OP_MOD v_exp {printf("v_exp_a T_OP_MOD v_exp_a\n")}
+       | v_exp T_OP_DIV_ENT v_exp {printf("v_exp_a T_OP_DIV_ENT v_exp_a\n")}
+       | T_PARENTESIS_APERTURA v_exp T_PARENTESIS_CLAUSURA {printf("T_PARENTESIS_APERTURA v_exp_a T_PARENTESIS_CLAUSURA\n")}
+       | v_operando {printf("v_operando\n")}
+       | T_LITERAL_NUMERICO {printf("T_LITERAL_NUMERICO\n")}
+       | T_OP_RESTA v_exp %prec T_OP_MULTI {printf("T_OP_RESTA v_exp_a\n")}
+       | v_exp T_Y v_exp {printf("v_exp_b T_Y v_exp_b\n")}
+       | v_exp T_O v_exp {printf("v_exp_b T_O v_exp_b\n")}
+       | T_NO v_exp {printf("T_NO v_exp_b\n")}
+       | T_VERDADERO {printf("T_VERDADERO\n")}
+       | T_FALSO {printf("T_FALSO\n")}
+       | v_exp T_OP_REL_MENOR v_exp {printf("v_exp_b T_OP_REL_MENOR v_exp_b\n")}
+       | v_exp T_OP_REL_MAYOR v_exp {printf("v_exp_b T_OP_REL_MAYOR v_exp_b\n")}
+       | v_exp T_OP_REL_IGUAL v_exp {printf("v_exp_b T_OP_REL_IGUAL v_exp_b\n")}
+       | v_exp T_OP_REL_DIF v_exp {printf("v_exp_b T_OP_REL_DIF v_exp_b\n")}
+       | v_exp T_OP_REL_MAYOR_IGUAL v_exp {printf("v_exp_b T_OP_REL_MAYOR_IGUAL v_exp_b\n")}
+       | v_exp T_OP_REL_MENOR_IGUAL v_exp {printf("v_exp_b T_OP_REL_MENOR_IGUAL v_exp_b\n")}
 ;
 
 v_operando: T_IDENTIFICADOR {printf("T_IDENTIFICADOR\n")}
