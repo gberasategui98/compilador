@@ -106,61 +106,61 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    T_ALGORITMO = 258,
-    T_ID = 259,
-    T_COMP_SECUENCIAL = 260,
-    T_FALGORITMO = 261,
-    T_PUNTO = 262,
-    T_COMENTARIO = 263,
-    T_TIPO = 264,
-    T_FTIPO = 265,
-    T_CONST = 266,
-    T_FCONST = 267,
-    T_VAR = 268,
-    T_FVAR = 269,
-    T_CREAR_TIPO = 270,
-    T_TUPLA = 271,
-    T_FTUPLA = 272,
-    T_TABLA = 273,
-    T_INICIO_ARRAY = 274,
-    T_SUBRANGO = 275,
-    T_FIN_ARRAY = 276,
-    T_DE = 277,
-    T_REF = 278,
-    T_TIPO_BASE = 279,
-    T_LITERAL_CARACTER = 280,
-    T_DEF_TIPO = 281,
-    T_LITERAL = 282,
-    T_COMA = 283,
-    T_ENT = 284,
-    T_SAL = 285,
-    T_OP_SUMA = 286,
-    T_OP_RESTA = 287,
-    T_OP_MULTI = 288,
-    T_OP_DIV = 289,
-    T_OP_MOD = 290,
-    T_OP_DIV_ENT = 291,
-    T_PARENTESIS_APERTURA = 292,
-    T_PARENTESIS_CLAUSURA = 293,
-    T_LITERAL_NUMERICO = 294,
-    T_Y = 295,
-    T_O = 296,
-    T_NO = 297,
-    T_VERDADERO = 298,
-    T_FALSO = 299,
-    T_OP_REL_MENOR = 300,
-    T_OP_REL_MAYOR = 301,
-    T_OP_REL_IGUAL = 302,
-    T_OP_REL_DIF = 303,
-    T_OP_REL_MAYOR_IGUAL = 304,
-    T_OP_REL_MENOR_IGUAL = 305,
+    T_OP_SUMA = 258,
+    T_OP_RESTA = 259,
+    T_OP_MULTI = 260,
+    T_OP_DIV = 261,
+    T_OP_MOD = 262,
+    T_OP_DIV_ENT = 263,
+    T_OP_REL_MENOR = 264,
+    T_OP_REL_MAYOR = 265,
+    T_OP_REL_IGUAL = 266,
+    T_OP_REL_DIF = 267,
+    T_OP_REL_MAYOR_IGUAL = 268,
+    T_OP_REL_MENOR_IGUAL = 269,
+    T_ALGORITMO = 270,
+    T_ID = 271,
+    T_COMP_SECUENCIAL = 272,
+    T_FALGORITMO = 273,
+    T_PUNTO = 274,
+    T_COMENTARIO = 275,
+    T_TIPO = 276,
+    T_FTIPO = 277,
+    T_CONST = 278,
+    T_FCONST = 279,
+    T_VAR = 280,
+    T_FVAR = 281,
+    T_CREAR_TIPO = 282,
+    T_TUPLA = 283,
+    T_FTUPLA = 284,
+    T_TABLA = 285,
+    T_INICIO_ARRAY = 286,
+    T_SUBRANGO = 287,
+    T_FIN_ARRAY = 288,
+    T_DE = 289,
+    T_REF = 290,
+    T_TIPO_BASE = 291,
+    T_LITERAL_CARACTER = 292,
+    T_DEF_TIPO = 293,
+    T_LITERAL = 294,
+    T_COMA = 295,
+    T_ENT = 296,
+    T_SAL = 297,
+    T_PARENTESIS_APERTURA = 298,
+    T_PARENTESIS_CLAUSURA = 299,
+    T_LITERAL_NUMERICO = 300,
+    T_Y = 301,
+    T_O = 302,
+    T_NO = 303,
+    T_VERDADERO = 304,
+    T_FALSO = 305,
     T_IDENTIFICADOR = 306,
     T_CONTINUAR = 307,
     T_ASIGNACION = 308,
     T_SI = 309,
     T_SIMBOLO_BLOQUE_IF = 310,
-    T_FSI = 311,
-    T_SIMBOLO_ELSE = 312,
+    T_SIMBOLO_ELSE = 311,
+    T_FSI = 312,
     T_MIENTRAS = 313,
     T_HACER = 314,
     T_FMIENTRAS = 315,
@@ -434,7 +434,11 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  4
 /* YYLAST -- Last index in YYTABLE.  */
+<<<<<<< HEAD
 #define YYLAST   279
+=======
+#define YYLAST   306
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  70
@@ -496,6 +500,7 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
+<<<<<<< HEAD
        0,    37,    37,    40,    43,    46,    47,    48,    51,    52,
       53,    56,    59,    60,    61,    62,    65,    68,    71,    74,
       75,    78,    79,    80,    81,    82,    83,    86,    87,    90,
@@ -506,6 +511,19 @@ static const yytype_uint8 yyrline[] =
      151,   152,   155,   156,   157,   158,   159,   162,   165,   168,
      169,   172,   172,   175,   178,   181,   184,   187,   190,   193,
      194,   197,   198,   199,   202,   205,   208,   209
+=======
+       0,    43,    43,    46,    49,    52,    53,    54,    57,    58,
+      59,    62,    65,    66,    67,    68,    71,    74,    77,    80,
+      81,    84,    85,    86,    87,    88,    89,    92,    93,    96,
+      97,   100,   101,   104,   105,   106,   109,   110,   113,   114,
+     115,   118,   121,   124,   125,   126,   129,   130,   131,   132,
+     133,   136,   137,   138,   139,   140,   143,   144,   145,   146,
+     147,   148,   151,   152,   153,   154,   155,   156,   157,   160,
+     161,   162,   163,   166,   167,   170,   171,   172,   173,   174,
+     177,   180,   183,   184,   187,   187,   190,   193,   196,   199,
+     202,   205,   208,   209,   212,   213,   214,   217,   220,   223,
+     224
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 };
 #endif
 
@@ -514,23 +532,23 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "T_ALGORITMO", "T_ID",
+  "$end", "error", "$undefined", "T_OP_SUMA", "T_OP_RESTA", "T_OP_MULTI",
+  "T_OP_DIV", "T_OP_MOD", "T_OP_DIV_ENT", "T_OP_REL_MENOR",
+  "T_OP_REL_MAYOR", "T_OP_REL_IGUAL", "T_OP_REL_DIF",
+  "T_OP_REL_MAYOR_IGUAL", "T_OP_REL_MENOR_IGUAL", "T_ALGORITMO", "T_ID",
   "T_COMP_SECUENCIAL", "T_FALGORITMO", "T_PUNTO", "T_COMENTARIO", "T_TIPO",
   "T_FTIPO", "T_CONST", "T_FCONST", "T_VAR", "T_FVAR", "T_CREAR_TIPO",
   "T_TUPLA", "T_FTUPLA", "T_TABLA", "T_INICIO_ARRAY", "T_SUBRANGO",
   "T_FIN_ARRAY", "T_DE", "T_REF", "T_TIPO_BASE", "T_LITERAL_CARACTER",
-  "T_DEF_TIPO", "T_LITERAL", "T_COMA", "T_ENT", "T_SAL", "T_OP_SUMA",
-  "T_OP_RESTA", "T_OP_MULTI", "T_OP_DIV", "T_OP_MOD", "T_OP_DIV_ENT",
+  "T_DEF_TIPO", "T_LITERAL", "T_COMA", "T_ENT", "T_SAL",
   "T_PARENTESIS_APERTURA", "T_PARENTESIS_CLAUSURA", "T_LITERAL_NUMERICO",
-  "T_Y", "T_O", "T_NO", "T_VERDADERO", "T_FALSO", "T_OP_REL_MENOR",
-  "T_OP_REL_MAYOR", "T_OP_REL_IGUAL", "T_OP_REL_DIF",
-  "T_OP_REL_MAYOR_IGUAL", "T_OP_REL_MENOR_IGUAL", "T_IDENTIFICADOR",
-  "T_CONTINUAR", "T_ASIGNACION", "T_SI", "T_SIMBOLO_BLOQUE_IF", "T_FSI",
-  "T_SIMBOLO_ELSE", "T_MIENTRAS", "T_HACER", "T_FMIENTRAS", "T_PARA",
-  "T_HASTA", "T_FPARA", "T_ACCION", "T_FACCION", "T_FUNCION", "T_DEV",
-  "T_FFUNCION", "T_E_S", "$accept", "v_desc_algoritmo", "v_cabecera_alg",
-  "v_bloque_alg", "v_decl_globales", "v_decl_a_f", "v_bloque",
-  "v_declaraciones", "v_declaracion_tipo", "v_declaracion_cte",
+  "T_Y", "T_O", "T_NO", "T_VERDADERO", "T_FALSO", "T_IDENTIFICADOR",
+  "T_CONTINUAR", "T_ASIGNACION", "T_SI", "T_SIMBOLO_BLOQUE_IF",
+  "T_SIMBOLO_ELSE", "T_FSI", "T_MIENTRAS", "T_HACER", "T_FMIENTRAS",
+  "T_PARA", "T_HASTA", "T_FPARA", "T_ACCION", "T_FACCION", "T_FUNCION",
+  "T_DEV", "T_FFUNCION", "T_E_S", "$accept", "v_desc_algoritmo",
+  "v_cabecera_alg", "v_bloque_alg", "v_decl_globales", "v_decl_a_f",
+  "v_bloque", "v_declaraciones", "v_declaracion_tipo", "v_declaracion_cte",
   "v_declaracion_var", "v_lista_d_tipo", "v_d_tipo", "v_expresion_t",
   "v_lista_campos", "v_lista_d_cte", "v_lista_d_var", "v_lista_id",
   "v_decl_ent_sal", "v_decl_ent", "v_decl_sal", "v_expresion", "v_exp",
@@ -557,10 +575,17 @@ static const yytype_uint16 yytoknum[] =
 };
 # endif
 
+<<<<<<< HEAD
 #define YYPACT_NINF -110
 
 #define yypact_value_is_default(Yystate) \
   (!!((Yystate) == (-110)))
+=======
+#define YYPACT_NINF -116
+
+#define yypact_value_is_default(Yystate) \
+  (!!((Yystate) == (-116)))
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 #define YYTABLE_NINF -1
 
@@ -571,6 +596,7 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
+<<<<<<< HEAD
       17,    27,    65,    66,  -110,    38,    81,    84,    19,    20,
       38,    38,    77,    85,    82,    86,    98,    99,   101,     5,
       19,    19,    19,   102,   103,   -13,    20,    20,  -110,  -110,
@@ -594,6 +620,32 @@ static const yytype_int16 yypact[] =
      100,   175,  -110,   100,  -110,  -110,  -110,  -110,  -110,    11,
     -110,   132,   223,   191,  -110,   190,   241,  -110,   228,     5,
        5,  -110,    11,   157,   188,  -110,  -110,  -110
+=======
+       8,    60,    43,    61,  -116,    -4,    69,    76,   -13,    -2,
+      -4,    -4,    73,    80,    99,   104,   117,   119,   115,   111,
+     -13,   -13,   -13,   129,   145,   116,    -2,    -2,  -116,  -116,
+       5,   147,   132,   149,   138,   158,   165,   174,  -116,   152,
+    -116,  -116,   151,   151,   164,    -1,  -116,   205,  -116,  -116,
+    -116,  -116,  -116,  -116,  -116,  -116,  -116,   180,   -13,   181,
+     -13,   117,   117,   213,   192,  -116,  -116,  -116,    16,   193,
+     219,   208,     5,  -116,  -116,    56,  -116,    47,  -116,  -116,
+     220,   209,  -116,   252,   234,   207,  -116,  -116,   223,  -116,
+     117,   232,   140,  -116,   151,   193,   196,   202,   199,   212,
+     151,  -116,   151,   111,   156,   201,   117,   200,  -116,  -116,
+    -116,  -116,    16,   198,    -6,   151,   230,   240,    20,  -116,
+     206,   218,    47,   234,    -6,    69,    20,    16,    16,    16,
+      16,    16,    16,    47,    47,    47,    47,    47,    47,    47,
+      47,    76,  -116,  -116,   -12,   253,   231,   228,   111,   111,
+     151,    -6,   241,  -116,  -116,   117,   117,   117,   229,   258,
+    -116,   233,   151,   235,     5,  -116,   244,  -116,  -116,  -116,
+    -116,   198,   198,  -116,  -116,  -116,  -116,   127,   127,   127,
+     127,   127,   127,   234,   234,  -116,   117,   117,   151,  -116,
+     222,   224,   221,  -116,   247,   248,   249,   265,   156,   225,
+     226,  -116,   271,    20,  -116,  -116,  -116,   151,   236,  -116,
+     151,  -116,  -116,  -116,  -116,  -116,     5,  -116,   219,   256,
+     237,  -116,   238,   273,  -116,   261,   111,   111,  -116,     5,
+     222,   239,  -116,  -116,  -116
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -605,6 +657,7 @@ static const yytype_uint8 yydefact[] =
        7,     7,     0,     0,     0,     0,    35,     0,     0,     0,
       15,    15,    15,     0,     0,     0,    10,    10,     5,     6,
        0,     0,     0,     0,    37,     0,     0,     0,     4,     0,
+<<<<<<< HEAD
       66,    72,     0,     0,     0,     0,    11,    71,    73,    74,
       75,    82,    81,    76,    12,    13,    14,     0,    15,     0,
       15,    35,    35,     0,    38,    40,     8,     9,    23,    30,
@@ -624,26 +677,63 @@ static const yytype_uint8 yydefact[] =
        0,     0,    83,     0,    91,    92,    93,    87,    89,     0,
       86,    30,     0,     0,    78,     0,     0,    29,     0,     0,
        0,    88,     0,    80,     0,    22,    79,    84
+=======
+      69,    75,     0,     0,     0,     0,    11,    74,    76,    77,
+      78,    85,    84,    79,    12,    13,    14,     0,    15,     0,
+      15,    35,    35,     0,    38,    40,     8,     9,     0,    23,
+      30,     0,     0,    26,    28,     0,    54,     0,    60,    61,
+       0,     0,    27,    43,    44,    53,    45,    16,     0,    17,
+       0,     0,     0,     2,     0,     0,     0,     0,     0,     0,
+       0,    72,     0,     0,    93,     0,    35,     0,    41,    42,
+       3,    39,     0,    55,    53,     0,     0,     0,     0,    25,
+       0,     0,     0,    58,    59,    20,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,    32,    36,    18,     0,     0,   100,     0,     0,     0,
+       0,    70,     0,    80,    73,     0,     0,     0,     0,     0,
+      88,     0,     0,     0,     0,    21,     0,    52,    68,    19,
+      24,    46,    47,    48,    49,    50,    51,    62,    63,    64,
+      65,    66,    67,    56,    57,    31,    35,    35,     0,    97,
+      83,     0,     0,    71,     0,     0,     0,     0,    93,     0,
+       0,    98,     0,     0,    33,    34,    99,     0,     0,    86,
+       0,    94,    95,    96,    90,    92,     0,    89,    30,     0,
+       0,    81,     0,     0,    29,     0,     0,     0,    91,     0,
+      83,     0,    22,    82,    87
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
+<<<<<<< HEAD
     -110,  -110,  -110,  -110,    58,    51,    33,    18,     8,    70,
     -110,   160,   -68,  -109,    53,   134,   -54,   -77,  -110,  -110,
      201,   -41,    42,   -19,   -98,  -110,  -110,  -110,    43,  -110,
     -110,  -110,  -110,  -110,  -110,  -110,    79,  -110,  -110,  -110,
     -105
+=======
+    -116,  -116,  -116,  -116,   170,   160,    15,     6,    27,    34,
+    -116,   171,   -70,  -115,    81,   157,   -55,   -74,  -116,  -116,
+     242,   -28,    11,    14,   -19,  -102,  -116,  -116,  -116,    70,
+    -116,  -116,  -116,  -116,  -116,  -116,  -116,   103,  -116,  -116,
+    -116,  -111
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int16 yydefgoto[] =
 {
       -1,     2,     8,    17,     9,    25,    18,    19,    20,    21,
+<<<<<<< HEAD
       22,    13,    80,    81,   113,    15,    35,    36,    63,    64,
       65,    82,    83,    84,    46,    47,    48,    49,   201,    50,
       51,    52,    26,    27,    58,    60,   152,   153,    53,    85,
      141
+=======
+      22,    13,    80,    81,   117,    15,    35,    36,    63,    64,
+      65,    82,    83,    84,    85,    46,    47,    48,    49,   208,
+      50,    51,    52,    26,    27,    58,    60,   158,   159,    53,
+      86,   147
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -651,6 +741,7 @@ static const yytype_int16 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int16 yytable[] =
 {
+<<<<<<< HEAD
       45,    95,    96,   115,   148,   160,   157,   107,   108,    39,
       98,   163,   136,    10,   179,    68,    61,    62,    10,    10,
        1,    98,    99,   139,   149,   150,   100,    69,     6,    70,
@@ -679,10 +770,44 @@ static const yytype_int16 yytable[] =
      222,   227,   129,   130,   131,   132,   133,   134,   121,   122,
      123,   124,   125,   126,   217,   110,   226,   127,   128,   178,
      208,     0,    -1,    -1,    -1,    -1,    -1,    -1,     0,   162
+=======
+      45,   154,   119,   166,   163,   186,   108,   109,     6,    68,
+       7,   170,    16,    99,    96,    97,   142,     6,    99,     7,
+      68,    69,   145,     1,    68,   100,    54,    55,    56,   101,
+     100,   115,    10,    70,   101,    71,    95,    10,    10,    11,
+      72,    73,    74,     4,    11,    11,   190,   191,    75,   114,
+      76,   161,   102,    77,    78,    79,    40,    74,   124,   112,
+      68,    76,    23,    75,    24,    76,   146,    40,    77,    78,
+      79,    40,   152,   105,   153,   107,     3,   206,     5,   113,
+     151,   194,   195,   196,    45,    12,   120,   146,   219,   121,
+     122,   123,    14,   114,   202,    77,    78,    79,    40,    75,
+      30,    76,    31,   124,    77,    78,    79,    40,   114,   114,
+     114,   114,   114,   114,   124,   124,   124,   124,   124,   124,
+     124,   124,   192,   120,   230,   231,    32,    39,    33,    45,
+      45,   204,   205,    34,   200,    38,   121,    37,   171,   172,
+     173,   174,   175,   176,    68,    57,   223,   177,   178,   179,
+     180,   181,   182,   183,   184,    68,   144,    61,    62,   232,
+     146,    59,    40,    41,    87,    42,    89,    95,    70,    43,
+      71,    88,    44,   139,   140,    72,    73,    74,    90,   220,
+      28,    29,   222,    75,    91,    76,    66,    67,    77,    78,
+      79,    40,    92,    93,    75,    94,    76,   155,   156,    77,
+      78,    79,    40,   129,   130,   131,   132,    45,    45,   127,
+     128,   129,   130,   131,   132,    98,   -59,   -59,   -59,   -59,
+     -59,   -59,   103,   104,   106,   157,    99,   133,   134,   135,
+     136,   137,   138,   110,    62,   116,   115,   125,   100,   118,
+     141,   126,   101,   133,   134,   135,   136,   137,   138,   143,
+     167,   148,   150,   -59,   -59,   127,   128,   129,   130,   131,
+     132,   149,   168,    40,   139,   140,   160,   162,   164,   165,
+     187,   188,   189,   197,   193,   198,   203,   199,   207,   201,
+     139,   140,   214,   210,   209,   211,   212,   213,   218,   225,
+     228,   226,   216,   221,   217,   229,   169,   227,   185,   224,
+     233,   215,   234,     0,     0,     0,   111
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 };
 
 static const yytype_int16 yycheck[] =
 {
+<<<<<<< HEAD
       19,    42,    43,    71,   102,   114,   111,    61,    62,     4,
        7,   120,    89,     5,     5,     4,    29,    30,    10,    11,
        3,     7,    19,    91,    29,    30,    23,    16,     9,    18,
@@ -711,12 +836,46 @@ static const yytype_int16 yycheck[] =
       22,    63,    45,    46,    47,    48,    49,    50,    31,    32,
       33,    34,    35,    36,   211,    64,   223,    40,    41,   135,
      191,    -1,    45,    46,    47,    48,    49,    50,    -1,   119
+=======
+      19,   103,    72,   118,   115,    17,    61,    62,    21,     4,
+      23,   126,    25,    19,    42,    43,    90,    21,    19,    23,
+       4,    16,    92,    15,     4,    31,    20,    21,    22,    35,
+      31,    43,     5,    28,    35,    30,    16,    10,    11,     5,
+      35,    36,    37,     0,    10,    11,   148,   149,    43,    68,
+      45,   106,    53,    48,    49,    50,    51,    37,    77,    43,
+       4,    45,    64,    43,    66,    45,    94,    51,    48,    49,
+      50,    51,   100,    58,   102,    60,    16,   188,    17,    68,
+      99,   155,   156,   157,   103,    16,    75,   115,   203,    75,
+      43,    77,    16,   112,   164,    48,    49,    50,    51,    43,
+      27,    45,    22,   122,    48,    49,    50,    51,   127,   128,
+     129,   130,   131,   132,   133,   134,   135,   136,   137,   138,
+     139,   140,   150,   112,   226,   227,    27,    16,    24,   148,
+     149,   186,   187,    16,   162,    20,   122,    18,   127,   128,
+     129,   130,   131,   132,     4,    16,   216,   133,   134,   135,
+     136,   137,   138,   139,   140,     4,    16,    41,    42,   229,
+     188,    16,    51,    52,    17,    54,    17,    16,    28,    58,
+      30,    39,    61,    46,    47,    35,    36,    37,    40,   207,
+      10,    11,   210,    43,    26,    45,    26,    27,    48,    49,
+      50,    51,    27,    19,    43,    43,    45,    41,    42,    48,
+      49,    50,    51,     5,     6,     7,     8,   226,   227,     3,
+       4,     5,     6,     7,     8,    51,     9,    10,    11,    12,
+      13,    14,    17,    43,    43,    69,    19,     9,    10,    11,
+      12,    13,    14,    20,    42,    16,    43,    17,    31,    31,
+      17,    32,    35,     9,    10,    11,    12,    13,    14,    17,
+      44,    55,    53,    46,    47,     3,     4,     5,     6,     7,
+       8,    59,    44,    51,    46,    47,    65,    67,    38,    29,
+      17,    40,    44,    44,    33,    17,    32,    44,    56,    44,
+      46,    47,    17,    62,    60,    38,    38,    38,    17,    33,
+      17,    54,    67,    57,    68,    34,   125,    59,   141,   218,
+     230,   198,    63,    -1,    -1,    -1,    64
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
+<<<<<<< HEAD
        0,     3,    71,     4,     0,     5,     9,    11,    72,    74,
       78,    79,     4,    81,     4,    85,    13,    73,    76,    77,
       78,    79,    80,    64,    66,    75,   102,   103,    74,    74,
@@ -740,6 +899,32 @@ static const yytype_uint8 yystos[] =
       57,    98,    60,    62,    26,    26,    26,     5,   106,    67,
       68,     5,    83,    91,    56,    91,    82,    84,    21,    54,
       59,     5,    22,    94,    94,    82,    98,    63
+=======
+       0,    15,    71,    16,     0,    17,    21,    23,    72,    74,
+      78,    79,    16,    81,    16,    85,    25,    73,    76,    77,
+      78,    79,    80,    64,    66,    75,   103,   104,    74,    74,
+      27,    22,    27,    24,    16,    86,    87,    18,    20,    16,
+      51,    52,    54,    58,    61,    94,    95,    96,    97,    98,
+     100,   101,   102,   109,    77,    77,    77,    16,   105,    16,
+     106,    41,    42,    88,    89,    90,    75,    75,     4,    16,
+      28,    30,    35,    36,    37,    43,    45,    48,    49,    50,
+      82,    83,    91,    92,    93,    94,   110,    17,    39,    17,
+      40,    26,    27,    19,    43,    16,    91,    91,    51,    19,
+      31,    35,    53,    17,    43,    76,    43,    76,    86,    86,
+      20,    90,    43,    92,    94,    43,    16,    84,    31,    82,
+      92,    93,    43,    93,    94,    17,    32,     3,     4,     5,
+       6,     7,     8,     9,    10,    11,    12,    13,    14,    46,
+      47,    17,    87,    17,    16,    82,    91,   111,    55,    59,
+      53,    94,    91,    91,    95,    41,    42,    69,   107,   108,
+      65,    86,    67,   111,    38,    29,    83,    44,    44,    81,
+      83,    92,    92,    92,    92,    92,    92,    93,    93,    93,
+      93,    93,    93,    93,    93,    85,    17,    17,    40,    44,
+      95,    95,    91,    33,    87,    87,    87,    44,    17,    44,
+      91,    44,    82,    32,    86,    86,   111,    56,    99,    60,
+      62,    38,    38,    38,    17,   107,    67,    68,    17,    83,
+      91,    57,    91,    82,    84,    33,    54,    59,    17,    34,
+      95,    95,    82,    99,    63
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
@@ -1446,511 +1631,918 @@ yyreduce:
   switch (yyn)
     {
         case 2:
+<<<<<<< HEAD
 #line 37 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 43 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_ALGORITMO T_ID T_COMP_SECUENCIAL v_cabecera_alg v_bloque_alg T_FALGORITMO T_PUNTO\n"); }
 #line 1452 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
+<<<<<<< HEAD
 #line 40 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 46 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_decl_globales v_decl_a_f v_decl_ent_sal T_COMENTARIO\n"); }
 #line 1458 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
+<<<<<<< HEAD
 #line 43 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 49 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_bloque T_COMENTARIO\n"); }
 #line 1464 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
+<<<<<<< HEAD
 #line 46 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 52 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_declaracion_tipo v_decl_globales\n"); }
 #line 1470 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
+<<<<<<< HEAD
 #line 47 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 53 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_declaracion_cte v_decl_globales\n"); }
 #line 1476 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
+<<<<<<< HEAD
 #line 51 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 57 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_accion_d v_decl_a_f\n"); }
 #line 1482 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
+<<<<<<< HEAD
 #line 52 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 58 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_funcion_d v_decl_a_f\n"); }
 #line 1488 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
+<<<<<<< HEAD
 #line 56 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 62 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_declaraciones v_instrucciones\n"); }
 #line 1494 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
+<<<<<<< HEAD
 #line 59 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 65 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_declaracion_tipo v_declaraciones\n"); }
 #line 1500 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
+<<<<<<< HEAD
 #line 60 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 66 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_declaracion_cte v_declaraciones\n"); }
 #line 1506 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
+<<<<<<< HEAD
 #line 61 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 67 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_declaracion_var v_declaraciones\n"); }
 #line 1512 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
+<<<<<<< HEAD
 #line 65 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 71 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_TIPO v_lista_d_tipo T_FTIPO T_COMP_SECUENCIAL\n"); }
 #line 1518 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
+<<<<<<< HEAD
 #line 68 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 74 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_CONST v_lista_d_cte T_FCONST T_COMP_SECUENCIAL\n"); }
 #line 1524 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
+<<<<<<< HEAD
 #line 71 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 77 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_VAR v_lista_d_var T_FVAR T_COMP_SECUENCIAL\n"); }
 #line 1530 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
+<<<<<<< HEAD
 #line 74 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 80 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_ID T_CREAR_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_tipo\n"); }
 #line 1536 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
+<<<<<<< HEAD
 #line 78 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 84 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_TUPLA v_lista_campos T_FTUPLA\n"); }
 #line 1542 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
+<<<<<<< HEAD
 #line 79 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 85 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo\n"); }
 #line 1548 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
+<<<<<<< HEAD
 #line 80 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 86 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_ID\n"); }
 #line 1554 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
+<<<<<<< HEAD
 #line 81 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 87 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_expresion_t T_SUBRANGO v_expresion_t\n"); }
 #line 1560 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
+<<<<<<< HEAD
 #line 82 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 88 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_REF v_d_tipo\n"); }
 #line 1566 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
+<<<<<<< HEAD
 #line 83 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 89 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_TIPO_BASE\n"); }
 #line 1572 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
+<<<<<<< HEAD
 #line 86 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 92 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_expresion\n"); }
 #line 1578 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
+<<<<<<< HEAD
 #line 87 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 93 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_LITERAL_CARACTER\n"); }
 #line 1584 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
+<<<<<<< HEAD
 #line 90 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 96 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_ID T_DEF_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_campos\n"); }
 #line 1590 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
+<<<<<<< HEAD
 #line 94 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 100 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_ID T_CREAR_TIPO T_LITERAL T_COMP_SECUENCIAL v_lista_d_cte\n"); }
 #line 1596 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
+<<<<<<< HEAD
 #line 98 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 104 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_lista_id T_CREAR_TIPO T_ID T_COMP_SECUENCIAL lista_d_var\n"); }
 #line 1602 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
+<<<<<<< HEAD
 #line 99 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 105 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_lista_id T_CREAR_TIPO d_tipo T_COMP_SECUENCIAL lista_d_var\n"); }
 #line 1608 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
+<<<<<<< HEAD
 #line 103 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 109 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_ID T_COMA v_lista_id\n"); }
 #line 1614 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
+<<<<<<< HEAD
 #line 104 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 110 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_ID\n"); }
 #line 1620 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
+<<<<<<< HEAD
 #line 107 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 113 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_decl_ent\n"); }
 #line 1626 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
+<<<<<<< HEAD
 #line 108 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 114 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_decl_ent v_decl_sal\n"); }
 #line 1632 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
+<<<<<<< HEAD
 #line 109 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 115 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_decl_sal\n"); }
 #line 1638 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
+<<<<<<< HEAD
 #line 112 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 118 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_ENT v_lista_d_var\n"); }
 #line 1644 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
+<<<<<<< HEAD
 #line 115 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 121 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_SAL v_lista_d_var\n"); }
 #line 1650 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
+<<<<<<< HEAD
 #line 118 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 124 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_exp_a\n")}
 #line 1656 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
+<<<<<<< HEAD
 #line 119 "gramatica.y" /* yacc.c:1646  */
+=======
+#line 125 "gramatica.y" /* yacc.c:1646  */
+    {printf("v_exp_b\n")}
+#line 1685 "gramatica.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 45:
+#line 126 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_funcion_ll\n")}
 #line 1662 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 45:
 #line 122 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 46:
+#line 129 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_exp_a T_OP_SUMA v_exp_a\n")}
 #line 1668 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 46:
 #line 123 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 47:
+#line 130 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_exp_a T_OP_RESTA v_exp_a\n")}
 #line 1674 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 47:
 #line 124 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 48:
+#line 131 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_exp_a T_OP_MULTI v_exp_a\n")}
 #line 1680 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 48:
 #line 125 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 49:
+#line 132 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_exp_a T_OP_DIV v_exp_a\n")}
 #line 1686 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 49:
 #line 126 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 50:
+#line 133 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_exp_a T_OP_MOD v_exp_a\n")}
 #line 1692 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 50:
 #line 127 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 51:
+#line 136 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_exp_a T_OP_DIV_ENT v_exp_a\n")}
 #line 1698 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 51:
 #line 128 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 52:
+#line 137 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("T_PARENTESIS_APERTURA v_exp_a T_PARENTESIS_CLAUSURA\n")}
 #line 1704 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 52:
 #line 129 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 53:
+#line 138 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_operando\n")}
 #line 1710 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 53:
 #line 130 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 54:
+#line 139 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("T_LITERAL_NUMERICO\n")}
 #line 1716 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 54:
 #line 131 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 55:
+#line 140 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("T_OP_RESTA v_exp_a\n")}
 #line 1722 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 55:
 #line 132 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 56:
+#line 143 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_exp_b T_Y v_exp_b\n")}
 #line 1728 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 56:
 #line 133 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 57:
+#line 144 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_exp_b T_O v_exp_b\n")}
 #line 1734 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 57:
 #line 134 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 58:
+#line 145 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("T_NO v_exp_b\n")}
 #line 1740 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 58:
 #line 135 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 59:
+#line 146 "gramatica.y" /* yacc.c:1646  */
+    {printf("v_operando\n")}
+#line 1775 "gramatica.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 60:
+#line 147 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("T_VERDADERO\n")}
 #line 1746 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 59:
 #line 136 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 61:
+#line 148 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("T_FALSO\n")}
 #line 1752 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 60:
 #line 137 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 62:
+#line 151 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_exp_b T_OP_REL_MENOR v_exp_b\n")}
 #line 1758 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 61:
 #line 138 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 63:
+#line 152 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_exp_b T_OP_REL_MAYOR v_exp_b\n")}
 #line 1764 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 62:
 #line 139 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 64:
+#line 153 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_exp_b T_OP_REL_IGUAL v_exp_b\n")}
 #line 1770 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 63:
 #line 140 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 65:
+#line 154 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_exp_b T_OP_REL_DIF v_exp_b\n")}
 #line 1776 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 64:
 #line 141 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 66:
+#line 155 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_exp_b T_OP_REL_MAYOR_IGUAL v_exp_b\n")}
 #line 1782 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 65:
 #line 142 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 67:
+#line 156 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_exp_b T_OP_REL_MENOR_IGUAL v_exp_b\n")}
 #line 1788 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 66:
 #line 145 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 68:
+#line 157 "gramatica.y" /* yacc.c:1646  */
+    {printf("T_PARENTESIS_APERTURA v_exp_b T_PARENTESIS_CLAUSURA\n")}
+#line 1829 "gramatica.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 69:
+#line 160 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("T_IDENTIFICADOR\n")}
 #line 1794 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 67:
 #line 146 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 70:
+#line 161 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_operando T_PUNTO v_operando\n")}
 #line 1800 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 68:
 #line 147 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 71:
+#line 162 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_operando T_INICIO_ARRAY v_expresion T_FIN_ARRAY\n")}
 #line 1806 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 69:
 #line 148 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 72:
+#line 163 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_operando T_REF\n")}
 #line 1812 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 70:
 #line 151 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 73:
+#line 166 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_instruccion T_COMP_SECUENCIAL v_instrucciones\n")}
 #line 1818 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 71:
 #line 152 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 74:
+#line 167 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_instruccion\n")}
 #line 1824 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 72:
 #line 155 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 75:
+#line 170 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("T_CONTINUAR\n")}
 #line 1830 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 73:
 #line 156 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 76:
+#line 171 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_asignacion\n")}
 #line 1836 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 74:
 #line 157 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 77:
+#line 172 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_alternativa\n")}
 #line 1842 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 75:
 #line 158 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 78:
+#line 173 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_iteracion\n")}
 #line 1848 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 76:
 #line 159 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 79:
+#line 174 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_accion_ll\n")}
 #line 1854 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 77:
 #line 162 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 80:
+#line 177 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_operando T_ASIGNACION v_expresion\n")}
 #line 1860 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 78:
 #line 165 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 81:
+#line 180 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("T_SI v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones T_FSI\n")}
 #line 1866 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 79:
 #line 168 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 82:
+#line 183 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("T_SIMBOLO_ELSE v_expresion T_SI v_instrucciones v_lista_opciones\n")}
 #line 1872 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 82:
 #line 172 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 85:
+#line 187 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("v_it_cota_fija | v_it_cota_exp\n")}
 #line 1878 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 83:
 #line 175 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 86:
+#line 190 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("T_MIENTRAS v_expresion T_HACER v_instrucciones T_FMIENTRAS\n")}
 #line 1884 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 84:
 #line 178 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 87:
+#line 193 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     {printf("T_PARA T_IDENTIFICADOR T_ASIGNACION v_expresion T_HASTA v_expresion T_HACER v_instrucciones T_FPARA\n")}
 #line 1890 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 85:
 #line 181 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 88:
+#line 196 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_ACCION v_a_cabecera bloque T_FACCION\n"); }
 #line 1896 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 86:
 #line 184 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 89:
+#line 199 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_FUNCION v_f_cabecera v_bloque T_DEV v_expresion T_FFUNCION\n"); }
 #line 1902 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 87:
 #line 187 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 90:
+#line 202 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_ID T_PARENTESIS_APERTURA v_d_par_form T_PARENTESIS_CLAUSURA T_COMP_SECUENCIAL\n"); }
 #line 1908 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 89:
 #line 193 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 92:
+#line 208 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_d_p_form T_COMP_SECUENCIAL v_d_par_form\n"); }
 #line 1914 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 91:
 #line 197 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 94:
+#line 212 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_ENT v_lista_id T_DEF_TIPO\n"); }
 #line 1920 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 92:
 #line 198 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 95:
+#line 213 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_SAL v_lista_id T_DEF_TIPO\n"); }
 #line 1926 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 93:
 #line 199 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 96:
+#line 214 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_E_S v_lista_id T_DEF_TIPO\n"); }
 #line 1932 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 94:
 #line 202 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 97:
+#line 217 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_ID T_PARENTESIS_APERTURA v_l_ll T_PARENTESIS_CLAUSURA\n"); }
 #line 1938 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 95:
 #line 205 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 98:
+#line 220 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("T_ID T_PARENTESIS_APERTURA v_l_ll T_PARENTESIS_CLAUSURA\n"); }
 #line 1944 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 96:
 #line 208 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 99:
+#line 223 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_expresion T_COMA v_l_ll\n"); }
 #line 1950 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
+<<<<<<< HEAD
   case 97:
 #line 209 "gramatica.y" /* yacc.c:1646  */
+=======
+  case 100:
+#line 224 "gramatica.y" /* yacc.c:1646  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     { printf("v_expresion\n"); }
 #line 1956 "gramatica.tab.c" /* yacc.c:1646  */
     break;
@@ -2184,7 +2776,11 @@ yyreturn:
 #endif
   return yyresult;
 }
+<<<<<<< HEAD
 #line 212 "gramatica.y" /* yacc.c:1906  */
+=======
+#line 227 "gramatica.y" /* yacc.c:1906  */
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 int main( int argc, char **argv ) {
         ++argv, --argc; 

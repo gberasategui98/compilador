@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Estado 116 conflictos: 2 desplazamiento/reducción
 Estado 118 conflictos: 14 desplazamiento/reducción
 Estado 138 conflictos: 1 desplazamiento/reducción
@@ -16,6 +17,20 @@ Estado 174 conflictos: 2 desplazamiento/reducción
 Estado 175 conflictos: 2 desplazamiento/reducción
 Estado 176 conflictos: 2 desplazamiento/reducción
 Estado 177 conflictos: 2 desplazamiento/reducción
+=======
+Estado 85 conflictos: 17 reducción/reducción
+Estado 123 conflictos: 8 desplazamiento/reducción
+Estado 144 conflictos: 1 desplazamiento/reducción
+Estado 151 conflictos: 3 desplazamiento/reducción
+Estado 177 conflictos: 2 desplazamiento/reducción
+Estado 178 conflictos: 2 desplazamiento/reducción
+Estado 179 conflictos: 2 desplazamiento/reducción
+Estado 180 conflictos: 2 desplazamiento/reducción
+Estado 181 conflictos: 2 desplazamiento/reducción
+Estado 182 conflictos: 2 desplazamiento/reducción
+Estado 183 conflictos: 8 desplazamiento/reducción
+Estado 184 conflictos: 8 desplazamiento/reducción
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Gramática
@@ -163,6 +178,7 @@ Terminales con las reglas donde aparecen
 
 $end (0) 0
 error (256)
+<<<<<<< HEAD
 T_ALGORITMO (258) 1
 T_ID (259) 1 18 22 28 30 32 35 36 86 87 93 94
 T_COMP_SECUENCIAL (260) 1 15 16 17 18 28 30 32 33 69 86 87 88
@@ -230,6 +246,75 @@ T_FUNCION (321) 85
 T_DEV (322) 85 87
 T_FFUNCION (323) 85
 T_E_S (324) 92
+=======
+T_OP_SUMA (258) 45
+T_OP_RESTA (259) 46 54
+T_OP_MULTI (260) 47
+T_OP_DIV (261) 48
+T_OP_MOD (262) 49
+T_OP_DIV_ENT (263) 50
+T_OP_REL_MENOR (264) 61
+T_OP_REL_MAYOR (265) 62
+T_OP_REL_IGUAL (266) 63
+T_OP_REL_DIF (267) 64
+T_OP_REL_MAYOR_IGUAL (268) 65
+T_OP_REL_MENOR_IGUAL (269) 66
+T_ALGORITMO (270) 1
+T_ID (271) 1 18 22 28 30 32 35 36 89 90 96 97
+T_COMP_SECUENCIAL (272) 1 15 16 17 18 28 30 32 33 72 89 90 91
+T_FALGORITMO (273) 1
+T_PUNTO (274) 1 69
+T_COMENTARIO (275) 2 3
+T_TIPO (276) 15
+T_FTIPO (277) 15
+T_CONST (278) 16
+T_FCONST (279) 16
+T_VAR (280) 17
+T_FVAR (281) 17
+T_CREAR_TIPO (282) 18 30 32 33
+T_TUPLA (283) 20
+T_FTUPLA (284) 20
+T_TABLA (285) 21
+T_INICIO_ARRAY (286) 21 70
+T_SUBRANGO (287) 21 23
+T_FIN_ARRAY (288) 21 70
+T_DE (289) 21
+T_REF (290) 24 71
+T_TIPO_BASE (291) 25
+T_LITERAL_CARACTER (292) 27
+T_DEF_TIPO (293) 28 93 94 95
+T_LITERAL (294) 30
+T_COMA (295) 35 98
+T_ENT (296) 40 93
+T_SAL (297) 41 94
+T_PARENTESIS_APERTURA (298) 51 67 89 90 96 97
+T_PARENTESIS_CLAUSURA (299) 51 67 89 90 96 97
+T_LITERAL_NUMERICO (300) 53
+T_Y (301) 55
+T_O (302) 56
+T_NO (303) 57
+T_VERDADERO (304) 59
+T_FALSO (305) 60
+T_IDENTIFICADOR (306) 68 86
+T_CONTINUAR (307) 74
+T_ASIGNACION (308) 79 86
+T_SI (309) 80 81
+T_SIMBOLO_BLOQUE_IF (310) 80
+T_SIMBOLO_ELSE (311) 81
+T_FSI (312) 80
+T_MIENTRAS (313) 85
+T_HACER (314) 85 86
+T_FMIENTRAS (315) 85
+T_PARA (316) 86
+T_HASTA (317) 86
+T_FPARA (318) 86
+T_ACCION (319) 87
+T_FACCION (320) 87
+T_FUNCION (321) 88
+T_DEV (322) 88 90
+T_FFUNCION (323) 88
+T_E_S (324) 95
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 No terminales con las reglas donde aparecen
@@ -656,13 +741,13 @@ Estado 30
 
    18 v_lista_d_tipo: T_ID T_CREAR_TIPO . v_d_tipo T_COMP_SECUENCIAL v_lista_d_tipo
 
-    T_ID                   desplazar e ir al estado 68
-    T_TUPLA                desplazar e ir al estado 69
-    T_TABLA                desplazar e ir al estado 70
-    T_REF                  desplazar e ir al estado 71
-    T_TIPO_BASE            desplazar e ir al estado 72
-    T_LITERAL_CARACTER     desplazar e ir al estado 73
-    T_OP_RESTA             desplazar e ir al estado 74
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 69
+    T_TUPLA                desplazar e ir al estado 70
+    T_TABLA                desplazar e ir al estado 71
+    T_REF                  desplazar e ir al estado 72
+    T_TIPO_BASE            desplazar e ir al estado 73
+    T_LITERAL_CARACTER     desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -763,8 +848,13 @@ Estado 42
 
    77 v_alternativa: T_SI . v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones T_FSI
 
+<<<<<<< HEAD
     T_ID                   desplazar e ir al estado 94
     T_OP_RESTA             desplazar e ir al estado 74
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 95
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -782,8 +872,13 @@ Estado 43
 
    82 v_it_cota_exp: T_MIENTRAS . v_expresion T_HACER v_instrucciones T_FMIENTRAS
 
+<<<<<<< HEAD
     T_ID                   desplazar e ir al estado 94
     T_OP_RESTA             desplazar e ir al estado 74
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 95
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -1011,43 +1106,72 @@ Estado 67
 
 Estado 68
 
-   22 v_d_tipo: T_ID .
-   94 v_funcion_ll: T_ID . T_PARENTESIS_APERTURA v_l_ll T_PARENTESIS_CLAUSURA
+   54 v_exp_a: T_OP_RESTA . v_exp_a
 
-    T_PARENTESIS_APERTURA  desplazar e ir al estado 111
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_PARENTESIS_APERTURA  desplazar e ir al estado 112
+    T_LITERAL_NUMERICO     desplazar e ir al estado 76
+    T_IDENTIFICADOR        desplazar e ir al estado 40
 
-    $default  reduce usando la regla 22 (v_d_tipo)
+    v_exp_a     ir al estado 113
+    v_operando  ir al estado 114
 
 
 Estado 69
 
+   22 v_d_tipo: T_ID .
+   94 v_funcion_ll: T_ID . T_PARENTESIS_APERTURA v_l_ll T_PARENTESIS_CLAUSURA
+
+<<<<<<< HEAD
+    T_PARENTESIS_APERTURA  desplazar e ir al estado 111
+=======
+    T_PARENTESIS_APERTURA  desplazar e ir al estado 115
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
+
+    $default  reduce usando la regla 22 (v_d_tipo)
+
+
+Estado 70
+
    20 v_d_tipo: T_TUPLA . v_lista_campos T_FTUPLA
 
+<<<<<<< HEAD
     T_ID  desplazar e ir al estado 112
 
     $default  reduce usando la regla 29 (v_lista_campos)
 
     v_lista_campos  ir al estado 113
+=======
+    T_ID  desplazar e ir al estado 116
 
+    $default  reduce usando la regla 29 (v_lista_campos)
 
-Estado 70
-
-   21 v_d_tipo: T_TABLA . T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo
-
-    T_INICIO_ARRAY  desplazar e ir al estado 114
+    v_lista_campos  ir al estado 117
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 71
 
+   21 v_d_tipo: T_TABLA . T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo
+
+<<<<<<< HEAD
+    T_INICIO_ARRAY  desplazar e ir al estado 114
+=======
+    T_INICIO_ARRAY  desplazar e ir al estado 118
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
+
+
+Estado 72
+
    24 v_d_tipo: T_REF . v_d_tipo
 
-    T_ID                   desplazar e ir al estado 68
-    T_TUPLA                desplazar e ir al estado 69
-    T_TABLA                desplazar e ir al estado 70
-    T_REF                  desplazar e ir al estado 71
-    T_TIPO_BASE            desplazar e ir al estado 72
-    T_LITERAL_CARACTER     desplazar e ir al estado 73
-    T_OP_RESTA             desplazar e ir al estado 74
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 69
+    T_TUPLA                desplazar e ir al estado 70
+    T_TABLA                desplazar e ir al estado 71
+    T_REF                  desplazar e ir al estado 72
+    T_TIPO_BASE            desplazar e ir al estado 73
+    T_LITERAL_CARACTER     desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -1055,7 +1179,11 @@ Estado 71
     T_FALSO                desplazar e ir al estado 79
     T_IDENTIFICADOR        desplazar e ir al estado 40
 
+<<<<<<< HEAD
     v_d_tipo       ir al estado 115
+=======
+    v_d_tipo       ir al estado 119
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     v_expresion_t  ir al estado 81
     v_expresion    ir al estado 82
     v_exp          ir al estado 83
@@ -1063,20 +1191,21 @@ Estado 71
     v_funcion_ll   ir al estado 85
 
 
-Estado 72
+Estado 73
 
    25 v_d_tipo: T_TIPO_BASE .
 
     $default  reduce usando la regla 25 (v_d_tipo)
 
 
-Estado 73
+Estado 74
 
    27 v_expresion_t: T_LITERAL_CARACTER .
 
     $default  reduce usando la regla 27 (v_expresion_t)
 
 
+<<<<<<< HEAD
 Estado 74
 
    53 v_exp: T_OP_RESTA . v_exp
@@ -1093,11 +1222,13 @@ Estado 74
     v_operando  ir al estado 84
 
 
+=======
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 Estado 75
 
    50 v_exp: T_PARENTESIS_APERTURA . v_exp T_PARENTESIS_CLAUSURA
 
-    T_OP_RESTA             desplazar e ir al estado 74
+    T_OP_RESTA             desplazar e ir al estado 68
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -1205,16 +1336,96 @@ Estado 83
 
 Estado 84
 
+<<<<<<< HEAD
    51 v_exp: v_operando .
    66 v_operando: v_operando . T_PUNTO v_operando
    67           | v_operando . T_INICIO_ARRAY v_expresion T_FIN_ARRAY
    68           | v_operando . T_REF
+=======
+   43 v_expresion: v_exp_b .
+   55 v_exp_b: v_exp_b . T_Y v_exp_b
+   56        | v_exp_b . T_O v_exp_b
+   61        | v_exp_b . T_OP_REL_MENOR v_exp_b
+   62        | v_exp_b . T_OP_REL_MAYOR v_exp_b
+   63        | v_exp_b . T_OP_REL_IGUAL v_exp_b
+   64        | v_exp_b . T_OP_REL_DIF v_exp_b
+   65        | v_exp_b . T_OP_REL_MAYOR_IGUAL v_exp_b
+   66        | v_exp_b . T_OP_REL_MENOR_IGUAL v_exp_b
+
+    T_OP_REL_MENOR        desplazar e ir al estado 133
+    T_OP_REL_MAYOR        desplazar e ir al estado 134
+    T_OP_REL_IGUAL        desplazar e ir al estado 135
+    T_OP_REL_DIF          desplazar e ir al estado 136
+    T_OP_REL_MAYOR_IGUAL  desplazar e ir al estado 137
+    T_OP_REL_MENOR_IGUAL  desplazar e ir al estado 138
+    T_Y                   desplazar e ir al estado 139
+    T_O                   desplazar e ir al estado 140
+
+    $default  reduce usando la regla 43 (v_expresion)
+
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
     T_PUNTO         desplazar e ir al estado 98
     T_INICIO_ARRAY  desplazar e ir al estado 99
     T_REF           desplazar e ir al estado 100
 
+<<<<<<< HEAD
     $default  reduce usando la regla 51 (v_exp)
+=======
+   52 v_exp_a: v_operando .
+   58 v_exp_b: v_operando .
+   69 v_operando: v_operando . T_PUNTO v_operando
+   70           | v_operando . T_INICIO_ARRAY v_expresion T_FIN_ARRAY
+   71           | v_operando . T_REF
+
+    T_PUNTO         desplazar e ir al estado 99
+    T_INICIO_ARRAY  desplazar e ir al estado 100
+    T_REF           desplazar e ir al estado 101
+
+    T_OP_REL_MENOR         reduce usando la regla 58 (v_exp_b)
+    T_OP_REL_MAYOR         reduce usando la regla 58 (v_exp_b)
+    T_OP_REL_IGUAL         reduce usando la regla 58 (v_exp_b)
+    T_OP_REL_DIF           reduce usando la regla 58 (v_exp_b)
+    T_OP_REL_MAYOR_IGUAL   reduce usando la regla 58 (v_exp_b)
+    T_OP_REL_MENOR_IGUAL   reduce usando la regla 58 (v_exp_b)
+    T_COMP_SECUENCIAL      reduce usando la regla 52 (v_exp_a)
+    T_COMP_SECUENCIAL      [reduce usando la regla 58 (v_exp_b)]
+    T_COMENTARIO           reduce usando la regla 52 (v_exp_a)
+    T_COMENTARIO           [reduce usando la regla 58 (v_exp_b)]
+    T_SUBRANGO             reduce usando la regla 52 (v_exp_a)
+    T_SUBRANGO             [reduce usando la regla 58 (v_exp_b)]
+    T_FIN_ARRAY            reduce usando la regla 52 (v_exp_a)
+    T_FIN_ARRAY            [reduce usando la regla 58 (v_exp_b)]
+    T_COMA                 reduce usando la regla 52 (v_exp_a)
+    T_COMA                 [reduce usando la regla 58 (v_exp_b)]
+    T_PARENTESIS_CLAUSURA  reduce usando la regla 52 (v_exp_a)
+    T_PARENTESIS_CLAUSURA  [reduce usando la regla 58 (v_exp_b)]
+    T_Y                    reduce usando la regla 58 (v_exp_b)
+    T_O                    reduce usando la regla 58 (v_exp_b)
+    T_SI                   reduce usando la regla 52 (v_exp_a)
+    T_SI                   [reduce usando la regla 58 (v_exp_b)]
+    T_SIMBOLO_BLOQUE_IF    reduce usando la regla 52 (v_exp_a)
+    T_SIMBOLO_BLOQUE_IF    [reduce usando la regla 58 (v_exp_b)]
+    T_SIMBOLO_ELSE         reduce usando la regla 52 (v_exp_a)
+    T_SIMBOLO_ELSE         [reduce usando la regla 58 (v_exp_b)]
+    T_FSI                  reduce usando la regla 52 (v_exp_a)
+    T_FSI                  [reduce usando la regla 58 (v_exp_b)]
+    T_HACER                reduce usando la regla 52 (v_exp_a)
+    T_HACER                [reduce usando la regla 58 (v_exp_b)]
+    T_FMIENTRAS            reduce usando la regla 52 (v_exp_a)
+    T_FMIENTRAS            [reduce usando la regla 58 (v_exp_b)]
+    T_HASTA                reduce usando la regla 52 (v_exp_a)
+    T_HASTA                [reduce usando la regla 58 (v_exp_b)]
+    T_FPARA                reduce usando la regla 52 (v_exp_a)
+    T_FPARA                [reduce usando la regla 58 (v_exp_b)]
+    T_FACCION              reduce usando la regla 52 (v_exp_a)
+    T_FACCION              [reduce usando la regla 58 (v_exp_b)]
+    T_DEV                  reduce usando la regla 52 (v_exp_a)
+    T_DEV                  [reduce usando la regla 58 (v_exp_b)]
+    T_FFUNCION             reduce usando la regla 52 (v_exp_a)
+    T_FFUNCION             [reduce usando la regla 58 (v_exp_b)]
+    $default               reduce usando la regla 52 (v_exp_a)
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 85
@@ -1266,6 +1477,7 @@ Estado 91
    32 v_lista_d_var: v_lista_id T_CREAR_TIPO . T_ID T_COMP_SECUENCIAL v_lista_d_var
    33              | v_lista_id T_CREAR_TIPO . v_d_tipo T_COMP_SECUENCIAL v_lista_d_var
 
+<<<<<<< HEAD
     T_ID                   desplazar e ir al estado 138
     T_TUPLA                desplazar e ir al estado 69
     T_TABLA                desplazar e ir al estado 70
@@ -1273,6 +1485,15 @@ Estado 91
     T_TIPO_BASE            desplazar e ir al estado 72
     T_LITERAL_CARACTER     desplazar e ir al estado 73
     T_OP_RESTA             desplazar e ir al estado 74
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 144
+    T_TUPLA                desplazar e ir al estado 70
+    T_TABLA                desplazar e ir al estado 71
+    T_REF                  desplazar e ir al estado 72
+    T_TIPO_BASE            desplazar e ir al estado 73
+    T_LITERAL_CARACTER     desplazar e ir al estado 74
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -1299,8 +1520,13 @@ Estado 93
 
    93 v_accion_ll: T_ID T_PARENTESIS_APERTURA . v_l_ll T_PARENTESIS_CLAUSURA
 
+<<<<<<< HEAD
     T_ID                   desplazar e ir al estado 94
     T_OP_RESTA             desplazar e ir al estado 74
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 95
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -1319,7 +1545,11 @@ Estado 94
 
    94 v_funcion_ll: T_ID . T_PARENTESIS_APERTURA v_l_ll T_PARENTESIS_CLAUSURA
 
+<<<<<<< HEAD
     T_PARENTESIS_APERTURA  desplazar e ir al estado 111
+=======
+    T_PARENTESIS_APERTURA  desplazar e ir al estado 115
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 95
@@ -1356,8 +1586,13 @@ Estado 99
 
    67 v_operando: v_operando T_INICIO_ARRAY . v_expresion T_FIN_ARRAY
 
+<<<<<<< HEAD
     T_ID                   desplazar e ir al estado 94
     T_OP_RESTA             desplazar e ir al estado 74
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 95
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -1382,8 +1617,13 @@ Estado 101
 
    76 v_asignacion: v_operando T_ASIGNACION . v_expresion
 
+<<<<<<< HEAD
     T_ID                   desplazar e ir al estado 94
     T_OP_RESTA             desplazar e ir al estado 74
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 95
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -1489,10 +1729,62 @@ Estado 110
 
 Estado 111
 
+<<<<<<< HEAD
    94 v_funcion_ll: T_ID T_PARENTESIS_APERTURA . v_l_ll T_PARENTESIS_CLAUSURA
 
     T_ID                   desplazar e ir al estado 94
     T_OP_RESTA             desplazar e ir al estado 74
+=======
+   51 v_exp_a: T_PARENTESIS_APERTURA . v_exp_a T_PARENTESIS_CLAUSURA
+
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_PARENTESIS_APERTURA  desplazar e ir al estado 112
+    T_LITERAL_NUMERICO     desplazar e ir al estado 76
+    T_IDENTIFICADOR        desplazar e ir al estado 40
+
+    v_exp_a     ir al estado 120
+    v_operando  ir al estado 114
+
+
+Estado 113
+
+   45 v_exp_a: v_exp_a . T_OP_SUMA v_exp_a
+   46        | v_exp_a . T_OP_RESTA v_exp_a
+   47        | v_exp_a . T_OP_MULTI v_exp_a
+   48        | v_exp_a . T_OP_DIV v_exp_a
+   49        | v_exp_a . T_OP_MOD v_exp_a
+   50        | v_exp_a . T_OP_DIV_ENT v_exp_a
+   54        | T_OP_RESTA v_exp_a .
+
+    T_OP_MULTI    desplazar e ir al estado 129
+    T_OP_DIV      desplazar e ir al estado 130
+    T_OP_MOD      desplazar e ir al estado 131
+    T_OP_DIV_ENT  desplazar e ir al estado 132
+
+    $default  reduce usando la regla 54 (v_exp_a)
+
+
+Estado 114
+
+   52 v_exp_a: v_operando .
+   69 v_operando: v_operando . T_PUNTO v_operando
+   70           | v_operando . T_INICIO_ARRAY v_expresion T_FIN_ARRAY
+   71           | v_operando . T_REF
+
+    T_PUNTO         desplazar e ir al estado 99
+    T_INICIO_ARRAY  desplazar e ir al estado 100
+    T_REF           desplazar e ir al estado 101
+
+    $default  reduce usando la regla 52 (v_exp_a)
+
+
+Estado 115
+
+   97 v_funcion_ll: T_ID T_PARENTESIS_APERTURA . v_l_ll T_PARENTESIS_CLAUSURA
+
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 95
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -1507,20 +1799,29 @@ Estado 111
     v_l_ll        ir al estado 157
 
 
+<<<<<<< HEAD
 Estado 112
+=======
+Estado 116
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
    28 v_lista_campos: T_ID . T_DEF_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_campos
 
     T_DEF_TIPO  desplazar e ir al estado 158
 
 
+<<<<<<< HEAD
 Estado 113
+=======
+Estado 117
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
    20 v_d_tipo: T_TUPLA v_lista_campos . T_FTUPLA
 
     T_FTUPLA  desplazar e ir al estado 159
 
 
+<<<<<<< HEAD
 Estado 114
 
    21 v_d_tipo: T_TABLA T_INICIO_ARRAY . v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo
@@ -1528,6 +1829,15 @@ Estado 114
     T_ID                   desplazar e ir al estado 94
     T_LITERAL_CARACTER     desplazar e ir al estado 73
     T_OP_RESTA             desplazar e ir al estado 74
+=======
+Estado 118
+
+   21 v_d_tipo: T_TABLA T_INICIO_ARRAY . v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo
+
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 95
+    T_LITERAL_CARACTER     desplazar e ir al estado 74
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -1542,13 +1852,18 @@ Estado 114
     v_funcion_ll   ir al estado 85
 
 
+<<<<<<< HEAD
 Estado 115
+=======
+Estado 119
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
    24 v_d_tipo: T_REF v_d_tipo .
 
     $default  reduce usando la regla 24 (v_d_tipo)
 
 
+<<<<<<< HEAD
 Estado 116
 
    44 v_exp: v_exp . T_OP_SUMA v_exp
@@ -1661,6 +1976,111 @@ Estado 118
 
 
 Estado 119
+=======
+Estado 120
+
+   45 v_exp_a: v_exp_a . T_OP_SUMA v_exp_a
+   46        | v_exp_a . T_OP_RESTA v_exp_a
+   47        | v_exp_a . T_OP_MULTI v_exp_a
+   48        | v_exp_a . T_OP_DIV v_exp_a
+   49        | v_exp_a . T_OP_MOD v_exp_a
+   50        | v_exp_a . T_OP_DIV_ENT v_exp_a
+   51        | T_PARENTESIS_APERTURA v_exp_a . T_PARENTESIS_CLAUSURA
+
+    T_OP_SUMA              desplazar e ir al estado 127
+    T_OP_RESTA             desplazar e ir al estado 128
+    T_OP_MULTI             desplazar e ir al estado 129
+    T_OP_DIV               desplazar e ir al estado 130
+    T_OP_MOD               desplazar e ir al estado 131
+    T_OP_DIV_ENT           desplazar e ir al estado 132
+    T_PARENTESIS_CLAUSURA  desplazar e ir al estado 167
+
+
+Estado 121
+
+   55 v_exp_b: v_exp_b . T_Y v_exp_b
+   56        | v_exp_b . T_O v_exp_b
+   61        | v_exp_b . T_OP_REL_MENOR v_exp_b
+   62        | v_exp_b . T_OP_REL_MAYOR v_exp_b
+   63        | v_exp_b . T_OP_REL_IGUAL v_exp_b
+   64        | v_exp_b . T_OP_REL_DIF v_exp_b
+   65        | v_exp_b . T_OP_REL_MAYOR_IGUAL v_exp_b
+   66        | v_exp_b . T_OP_REL_MENOR_IGUAL v_exp_b
+   67        | T_PARENTESIS_APERTURA v_exp_b . T_PARENTESIS_CLAUSURA
+
+    T_OP_REL_MENOR         desplazar e ir al estado 133
+    T_OP_REL_MAYOR         desplazar e ir al estado 134
+    T_OP_REL_IGUAL         desplazar e ir al estado 135
+    T_OP_REL_DIF           desplazar e ir al estado 136
+    T_OP_REL_MAYOR_IGUAL   desplazar e ir al estado 137
+    T_OP_REL_MENOR_IGUAL   desplazar e ir al estado 138
+    T_PARENTESIS_CLAUSURA  desplazar e ir al estado 168
+    T_Y                    desplazar e ir al estado 139
+    T_O                    desplazar e ir al estado 140
+
+
+Estado 122
+
+   67 v_exp_b: T_PARENTESIS_APERTURA . v_exp_b T_PARENTESIS_CLAUSURA
+
+    T_PARENTESIS_APERTURA  desplazar e ir al estado 122
+    T_NO                   desplazar e ir al estado 77
+    T_VERDADERO            desplazar e ir al estado 78
+    T_FALSO                desplazar e ir al estado 79
+    T_IDENTIFICADOR        desplazar e ir al estado 40
+
+    v_exp_b     ir al estado 121
+    v_operando  ir al estado 124
+
+
+Estado 123
+
+   55 v_exp_b: v_exp_b . T_Y v_exp_b
+   56        | v_exp_b . T_O v_exp_b
+   57        | T_NO v_exp_b .
+   61        | v_exp_b . T_OP_REL_MENOR v_exp_b
+   62        | v_exp_b . T_OP_REL_MAYOR v_exp_b
+   63        | v_exp_b . T_OP_REL_IGUAL v_exp_b
+   64        | v_exp_b . T_OP_REL_DIF v_exp_b
+   65        | v_exp_b . T_OP_REL_MAYOR_IGUAL v_exp_b
+   66        | v_exp_b . T_OP_REL_MENOR_IGUAL v_exp_b
+
+    T_OP_REL_MENOR        desplazar e ir al estado 133
+    T_OP_REL_MAYOR        desplazar e ir al estado 134
+    T_OP_REL_IGUAL        desplazar e ir al estado 135
+    T_OP_REL_DIF          desplazar e ir al estado 136
+    T_OP_REL_MAYOR_IGUAL  desplazar e ir al estado 137
+    T_OP_REL_MENOR_IGUAL  desplazar e ir al estado 138
+    T_Y                   desplazar e ir al estado 139
+    T_O                   desplazar e ir al estado 140
+
+    T_OP_REL_MENOR        [reduce usando la regla 57 (v_exp_b)]
+    T_OP_REL_MAYOR        [reduce usando la regla 57 (v_exp_b)]
+    T_OP_REL_IGUAL        [reduce usando la regla 57 (v_exp_b)]
+    T_OP_REL_DIF          [reduce usando la regla 57 (v_exp_b)]
+    T_OP_REL_MAYOR_IGUAL  [reduce usando la regla 57 (v_exp_b)]
+    T_OP_REL_MENOR_IGUAL  [reduce usando la regla 57 (v_exp_b)]
+    T_Y                   [reduce usando la regla 57 (v_exp_b)]
+    T_O                   [reduce usando la regla 57 (v_exp_b)]
+    $default              reduce usando la regla 57 (v_exp_b)
+
+
+Estado 124
+
+   58 v_exp_b: v_operando .
+   69 v_operando: v_operando . T_PUNTO v_operando
+   70           | v_operando . T_INICIO_ARRAY v_expresion T_FIN_ARRAY
+   71           | v_operando . T_REF
+
+    T_PUNTO         desplazar e ir al estado 99
+    T_INICIO_ARRAY  desplazar e ir al estado 100
+    T_REF           desplazar e ir al estado 101
+
+    $default  reduce usando la regla 58 (v_exp_b)
+
+
+Estado 125
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
    18 v_lista_d_tipo: T_ID T_CREAR_TIPO v_d_tipo T_COMP_SECUENCIAL . v_lista_d_tipo
 
@@ -1675,9 +2095,15 @@ Estado 120
 
    23 v_d_tipo: v_expresion_t T_SUBRANGO . v_expresion_t
 
+<<<<<<< HEAD
     T_ID                   desplazar e ir al estado 94
     T_LITERAL_CARACTER     desplazar e ir al estado 73
     T_OP_RESTA             desplazar e ir al estado 74
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 95
+    T_LITERAL_CARACTER     desplazar e ir al estado 74
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -1696,101 +2122,165 @@ Estado 121
 
    44 v_exp: v_exp T_OP_SUMA . v_exp
 
+<<<<<<< HEAD
     T_OP_RESTA             desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_PARENTESIS_APERTURA  desplazar e ir al estado 112
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
     T_VERDADERO            desplazar e ir al estado 78
     T_FALSO                desplazar e ir al estado 79
     T_IDENTIFICADOR        desplazar e ir al estado 40
 
+<<<<<<< HEAD
     v_exp       ir al estado 164
     v_operando  ir al estado 84
+=======
+    v_exp_a     ir al estado 171
+    v_operando  ir al estado 114
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 122
 
    45 v_exp: v_exp T_OP_RESTA . v_exp
 
+<<<<<<< HEAD
     T_OP_RESTA             desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_PARENTESIS_APERTURA  desplazar e ir al estado 112
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
     T_VERDADERO            desplazar e ir al estado 78
     T_FALSO                desplazar e ir al estado 79
     T_IDENTIFICADOR        desplazar e ir al estado 40
 
+<<<<<<< HEAD
     v_exp       ir al estado 165
     v_operando  ir al estado 84
+=======
+    v_exp_a     ir al estado 172
+    v_operando  ir al estado 114
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 123
 
    46 v_exp: v_exp T_OP_MULTI . v_exp
 
+<<<<<<< HEAD
     T_OP_RESTA             desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_PARENTESIS_APERTURA  desplazar e ir al estado 112
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
     T_VERDADERO            desplazar e ir al estado 78
     T_FALSO                desplazar e ir al estado 79
     T_IDENTIFICADOR        desplazar e ir al estado 40
 
+<<<<<<< HEAD
     v_exp       ir al estado 166
     v_operando  ir al estado 84
+=======
+    v_exp_a     ir al estado 173
+    v_operando  ir al estado 114
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 124
 
    47 v_exp: v_exp T_OP_DIV . v_exp
 
+<<<<<<< HEAD
     T_OP_RESTA             desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_PARENTESIS_APERTURA  desplazar e ir al estado 112
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
     T_VERDADERO            desplazar e ir al estado 78
     T_FALSO                desplazar e ir al estado 79
     T_IDENTIFICADOR        desplazar e ir al estado 40
 
+<<<<<<< HEAD
     v_exp       ir al estado 167
     v_operando  ir al estado 84
+=======
+    v_exp_a     ir al estado 174
+    v_operando  ir al estado 114
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 125
 
    48 v_exp: v_exp T_OP_MOD . v_exp
 
+<<<<<<< HEAD
     T_OP_RESTA             desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_PARENTESIS_APERTURA  desplazar e ir al estado 112
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
     T_VERDADERO            desplazar e ir al estado 78
     T_FALSO                desplazar e ir al estado 79
     T_IDENTIFICADOR        desplazar e ir al estado 40
 
+<<<<<<< HEAD
     v_exp       ir al estado 168
     v_operando  ir al estado 84
+=======
+    v_exp_a     ir al estado 175
+    v_operando  ir al estado 114
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 126
 
    49 v_exp: v_exp T_OP_DIV_ENT . v_exp
 
+<<<<<<< HEAD
     T_OP_RESTA             desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_PARENTESIS_APERTURA  desplazar e ir al estado 112
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
     T_VERDADERO            desplazar e ir al estado 78
     T_FALSO                desplazar e ir al estado 79
     T_IDENTIFICADOR        desplazar e ir al estado 40
 
+<<<<<<< HEAD
     v_exp       ir al estado 169
     v_operando  ir al estado 84
+=======
+    v_exp_a     ir al estado 176
+    v_operando  ir al estado 114
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 127
 
+<<<<<<< HEAD
    54 v_exp: v_exp T_Y . v_exp
+=======
+   61 v_exp_b: v_exp_b T_OP_REL_MENOR . v_exp_b
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
     T_OP_RESTA             desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
@@ -1806,7 +2296,11 @@ Estado 127
 
 Estado 128
 
+<<<<<<< HEAD
    55 v_exp: v_exp T_O . v_exp
+=======
+   62 v_exp_b: v_exp_b T_OP_REL_MAYOR . v_exp_b
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
     T_OP_RESTA             desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
@@ -1822,7 +2316,11 @@ Estado 128
 
 Estado 129
 
+<<<<<<< HEAD
    59 v_exp: v_exp T_OP_REL_MENOR . v_exp
+=======
+   63 v_exp_b: v_exp_b T_OP_REL_IGUAL . v_exp_b
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
     T_OP_RESTA             desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
@@ -1838,7 +2336,11 @@ Estado 129
 
 Estado 130
 
+<<<<<<< HEAD
    60 v_exp: v_exp T_OP_REL_MAYOR . v_exp
+=======
+   64 v_exp_b: v_exp_b T_OP_REL_DIF . v_exp_b
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
     T_OP_RESTA             desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
@@ -1854,7 +2356,11 @@ Estado 130
 
 Estado 131
 
+<<<<<<< HEAD
    61 v_exp: v_exp T_OP_REL_IGUAL . v_exp
+=======
+   65 v_exp_b: v_exp_b T_OP_REL_MAYOR_IGUAL . v_exp_b
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
     T_OP_RESTA             desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
@@ -1870,7 +2376,11 @@ Estado 131
 
 Estado 132
 
+<<<<<<< HEAD
    62 v_exp: v_exp T_OP_REL_DIF . v_exp
+=======
+   66 v_exp_b: v_exp_b T_OP_REL_MENOR_IGUAL . v_exp_b
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
     T_OP_RESTA             desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
@@ -1886,7 +2396,11 @@ Estado 132
 
 Estado 133
 
+<<<<<<< HEAD
    63 v_exp: v_exp T_OP_REL_MAYOR_IGUAL . v_exp
+=======
+   55 v_exp_b: v_exp_b T_Y . v_exp_b
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
     T_OP_RESTA             desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
@@ -1902,7 +2416,11 @@ Estado 133
 
 Estado 134
 
+<<<<<<< HEAD
    64 v_exp: v_exp T_OP_REL_MENOR_IGUAL . v_exp
+=======
+   56 v_exp_b: v_exp_b T_O . v_exp_b
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
     T_OP_RESTA             desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
@@ -1947,8 +2465,13 @@ Estado 138
    32 v_lista_d_var: v_lista_id T_CREAR_TIPO T_ID . T_COMP_SECUENCIAL v_lista_d_var
    94 v_funcion_ll: T_ID . T_PARENTESIS_APERTURA v_l_ll T_PARENTESIS_CLAUSURA
 
+<<<<<<< HEAD
     T_COMP_SECUENCIAL      desplazar e ir al estado 179
     T_PARENTESIS_APERTURA  desplazar e ir al estado 111
+=======
+    T_COMP_SECUENCIAL      desplazar e ir al estado 186
+    T_PARENTESIS_APERTURA  desplazar e ir al estado 115
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
     T_COMP_SECUENCIAL  [reduce usando la regla 22 (v_d_tipo)]
 
@@ -2025,8 +2548,13 @@ Estado 144
 
    83 v_it_cota_fija: T_PARA T_IDENTIFICADOR T_ASIGNACION . v_expresion T_HASTA v_expresion T_HACER v_instrucciones T_FPARA
 
+<<<<<<< HEAD
     T_ID                   desplazar e ir al estado 94
     T_OP_RESTA             desplazar e ir al estado 74
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 95
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -2137,8 +2665,13 @@ Estado 156
 
    85 v_funcion_d: T_FUNCION v_f_cabecera v_bloque T_DEV . v_expresion T_FFUNCION
 
+<<<<<<< HEAD
     T_ID                   desplazar e ir al estado 94
     T_OP_RESTA             desplazar e ir al estado 74
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 95
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -2163,13 +2696,13 @@ Estado 158
 
    28 v_lista_campos: T_ID T_DEF_TIPO . v_d_tipo T_COMP_SECUENCIAL v_lista_campos
 
-    T_ID                   desplazar e ir al estado 68
-    T_TUPLA                desplazar e ir al estado 69
-    T_TABLA                desplazar e ir al estado 70
-    T_REF                  desplazar e ir al estado 71
-    T_TIPO_BASE            desplazar e ir al estado 72
-    T_LITERAL_CARACTER     desplazar e ir al estado 73
-    T_OP_RESTA             desplazar e ir al estado 74
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 69
+    T_TUPLA                desplazar e ir al estado 70
+    T_TABLA                desplazar e ir al estado 71
+    T_REF                  desplazar e ir al estado 72
+    T_TIPO_BASE            desplazar e ir al estado 73
+    T_LITERAL_CARACTER     desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -2222,6 +2755,7 @@ Estado 163
 
 Estado 164
 
+<<<<<<< HEAD
    44 v_exp: v_exp . T_OP_SUMA v_exp
    44      | v_exp T_OP_SUMA v_exp .
    45      | v_exp . T_OP_RESTA v_exp
@@ -2248,10 +2782,27 @@ Estado 164
     T_Y       [reduce usando la regla 44 (v_exp)]
     T_O       [reduce usando la regla 44 (v_exp)]
     $default  reduce usando la regla 44 (v_exp)
+=======
+   45 v_exp_a: v_exp_a . T_OP_SUMA v_exp_a
+   45        | v_exp_a T_OP_SUMA v_exp_a .
+   46        | v_exp_a . T_OP_RESTA v_exp_a
+   47        | v_exp_a . T_OP_MULTI v_exp_a
+   48        | v_exp_a . T_OP_DIV v_exp_a
+   49        | v_exp_a . T_OP_MOD v_exp_a
+   50        | v_exp_a . T_OP_DIV_ENT v_exp_a
+
+    T_OP_MULTI    desplazar e ir al estado 129
+    T_OP_DIV      desplazar e ir al estado 130
+    T_OP_MOD      desplazar e ir al estado 131
+    T_OP_DIV_ENT  desplazar e ir al estado 132
+
+    $default  reduce usando la regla 45 (v_exp_a)
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 165
 
+<<<<<<< HEAD
    44 v_exp: v_exp . T_OP_SUMA v_exp
    45      | v_exp . T_OP_RESTA v_exp
    45      | v_exp T_OP_RESTA v_exp .
@@ -2278,10 +2829,27 @@ Estado 165
     T_Y       [reduce usando la regla 45 (v_exp)]
     T_O       [reduce usando la regla 45 (v_exp)]
     $default  reduce usando la regla 45 (v_exp)
+=======
+   45 v_exp_a: v_exp_a . T_OP_SUMA v_exp_a
+   46        | v_exp_a . T_OP_RESTA v_exp_a
+   46        | v_exp_a T_OP_RESTA v_exp_a .
+   47        | v_exp_a . T_OP_MULTI v_exp_a
+   48        | v_exp_a . T_OP_DIV v_exp_a
+   49        | v_exp_a . T_OP_MOD v_exp_a
+   50        | v_exp_a . T_OP_DIV_ENT v_exp_a
+
+    T_OP_MULTI    desplazar e ir al estado 129
+    T_OP_DIV      desplazar e ir al estado 130
+    T_OP_MOD      desplazar e ir al estado 131
+    T_OP_DIV_ENT  desplazar e ir al estado 132
+
+    $default  reduce usando la regla 46 (v_exp_a)
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 166
 
+<<<<<<< HEAD
    44 v_exp: v_exp . T_OP_SUMA v_exp
    45      | v_exp . T_OP_RESTA v_exp
    46      | v_exp . T_OP_MULTI v_exp
@@ -2304,10 +2872,22 @@ Estado 166
     T_Y       [reduce usando la regla 46 (v_exp)]
     T_O       [reduce usando la regla 46 (v_exp)]
     $default  reduce usando la regla 46 (v_exp)
+=======
+   45 v_exp_a: v_exp_a . T_OP_SUMA v_exp_a
+   46        | v_exp_a . T_OP_RESTA v_exp_a
+   47        | v_exp_a . T_OP_MULTI v_exp_a
+   47        | v_exp_a T_OP_MULTI v_exp_a .
+   48        | v_exp_a . T_OP_DIV v_exp_a
+   49        | v_exp_a . T_OP_MOD v_exp_a
+   50        | v_exp_a . T_OP_DIV_ENT v_exp_a
+
+    $default  reduce usando la regla 47 (v_exp_a)
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 167
 
+<<<<<<< HEAD
    44 v_exp: v_exp . T_OP_SUMA v_exp
    45      | v_exp . T_OP_RESTA v_exp
    46      | v_exp . T_OP_MULTI v_exp
@@ -2330,10 +2910,22 @@ Estado 167
     T_Y       [reduce usando la regla 47 (v_exp)]
     T_O       [reduce usando la regla 47 (v_exp)]
     $default  reduce usando la regla 47 (v_exp)
+=======
+   45 v_exp_a: v_exp_a . T_OP_SUMA v_exp_a
+   46        | v_exp_a . T_OP_RESTA v_exp_a
+   47        | v_exp_a . T_OP_MULTI v_exp_a
+   48        | v_exp_a . T_OP_DIV v_exp_a
+   48        | v_exp_a T_OP_DIV v_exp_a .
+   49        | v_exp_a . T_OP_MOD v_exp_a
+   50        | v_exp_a . T_OP_DIV_ENT v_exp_a
+
+    $default  reduce usando la regla 48 (v_exp_a)
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 168
 
+<<<<<<< HEAD
    44 v_exp: v_exp . T_OP_SUMA v_exp
    45      | v_exp . T_OP_RESTA v_exp
    46      | v_exp . T_OP_MULTI v_exp
@@ -2356,10 +2948,22 @@ Estado 168
     T_Y       [reduce usando la regla 48 (v_exp)]
     T_O       [reduce usando la regla 48 (v_exp)]
     $default  reduce usando la regla 48 (v_exp)
+=======
+   45 v_exp_a: v_exp_a . T_OP_SUMA v_exp_a
+   46        | v_exp_a . T_OP_RESTA v_exp_a
+   47        | v_exp_a . T_OP_MULTI v_exp_a
+   48        | v_exp_a . T_OP_DIV v_exp_a
+   49        | v_exp_a . T_OP_MOD v_exp_a
+   49        | v_exp_a T_OP_MOD v_exp_a .
+   50        | v_exp_a . T_OP_DIV_ENT v_exp_a
+
+    $default  reduce usando la regla 49 (v_exp_a)
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 169
 
+<<<<<<< HEAD
    44 v_exp: v_exp . T_OP_SUMA v_exp
    45      | v_exp . T_OP_RESTA v_exp
    46      | v_exp . T_OP_MULTI v_exp
@@ -2382,10 +2986,22 @@ Estado 169
     T_Y       [reduce usando la regla 49 (v_exp)]
     T_O       [reduce usando la regla 49 (v_exp)]
     $default  reduce usando la regla 49 (v_exp)
+=======
+   45 v_exp_a: v_exp_a . T_OP_SUMA v_exp_a
+   46        | v_exp_a . T_OP_RESTA v_exp_a
+   47        | v_exp_a . T_OP_MULTI v_exp_a
+   48        | v_exp_a . T_OP_DIV v_exp_a
+   49        | v_exp_a . T_OP_MOD v_exp_a
+   50        | v_exp_a . T_OP_DIV_ENT v_exp_a
+   50        | v_exp_a T_OP_DIV_ENT v_exp_a .
+
+    $default  reduce usando la regla 50 (v_exp_a)
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 170
 
+<<<<<<< HEAD
    44 v_exp: v_exp . T_OP_SUMA v_exp
    45      | v_exp . T_OP_RESTA v_exp
    46      | v_exp . T_OP_MULTI v_exp
@@ -2432,10 +3048,29 @@ Estado 170
     T_OP_REL_MAYOR_IGUAL  [reduce usando la regla 54 (v_exp)]
     T_OP_REL_MENOR_IGUAL  [reduce usando la regla 54 (v_exp)]
     $default              reduce usando la regla 54 (v_exp)
+=======
+   55 v_exp_b: v_exp_b . T_Y v_exp_b
+   56        | v_exp_b . T_O v_exp_b
+   61        | v_exp_b . T_OP_REL_MENOR v_exp_b
+   61        | v_exp_b T_OP_REL_MENOR v_exp_b .
+   62        | v_exp_b . T_OP_REL_MAYOR v_exp_b
+   63        | v_exp_b . T_OP_REL_IGUAL v_exp_b
+   64        | v_exp_b . T_OP_REL_DIF v_exp_b
+   65        | v_exp_b . T_OP_REL_MAYOR_IGUAL v_exp_b
+   66        | v_exp_b . T_OP_REL_MENOR_IGUAL v_exp_b
+
+    T_Y  desplazar e ir al estado 139
+    T_O  desplazar e ir al estado 140
+
+    T_Y       [reduce usando la regla 61 (v_exp_b)]
+    T_O       [reduce usando la regla 61 (v_exp_b)]
+    $default  reduce usando la regla 61 (v_exp_b)
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 171
 
+<<<<<<< HEAD
    44 v_exp: v_exp . T_OP_SUMA v_exp
    45      | v_exp . T_OP_RESTA v_exp
    46      | v_exp . T_OP_MULTI v_exp
@@ -2482,10 +3117,29 @@ Estado 171
     T_OP_REL_MAYOR_IGUAL  [reduce usando la regla 55 (v_exp)]
     T_OP_REL_MENOR_IGUAL  [reduce usando la regla 55 (v_exp)]
     $default              reduce usando la regla 55 (v_exp)
+=======
+   55 v_exp_b: v_exp_b . T_Y v_exp_b
+   56        | v_exp_b . T_O v_exp_b
+   61        | v_exp_b . T_OP_REL_MENOR v_exp_b
+   62        | v_exp_b . T_OP_REL_MAYOR v_exp_b
+   62        | v_exp_b T_OP_REL_MAYOR v_exp_b .
+   63        | v_exp_b . T_OP_REL_IGUAL v_exp_b
+   64        | v_exp_b . T_OP_REL_DIF v_exp_b
+   65        | v_exp_b . T_OP_REL_MAYOR_IGUAL v_exp_b
+   66        | v_exp_b . T_OP_REL_MENOR_IGUAL v_exp_b
+
+    T_Y  desplazar e ir al estado 139
+    T_O  desplazar e ir al estado 140
+
+    T_Y       [reduce usando la regla 62 (v_exp_b)]
+    T_O       [reduce usando la regla 62 (v_exp_b)]
+    $default  reduce usando la regla 62 (v_exp_b)
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 172
 
+<<<<<<< HEAD
    44 v_exp: v_exp . T_OP_SUMA v_exp
    45      | v_exp . T_OP_RESTA v_exp
    46      | v_exp . T_OP_MULTI v_exp
@@ -2521,10 +3175,29 @@ Estado 172
     T_Y       [reduce usando la regla 59 (v_exp)]
     T_O       [reduce usando la regla 59 (v_exp)]
     $default  reduce usando la regla 59 (v_exp)
+=======
+   55 v_exp_b: v_exp_b . T_Y v_exp_b
+   56        | v_exp_b . T_O v_exp_b
+   61        | v_exp_b . T_OP_REL_MENOR v_exp_b
+   62        | v_exp_b . T_OP_REL_MAYOR v_exp_b
+   63        | v_exp_b . T_OP_REL_IGUAL v_exp_b
+   63        | v_exp_b T_OP_REL_IGUAL v_exp_b .
+   64        | v_exp_b . T_OP_REL_DIF v_exp_b
+   65        | v_exp_b . T_OP_REL_MAYOR_IGUAL v_exp_b
+   66        | v_exp_b . T_OP_REL_MENOR_IGUAL v_exp_b
+
+    T_Y  desplazar e ir al estado 139
+    T_O  desplazar e ir al estado 140
+
+    T_Y       [reduce usando la regla 63 (v_exp_b)]
+    T_O       [reduce usando la regla 63 (v_exp_b)]
+    $default  reduce usando la regla 63 (v_exp_b)
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 173
 
+<<<<<<< HEAD
    44 v_exp: v_exp . T_OP_SUMA v_exp
    45      | v_exp . T_OP_RESTA v_exp
    46      | v_exp . T_OP_MULTI v_exp
@@ -2560,10 +3233,29 @@ Estado 173
     T_Y       [reduce usando la regla 60 (v_exp)]
     T_O       [reduce usando la regla 60 (v_exp)]
     $default  reduce usando la regla 60 (v_exp)
+=======
+   55 v_exp_b: v_exp_b . T_Y v_exp_b
+   56        | v_exp_b . T_O v_exp_b
+   61        | v_exp_b . T_OP_REL_MENOR v_exp_b
+   62        | v_exp_b . T_OP_REL_MAYOR v_exp_b
+   63        | v_exp_b . T_OP_REL_IGUAL v_exp_b
+   64        | v_exp_b . T_OP_REL_DIF v_exp_b
+   64        | v_exp_b T_OP_REL_DIF v_exp_b .
+   65        | v_exp_b . T_OP_REL_MAYOR_IGUAL v_exp_b
+   66        | v_exp_b . T_OP_REL_MENOR_IGUAL v_exp_b
+
+    T_Y  desplazar e ir al estado 139
+    T_O  desplazar e ir al estado 140
+
+    T_Y       [reduce usando la regla 64 (v_exp_b)]
+    T_O       [reduce usando la regla 64 (v_exp_b)]
+    $default  reduce usando la regla 64 (v_exp_b)
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 174
 
+<<<<<<< HEAD
    44 v_exp: v_exp . T_OP_SUMA v_exp
    45      | v_exp . T_OP_RESTA v_exp
    46      | v_exp . T_OP_MULTI v_exp
@@ -2599,10 +3291,29 @@ Estado 174
     T_Y       [reduce usando la regla 61 (v_exp)]
     T_O       [reduce usando la regla 61 (v_exp)]
     $default  reduce usando la regla 61 (v_exp)
+=======
+   55 v_exp_b: v_exp_b . T_Y v_exp_b
+   56        | v_exp_b . T_O v_exp_b
+   61        | v_exp_b . T_OP_REL_MENOR v_exp_b
+   62        | v_exp_b . T_OP_REL_MAYOR v_exp_b
+   63        | v_exp_b . T_OP_REL_IGUAL v_exp_b
+   64        | v_exp_b . T_OP_REL_DIF v_exp_b
+   65        | v_exp_b . T_OP_REL_MAYOR_IGUAL v_exp_b
+   65        | v_exp_b T_OP_REL_MAYOR_IGUAL v_exp_b .
+   66        | v_exp_b . T_OP_REL_MENOR_IGUAL v_exp_b
+
+    T_Y  desplazar e ir al estado 139
+    T_O  desplazar e ir al estado 140
+
+    T_Y       [reduce usando la regla 65 (v_exp_b)]
+    T_O       [reduce usando la regla 65 (v_exp_b)]
+    $default  reduce usando la regla 65 (v_exp_b)
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 175
 
+<<<<<<< HEAD
    44 v_exp: v_exp . T_OP_SUMA v_exp
    45      | v_exp . T_OP_RESTA v_exp
    46      | v_exp . T_OP_MULTI v_exp
@@ -2638,10 +3349,29 @@ Estado 175
     T_Y       [reduce usando la regla 62 (v_exp)]
     T_O       [reduce usando la regla 62 (v_exp)]
     $default  reduce usando la regla 62 (v_exp)
+=======
+   55 v_exp_b: v_exp_b . T_Y v_exp_b
+   56        | v_exp_b . T_O v_exp_b
+   61        | v_exp_b . T_OP_REL_MENOR v_exp_b
+   62        | v_exp_b . T_OP_REL_MAYOR v_exp_b
+   63        | v_exp_b . T_OP_REL_IGUAL v_exp_b
+   64        | v_exp_b . T_OP_REL_DIF v_exp_b
+   65        | v_exp_b . T_OP_REL_MAYOR_IGUAL v_exp_b
+   66        | v_exp_b . T_OP_REL_MENOR_IGUAL v_exp_b
+   66        | v_exp_b T_OP_REL_MENOR_IGUAL v_exp_b .
+
+    T_Y  desplazar e ir al estado 139
+    T_O  desplazar e ir al estado 140
+
+    T_Y       [reduce usando la regla 66 (v_exp_b)]
+    T_O       [reduce usando la regla 66 (v_exp_b)]
+    $default  reduce usando la regla 66 (v_exp_b)
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 176
 
+<<<<<<< HEAD
    44 v_exp: v_exp . T_OP_SUMA v_exp
    45      | v_exp . T_OP_RESTA v_exp
    46      | v_exp . T_OP_MULTI v_exp
@@ -2677,10 +3407,41 @@ Estado 176
     T_Y       [reduce usando la regla 63 (v_exp)]
     T_O       [reduce usando la regla 63 (v_exp)]
     $default  reduce usando la regla 63 (v_exp)
+=======
+   55 v_exp_b: v_exp_b . T_Y v_exp_b
+   55        | v_exp_b T_Y v_exp_b .
+   56        | v_exp_b . T_O v_exp_b
+   61        | v_exp_b . T_OP_REL_MENOR v_exp_b
+   62        | v_exp_b . T_OP_REL_MAYOR v_exp_b
+   63        | v_exp_b . T_OP_REL_IGUAL v_exp_b
+   64        | v_exp_b . T_OP_REL_DIF v_exp_b
+   65        | v_exp_b . T_OP_REL_MAYOR_IGUAL v_exp_b
+   66        | v_exp_b . T_OP_REL_MENOR_IGUAL v_exp_b
+
+    T_OP_REL_MENOR        desplazar e ir al estado 133
+    T_OP_REL_MAYOR        desplazar e ir al estado 134
+    T_OP_REL_IGUAL        desplazar e ir al estado 135
+    T_OP_REL_DIF          desplazar e ir al estado 136
+    T_OP_REL_MAYOR_IGUAL  desplazar e ir al estado 137
+    T_OP_REL_MENOR_IGUAL  desplazar e ir al estado 138
+    T_Y                   desplazar e ir al estado 139
+    T_O                   desplazar e ir al estado 140
+
+    T_OP_REL_MENOR        [reduce usando la regla 55 (v_exp_b)]
+    T_OP_REL_MAYOR        [reduce usando la regla 55 (v_exp_b)]
+    T_OP_REL_IGUAL        [reduce usando la regla 55 (v_exp_b)]
+    T_OP_REL_DIF          [reduce usando la regla 55 (v_exp_b)]
+    T_OP_REL_MAYOR_IGUAL  [reduce usando la regla 55 (v_exp_b)]
+    T_OP_REL_MENOR_IGUAL  [reduce usando la regla 55 (v_exp_b)]
+    T_Y                   [reduce usando la regla 55 (v_exp_b)]
+    T_O                   [reduce usando la regla 55 (v_exp_b)]
+    $default              reduce usando la regla 55 (v_exp_b)
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 177
 
+<<<<<<< HEAD
    44 v_exp: v_exp . T_OP_SUMA v_exp
    45      | v_exp . T_OP_RESTA v_exp
    46      | v_exp . T_OP_MULTI v_exp
@@ -2716,6 +3477,36 @@ Estado 177
     T_Y       [reduce usando la regla 64 (v_exp)]
     T_O       [reduce usando la regla 64 (v_exp)]
     $default  reduce usando la regla 64 (v_exp)
+=======
+   55 v_exp_b: v_exp_b . T_Y v_exp_b
+   56        | v_exp_b . T_O v_exp_b
+   56        | v_exp_b T_O v_exp_b .
+   61        | v_exp_b . T_OP_REL_MENOR v_exp_b
+   62        | v_exp_b . T_OP_REL_MAYOR v_exp_b
+   63        | v_exp_b . T_OP_REL_IGUAL v_exp_b
+   64        | v_exp_b . T_OP_REL_DIF v_exp_b
+   65        | v_exp_b . T_OP_REL_MAYOR_IGUAL v_exp_b
+   66        | v_exp_b . T_OP_REL_MENOR_IGUAL v_exp_b
+
+    T_OP_REL_MENOR        desplazar e ir al estado 133
+    T_OP_REL_MAYOR        desplazar e ir al estado 134
+    T_OP_REL_IGUAL        desplazar e ir al estado 135
+    T_OP_REL_DIF          desplazar e ir al estado 136
+    T_OP_REL_MAYOR_IGUAL  desplazar e ir al estado 137
+    T_OP_REL_MENOR_IGUAL  desplazar e ir al estado 138
+    T_Y                   desplazar e ir al estado 139
+    T_O                   desplazar e ir al estado 140
+
+    T_OP_REL_MENOR        [reduce usando la regla 56 (v_exp_b)]
+    T_OP_REL_MAYOR        [reduce usando la regla 56 (v_exp_b)]
+    T_OP_REL_IGUAL        [reduce usando la regla 56 (v_exp_b)]
+    T_OP_REL_DIF          [reduce usando la regla 56 (v_exp_b)]
+    T_OP_REL_MAYOR_IGUAL  [reduce usando la regla 56 (v_exp_b)]
+    T_OP_REL_MENOR_IGUAL  [reduce usando la regla 56 (v_exp_b)]
+    T_Y                   [reduce usando la regla 56 (v_exp_b)]
+    T_O                   [reduce usando la regla 56 (v_exp_b)]
+    $default              reduce usando la regla 56 (v_exp_b)
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
 
 Estado 178
@@ -2753,8 +3544,13 @@ Estado 181
 
    95 v_l_ll: v_expresion T_COMA . v_l_ll
 
+<<<<<<< HEAD
     T_ID                   desplazar e ir al estado 94
     T_OP_RESTA             desplazar e ir al estado 74
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 95
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -2882,9 +3678,15 @@ Estado 196
 
    21 v_d_tipo: T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO . v_expresion_t T_FIN_ARRAY T_DE v_d_tipo
 
+<<<<<<< HEAD
     T_ID                   desplazar e ir al estado 94
     T_LITERAL_CARACTER     desplazar e ir al estado 73
     T_OP_RESTA             desplazar e ir al estado 74
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 95
+    T_LITERAL_CARACTER     desplazar e ir al estado 74
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -2924,8 +3726,13 @@ Estado 200
 
    78 v_lista_opciones: T_SIMBOLO_ELSE . v_expresion T_SI v_instrucciones v_lista_opciones
 
+<<<<<<< HEAD
     T_ID                   desplazar e ir al estado 94
     T_OP_RESTA             desplazar e ir al estado 74
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 95
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -2957,8 +3764,13 @@ Estado 203
 
    83 v_it_cota_fija: T_PARA T_IDENTIFICADOR T_ASIGNACION v_expresion T_HASTA . v_expresion T_HACER v_instrucciones T_FPARA
 
+<<<<<<< HEAD
     T_ID                   desplazar e ir al estado 94
     T_OP_RESTA             desplazar e ir al estado 74
+=======
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 95
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -3011,13 +3823,13 @@ Estado 209
 
    87 v_f_cabecera: T_ID T_PARENTESIS_APERTURA v_lista_d_var T_PARENTESIS_CLAUSURA T_DEV . v_d_tipo T_COMP_SECUENCIAL
 
-    T_ID                   desplazar e ir al estado 68
-    T_TUPLA                desplazar e ir al estado 69
-    T_TABLA                desplazar e ir al estado 70
-    T_REF                  desplazar e ir al estado 71
-    T_TIPO_BASE            desplazar e ir al estado 72
-    T_LITERAL_CARACTER     desplazar e ir al estado 73
-    T_OP_RESTA             desplazar e ir al estado 74
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 69
+    T_TUPLA                desplazar e ir al estado 70
+    T_TABLA                desplazar e ir al estado 71
+    T_REF                  desplazar e ir al estado 72
+    T_TIPO_BASE            desplazar e ir al estado 73
+    T_LITERAL_CARACTER     desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
@@ -3044,7 +3856,11 @@ Estado 211
 
    28 v_lista_campos: T_ID T_DEF_TIPO v_d_tipo T_COMP_SECUENCIAL . v_lista_campos
 
+<<<<<<< HEAD
     T_ID  desplazar e ir al estado 112
+=======
+    T_ID  desplazar e ir al estado 116
+>>>>>>> a159424b9c431d6dade27f7231f081428b21d3ef
 
     $default  reduce usando la regla 29 (v_lista_campos)
 
@@ -3155,13 +3971,13 @@ Estado 222
 
    21 v_d_tipo: T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE . v_d_tipo
 
-    T_ID                   desplazar e ir al estado 68
-    T_TUPLA                desplazar e ir al estado 69
-    T_TABLA                desplazar e ir al estado 70
-    T_REF                  desplazar e ir al estado 71
-    T_TIPO_BASE            desplazar e ir al estado 72
-    T_LITERAL_CARACTER     desplazar e ir al estado 73
-    T_OP_RESTA             desplazar e ir al estado 74
+    T_OP_RESTA             desplazar e ir al estado 68
+    T_ID                   desplazar e ir al estado 69
+    T_TUPLA                desplazar e ir al estado 70
+    T_TABLA                desplazar e ir al estado 71
+    T_REF                  desplazar e ir al estado 72
+    T_TIPO_BASE            desplazar e ir al estado 73
+    T_LITERAL_CARACTER     desplazar e ir al estado 74
     T_PARENTESIS_APERTURA  desplazar e ir al estado 75
     T_LITERAL_NUMERICO     desplazar e ir al estado 76
     T_NO                   desplazar e ir al estado 77
