@@ -5,7 +5,7 @@
 
 %{
 #include <math.h>
-#include "calc.tab.h"
+#include "ProAlg.tab.h"
 %}
 
 DR_DIGIT    [0-9]

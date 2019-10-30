@@ -13,7 +13,7 @@ void yyerror(const char* s);
 
 
 %token T_ALGORITMO T_ID T_FALGORITMO T_COMENTARIO T_COMP_SECUENCIAL
-%token T_TIPO T_FTIPO T_CONST T_FCONST T_VAR T_FVAR
+%token T_TIPO T_FTIPO T_CONSTANTE T_FCONST T_VAR T_FVAR
 %token T_CREAR_TIPO T_TUPLA T_FTUPLA
 %token T_TABLA T_INICIO_ARRAY T_SUBRANGO T_FIN_ARRAY T_DE
 %token T_REF T_TIPO_BASE T_LITERAL_CARACTER
@@ -28,15 +28,17 @@ void yyerror(const char* s);
 %token T_PARA T_HASTA T_FPARA
 %token T_ACCION T_FACCION T_FUNCION T_DEV T_FFUNCION
 %token T_E_S
-
+%token T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
+%token T_OP_SUMA T_OP_RESTA
+%token T_OP_MULTI T_OP_DIV T_OP_MOD T_OP_DIV_ENT
 
 %left T_PUNTO
 %nonassoc T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
 %left T_Y T_O
-%nonassoc T_NO
+%left T_NO
 %left T_OP_SUMA T_OP_RESTA
 %left T_OP_MULTI T_OP_DIV T_OP_MOD T_OP_DIV_ENT
-
+%left T_MAX_PRIORIDAD
 
 %%
 
@@ -71,7 +73,7 @@ v_declaraciones: v_declaracion_tipo v_declaraciones { printf("v_declaracion_tipo
 v_declaracion_tipo: T_TIPO v_lista_d_tipo T_FTIPO T_COMP_SECUENCIAL { printf("T_TIPO v_lista_d_tipo T_FTIPO T_COMP_SECUENCIAL\n"); }
 ;
 
-v_declaracion_cte: T_CONST v_lista_d_cte T_FCONST T_COMP_SECUENCIAL { printf("T_CONST v_lista_d_cte T_FCONST T_COMP_SECUENCIAL\n"); }
+v_declaracion_cte: T_CONSTANTE v_lista_d_cte T_FCONST T_COMP_SECUENCIAL { printf("T_CONSTANTE v_lista_d_cte T_FCONST T_COMP_SECUENCIAL\n"); }
 ;
 
 v_declaracion_var: T_VAR v_lista_d_var T_FVAR T_COMP_SECUENCIAL { printf("T_VAR v_lista_d_var T_FVAR T_COMP_SECUENCIAL\n"); }
@@ -101,7 +103,7 @@ v_lista_d_cte: T_ID T_CREAR_TIPO T_LITERAL T_COMP_SECUENCIAL v_lista_d_cte { pri
 	|
 ;
 
-v_lista_d_var: v_lista_id T_CREAR_TIPO T_ID T_COMP_SECUENCIAL v_lista_d_var %prec T_OP_MULTI { printf("v_lista_id T_CREAR_TIPO T_ID T_COMP_SECUENCIAL lista_d_var\n"); }
+v_lista_d_var: v_lista_id T_CREAR_TIPO T_ID T_COMP_SECUENCIAL v_lista_d_var %prec T_MAX_PRIORIDAD{ printf("v_lista_id T_CREAR_TIPO T_ID T_COMP_SECUENCIAL lista_d_var\n"); }
 	| v_lista_id T_CREAR_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_var { printf("v_lista_id T_CREAR_TIPO d_tipo T_COMP_SECUENCIAL lista_d_var\n"); }
 	|
 ;
