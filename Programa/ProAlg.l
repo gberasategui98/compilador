@@ -3,6 +3,13 @@
 * 07/10/2019
 */
 
+/*
+* NOTA: DR_OP_REL_IGUAL tambien representa DR_CREAR_TIPO con el simbolo "="
+* DUDA 2: ¿El token 'T_LITERAL' engloba a 'T_LITERAL_NUMERICO', 'T_LITERAL_BOOLEANO', 'T_LITERAL_CADENA'
+*           y 'T_LITERAL_CARACTER' deberiamos devolver a bison en estos casos 'T_LITERAL' y yy.type el correspondiente
+*           tipo?
+*/
+
 %{
 #include <math.h>
 #include "ProAlg.tab.h"
@@ -13,9 +20,18 @@ DR_MAY	 [A-Z]
 DR_MIN	 [a-z]
 DR_CARACTER   {DR_MAY}|{DR_MIN}
 DR_ID       {DR_CARACTER}({DR_CARACTER}|{DR_DIGIT})*
-DR_OP_SUMA_REST "+"|"-"
-DR_OP_PRO_DIV "*"|"/"|mod|div
-DR_OP_RELACIONAL "<"|"<="|">"|">="|"="|"<>"
+DR_OP_SUMA "+"
+DR_OP_RESTA "-"
+DR_OP_MULTI "*"
+DR_OP_DIV "/"
+DR_OP_MOD mod
+DR_OP_DIV_ENT div
+DR_OP_REL_MENOR "<"
+DR_OP_REL_MAYOR ">"
+DR_OP_REL_IGUAL "="
+DR_OP_REL_DIF "<>"
+DR_OP_REL_MENOR_IGUAL "<="
+DR_OP_REL_MAYOR_IGUAL ">="
 DR_PARENTESIS_APERTURA "("
 DR_PARENTESIS_CLAUSURA ")"
 DR_ASIGNACION ":="
@@ -25,7 +41,6 @@ DR_SUBRANGO ".."
 DR_DEF_TIPO ":"
 DR_SIMBOLO_BLOQUE_IF "->"
 DR_SIMBOLO_ELSE "[]"
-DR_CREAR_TIPO "="
 DR_INICIO_ARRAY "["
 DR_FIN_ARRAY "]"
 DR_SPACE [ \t\n]+
@@ -59,9 +74,9 @@ DR_FVAR fvar
 DR_HACER hacer
 DR_HASTA hasta
 DR_MIENTRAS mientras
-DR_MOD mod
 DR_NO no
-DR_Y_O y|o
+DR_Y y
+DR_O o
 DR_PARA para
 DR_REF ref
 DR_SAL sal
@@ -119,7 +134,9 @@ DR_VAR var
 
 {DR_NO} 	{printf("no: %s\n", yytext); return T_NO;}
 
-{DR_Y_O}	 {printf("y|o: %s\n", yytext); return T_Y_O;}
+{DR_O}	 {printf("o: %s\n", yytext); return T_O;}
+
+{DR_Y}          {printf("y: %s\n", yytext); return T_Y;}
 
 {DR_PARA} 	{printf("para: %s\n", yytext); return T_PARA;}
 
@@ -137,13 +154,19 @@ DR_VAR var
 
 {DR_VAR} 	{printf("var: %s\n", yytext); return T_VAR;}
 
-{DR_OP_SUMA_REST} {printf("Operador suma o resta: %s \n", yytext); return T_OP_SUMA_REST;}
+{DR_OP_RESTA} 	{printf("Operador resta: %s\n", yytext); return T_OP_RESTA;}
 
-{DR_OP_PRO_DIV}	{printf("Operador producto, división o modulo: %s \n", yytext); return T_OP_PRO_DIV;}
+{DR_OP_SUMA} 	{printf("Operador suma: %s\n", yytext); return T_OP_SUMA;}
 
-{DR_LITERAL_ENTERO}	{printf("Literal entero: %d \n", atoi(yytext)); return T_LITERAL_ENTERO;}
+{DR_OP_MULTI} 	{printf("Operador multiplicaión: %s\n", yytext); return T_OP_MULTI;}
 
-{DR_LITERAL_REAL}	{printf("Literal real: %lf \n", atof(yytext)); return T_LITERAL_REAL ;}
+{DR_OP_DIV} 	{printf("operador división: %s\n", yytext); return T_OP_DIV;}
+
+{DR_OP_MOD} 	{printf("Operador mod: %s\n", yytext); return T_OP_MOD;}
+
+{DR_LITERAL_ENTERO}	{printf("Literal entero: %d \n", atoi(yytext)); return T_LITERAL_NUMERICO;}
+
+{DR_LITERAL_REAL}	{printf("Literal real: %lf \n", atof(yytext)); return T_LITERAL_NUMERICO ;}
 
 {DR_LITERAL_BOOLEANO} {printf("Literal booleano: %s \n", yytext); return T_LITERAL_BOOLEANO;}
 
@@ -163,8 +186,6 @@ DR_VAR var
 
 {DR_SIMBOLO_ELSE} {printf("Simbolo else: %s\n", yytext); return T_SIMBOLO_ELSE;}
 
-{DR_CREAR_TIPO} {printf("Simbolo crear tipo: %s\n", yytext); return T_CREAR_TIPO;}
-
 {DR_INICIO_ARRAY} {printf("Simbolo crear tipo: %s\n", yytext); return T_INICIO_ARRAY;}
 
 {DR_TIPO_BASE} {printf("Tipo de la variable: %s\n", yytext); return T_TIPO_BASE;}
@@ -175,7 +196,17 @@ DR_VAR var
 
 {DR_PARENTESIS_CLAUSURA} {printf("Parentesis clausura: %s\n", yytext); return T_PARENTESIS_CLAUSURA;}
 
-{DR_OP_RELACIONAL} {printf("Operador relacional: %s\n", yytext); return T_OP_RELACIONAL;}
+{DR_OP_REL_MENOR} {printf("Operador relacional menor: %s\n", yytext); return T_OP_REL_MENOR;}
+
+{DR_OP_REL_MAYOR} {printf("Operador relacional mayor: %s\n", yytext); return T_OP_REL_MAYOR;}
+
+{DR_OP_REL_IGUAL} {printf("Operador relacional igual: %s\n", yytext); return T_OP_REL_IGUAL;}
+
+{DR_OP_REL_DIF} {printf("Operador relacional diferente: %s\n", yytext); return T_OP_REL_DIF;}
+
+{DR_OP_REL_MENOR_IGUAL} {printf("Operador relacional menor o igual: %s\n", yytext); return T_OP_REL_MENOR_IGUAL;}
+
+{DR_OP_REL_MAYOR_IGUAL} {printf("Operador relacional mayor o igual: %s\n", yytext); return T_OP_REL_MAYOR_IGUAL;}
 
 {DR_COMENTARIO} {printf("Comentario: %s\n", yytext); return T_COMENTARIO;}
 

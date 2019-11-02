@@ -3,6 +3,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+* NOTA: T_LITERAL_CADENA y T_LITERAL_NUMERICO reemplazados por 'T_LITERAL'
+*/
+
 extern int yylex();
 extern int yyparse();
 extern FILE* yyin;
@@ -17,7 +21,7 @@ void yyerror(const char* s);
 %token T_CREAR_TIPO T_TUPLA T_FTUPLA
 %token T_TABLA T_INICIO_ARRAY T_SUBRANGO T_FIN_ARRAY T_DE
 %token T_REF T_TIPO_BASE T_LITERAL_CARACTER
-%token T_DEF_TIPO T_LITERAL T_COMA
+%token T_DEF_TIPO T_LITERAL T_SEPARADOR
 %token T_ENT T_SAL
 %token T_PARENTESIS_APERTURA T_PARENTESIS_CLAUSURA
 %token T_LITERAL_NUMERICO T_Y T_O T_NO
@@ -31,14 +35,14 @@ void yyerror(const char* s);
 %token T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
 %token T_OP_SUMA T_OP_RESTA
 %token T_OP_MULTI T_OP_DIV T_OP_MOD T_OP_DIV_ENT
+%token T_PUNTO
 
-%left T_PUNTO
+%left T_PUNTO T_INICIO_ARRAY T_REF
 %nonassoc T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
 %left T_Y T_O
 %left T_NO
 %left T_OP_SUMA T_OP_RESTA
 %left T_OP_MULTI T_OP_DIV T_OP_MOD T_OP_DIV_ENT
-%left T_MAX_PRIORIDAD
 
 %%
 
@@ -85,7 +89,7 @@ v_lista_d_tipo: T_ID T_CREAR_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_tipo { pr
 
 v_d_tipo: T_TUPLA v_lista_campos T_FTUPLA { printf("T_TUPLA v_lista_campos T_FTUPLA\n"); }
 	| T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo { printf("T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo\n"); }
-	| T_ID { printf("T_ID\n"); }
+	| T_ID %prec T_OP_MULTI{ printf("T_ID\n"); }
 	| v_expresion_t T_SUBRANGO v_expresion_t { printf("v_expresion_t T_SUBRANGO v_expresion_t\n"); }
 	| T_REF v_d_tipo { printf("T_REF v_d_tipo\n"); }
 	| T_TIPO_BASE { printf("T_TIPO_BASE\n"); }
@@ -103,12 +107,12 @@ v_lista_d_cte: T_ID T_CREAR_TIPO T_LITERAL T_COMP_SECUENCIAL v_lista_d_cte { pri
 	|
 ;
 
-v_lista_d_var: v_lista_id T_CREAR_TIPO T_ID T_COMP_SECUENCIAL v_lista_d_var %prec T_MAX_PRIORIDAD{ printf("v_lista_id T_CREAR_TIPO T_ID T_COMP_SECUENCIAL lista_d_var\n"); }
+v_lista_d_var: v_lista_id T_CREAR_TIPO T_ID T_COMP_SECUENCIAL v_lista_d_var %prec T_OP_RESTA{ printf("v_lista_id T_CREAR_TIPO T_ID T_COMP_SECUENCIAL lista_d_var\n"); }
 	| v_lista_id T_CREAR_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_var { printf("v_lista_id T_CREAR_TIPO d_tipo T_COMP_SECUENCIAL lista_d_var\n"); }
 	|
 ;
 
-v_lista_id: T_ID T_COMA v_lista_id { printf("T_ID T_COMA v_lista_id\n"); }
+v_lista_id: T_ID T_SEPARADOR v_lista_id { printf("T_ID T_SEPARADOR v_lista_id\n"); }
 	| T_ID { printf("T_ID\n"); }
 ;
 
@@ -213,7 +217,7 @@ v_accion_ll: T_ID T_PARENTESIS_APERTURA v_l_ll T_PARENTESIS_CLAUSURA { printf("T
 v_funcion_ll: T_ID T_PARENTESIS_APERTURA v_l_ll T_PARENTESIS_CLAUSURA { printf("T_ID T_PARENTESIS_APERTURA v_l_ll T_PARENTESIS_CLAUSURA\n"); }
 ;
 
-v_l_ll: v_expresion T_COMA v_l_ll { printf("v_expresion T_COMA v_l_ll\n"); }
+v_l_ll: v_expresion T_SEPARADOR v_l_ll { printf("v_expresion T_CT_SEPARADOROMA v_l_ll\n"); }
 	| v_expresion { printf("v_expresion\n"); }
 ;
 
