@@ -1,6 +1,6 @@
 all: combine
-clean: bison flex
-	rm lex.yy.c ProAlg.output ProAlg.tab.c ProAlg.tab.h
+clean:
+	rm lex.yy.c ProAlg.output ProAlg.tab.c ProAlg.tab.h a.out lex.yy.o
 bison: ProAlg.y
 	bison -v -d ProAlg.y
 flex: ProAlg.l ProAlg.tab.h

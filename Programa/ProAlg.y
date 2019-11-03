@@ -4,7 +4,9 @@
 #include <stdlib.h>
 
 /*
-* NOTA: T_LITERAL_CADENA y T_LITERAL_NUMERICO reemplazados por 'T_LITERAL'
+* NOTA: T_LITERAL_CARACTER y T_LITERAL_NUMERICO reemplazados por 'T_LITERAL'
+* NOTA: en v_d_tipo el subrango de la tabla no puede ser un caracter (ej: tabla['a'..'d'] de v_d_tipo)
+* DUDA: El token asignacion -> operando := expresion no debería ser 'identificador := expresion'
 */
 
 extern int yylex();
@@ -20,13 +22,13 @@ void yyerror(const char* s);
 %token T_TIPO T_FTIPO T_CONSTANTE T_FCONST T_VAR T_FVAR
 %token T_CREAR_TIPO T_TUPLA T_FTUPLA
 %token T_TABLA T_INICIO_ARRAY T_SUBRANGO T_FIN_ARRAY T_DE
-%token T_REF T_TIPO_BASE T_LITERAL_CARACTER
+%token T_REF T_TIPO_BASE
 %token T_DEF_TIPO T_LITERAL T_SEPARADOR
 %token T_ENT T_SAL
 %token T_PARENTESIS_APERTURA T_PARENTESIS_CLAUSURA
-%token T_LITERAL_NUMERICO T_Y T_O T_NO
+%token T_Y T_O T_NO
 %token T_VERDADERO T_FALSO
-%token T_IDENTIFICADOR T_CONTINUAR T_ASIGNACION
+%token T_CONTINUAR T_ASIGNACION
 %token T_SI T_SIMBOLO_BLOQUE_IF T_SIMBOLO_ELSE T_FSI
 %token T_MIENTRAS T_HACER T_FMIENTRAS
 %token T_PARA T_HASTA T_FPARA
@@ -38,11 +40,12 @@ void yyerror(const char* s);
 %token T_PUNTO
 
 %left T_PUNTO T_INICIO_ARRAY T_REF
-%nonassoc T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
+%left T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
 %left T_Y T_O
 %left T_NO
 %left T_OP_SUMA T_OP_RESTA
 %left T_OP_MULTI T_OP_DIV T_OP_MOD T_OP_DIV_ENT
+%left T_PREC_MAX
 
 %%
 
@@ -89,14 +92,13 @@ v_lista_d_tipo: T_ID T_CREAR_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_tipo { pr
 
 v_d_tipo: T_TUPLA v_lista_campos T_FTUPLA { printf("T_TUPLA v_lista_campos T_FTUPLA\n"); }
 	| T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo { printf("T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo\n"); }
-	| T_ID %prec T_OP_MULTI{ printf("T_ID\n"); }
+	| T_ID { printf("T_ID\n"); }
 	| v_expresion_t T_SUBRANGO v_expresion_t { printf("v_expresion_t T_SUBRANGO v_expresion_t\n"); }
 	| T_REF v_d_tipo { printf("T_REF v_d_tipo\n"); }
 	| T_TIPO_BASE { printf("T_TIPO_BASE\n"); }
 ;
 
 v_expresion_t: v_expresion { printf("v_expresion\n"); }
-	| T_LITERAL_CARACTER { printf("T_LITERAL_CARACTER\n"); }
 ;
 
 v_lista_campos: T_ID T_DEF_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_campos { printf("T_ID T_DEF_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_campos\n"); }
@@ -107,8 +109,8 @@ v_lista_d_cte: T_ID T_CREAR_TIPO T_LITERAL T_COMP_SECUENCIAL v_lista_d_cte { pri
 	|
 ;
 
-v_lista_d_var: v_lista_id T_CREAR_TIPO T_ID T_COMP_SECUENCIAL v_lista_d_var %prec T_OP_RESTA{ printf("v_lista_id T_CREAR_TIPO T_ID T_COMP_SECUENCIAL lista_d_var\n"); }
-	| v_lista_id T_CREAR_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_var { printf("v_lista_id T_CREAR_TIPO d_tipo T_COMP_SECUENCIAL lista_d_var\n"); }
+v_lista_d_var: v_lista_id T_DEF_TIPO T_ID T_COMP_SECUENCIAL v_lista_d_var{ printf("v_lista_id T_DEF_TIPO T_ID T_COMP_SECUENCIAL lista_d_var\n"); }
+	| v_lista_id T_DEF_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_var { printf("v_lista_id T_DEF_TIPO d_tipo T_COMP_SECUENCIAL lista_d_var\n"); }
 	|
 ;
 
@@ -127,67 +129,67 @@ v_decl_ent: T_ENT v_lista_d_var { printf("T_ENT v_lista_d_var\n"); }
 v_decl_sal: T_SAL v_lista_d_var  { printf("T_SAL v_lista_d_var\n"); }
 ;
 
-v_expresion: v_exp  {printf("v_exp_a\n")}
-           |v_funcion_ll  {printf("v_funcion_ll\n")}
+v_expresion: v_exp  {printf("v_exp_a\n");}
+           |v_funcion_ll  {printf("v_funcion_ll\n");}
 ;
 
-v_exp: v_exp T_OP_SUMA v_exp {printf("v_exp_a T_OP_SUMA v_exp_a\n")}
-       | v_exp T_OP_RESTA v_exp {printf("v_exp_a T_OP_RESTA v_exp_a\n")}
-       | v_exp T_OP_MULTI v_exp {printf("v_exp_a T_OP_MULTI v_exp_a\n")}
-       | v_exp T_OP_DIV v_exp {printf("v_exp_a T_OP_DIV v_exp_a\n")}
-       | v_exp T_OP_MOD v_exp {printf("v_exp_a T_OP_MOD v_exp_a\n")}
-       | v_exp T_OP_DIV_ENT v_exp {printf("v_exp_a T_OP_DIV_ENT v_exp_a\n")}
-       | T_PARENTESIS_APERTURA v_exp T_PARENTESIS_CLAUSURA {printf("T_PARENTESIS_APERTURA v_exp_a T_PARENTESIS_CLAUSURA\n")}
-       | v_operando {printf("v_operando\n")}
-       | T_LITERAL_NUMERICO {printf("T_LITERAL_NUMERICO\n")}
-       | T_OP_RESTA v_exp %prec T_OP_MULTI {printf("T_OP_RESTA v_exp_a\n")}
-       | v_exp T_Y v_exp {printf("v_exp_b T_Y v_exp_b\n")}
-       | v_exp T_O v_exp {printf("v_exp_b T_O v_exp_b\n")}
-       | T_NO v_exp {printf("T_NO v_exp_b\n")}
-       | T_VERDADERO {printf("T_VERDADERO\n")}
-       | T_FALSO {printf("T_FALSO\n")}
-       | v_exp T_OP_REL_MENOR v_exp {printf("v_exp_b T_OP_REL_MENOR v_exp_b\n")}
-       | v_exp T_OP_REL_MAYOR v_exp {printf("v_exp_b T_OP_REL_MAYOR v_exp_b\n")}
-       | v_exp T_OP_REL_IGUAL v_exp {printf("v_exp_b T_OP_REL_IGUAL v_exp_b\n")}
-       | v_exp T_OP_REL_DIF v_exp {printf("v_exp_b T_OP_REL_DIF v_exp_b\n")}
-       | v_exp T_OP_REL_MAYOR_IGUAL v_exp {printf("v_exp_b T_OP_REL_MAYOR_IGUAL v_exp_b\n")}
-       | v_exp T_OP_REL_MENOR_IGUAL v_exp {printf("v_exp_b T_OP_REL_MENOR_IGUAL v_exp_b\n")}
+v_exp: v_exp T_OP_SUMA v_exp {printf("v_exp_a T_OP_SUMA v_exp_a\n");}
+       | v_exp T_OP_RESTA v_exp {printf("v_exp_a T_OP_RESTA v_exp_a\n");}
+       | v_exp T_OP_MULTI v_exp {printf("v_exp_a T_OP_MULTI v_exp_a\n");}
+       | v_exp T_OP_DIV v_exp {printf("v_exp_a T_OP_DIV v_exp_a\n");}
+       | v_exp T_OP_MOD v_exp {printf("v_exp_a T_OP_MOD v_exp_a\n");}
+       | v_exp T_OP_DIV_ENT v_exp {printf("v_exp_a T_OP_DIV_ENT v_exp_a\n");}
+       | T_PARENTESIS_APERTURA v_exp T_PARENTESIS_CLAUSURA {printf("T_PARENTESIS_APERTURA v_exp_a T_PARENTESIS_CLAUSURA\n");}
+       | v_operando {printf("v_operando\n");}
+       | T_LITERAL {printf("T_LITERAL\n");}
+       | T_OP_RESTA v_exp %prec T_OP_MULTI {printf("T_OP_RESTA v_exp_a\n");}
+       | v_exp T_Y v_exp {printf("v_exp_b T_Y v_exp_b\n");}
+       | v_exp T_O v_exp {printf("v_exp_b T_O v_exp_b\n");}
+       | T_NO v_exp {printf("T_NO v_exp_b\n");}
+       | T_VERDADERO {printf("T_VERDADERO\n");}
+       | T_FALSO {printf("T_FALSO\n");}
+       | v_exp T_OP_REL_MENOR v_exp {printf("v_exp_b T_OP_REL_MENOR v_exp_b\n");}
+       | v_exp T_OP_REL_MAYOR v_exp {printf("v_exp_b T_OP_REL_MAYOR v_exp_b\n");}
+       | v_exp T_OP_REL_IGUAL v_exp {printf("v_exp_b T_OP_REL_IGUAL v_exp_b\n");}
+       | v_exp T_OP_REL_DIF v_exp {printf("v_exp_b T_OP_REL_DIF v_exp_b\n");}
+       | v_exp T_OP_REL_MAYOR_IGUAL v_exp {printf("v_exp_b T_OP_REL_MAYOR_IGUAL v_exp_b\n");}
+       | v_exp T_OP_REL_MENOR_IGUAL v_exp {printf("v_exp_b T_OP_REL_MENOR_IGUAL v_exp_b\n");}
 ;
 
-v_operando: T_IDENTIFICADOR {printf("T_IDENTIFICADOR\n")}
-            | v_operando T_PUNTO v_operando {printf("v_operando T_PUNTO v_operando\n")}
-            | v_operando T_INICIO_ARRAY v_expresion T_FIN_ARRAY {printf("v_operando T_INICIO_ARRAY v_expresion T_FIN_ARRAY\n")}
-            | v_operando T_REF {printf("v_operando T_REF\n")}
+v_operando: T_ID {printf("T_ID\n");}
+            | v_operando T_PUNTO v_operando {printf("v_operando T_PUNTO v_operando\n");}
+            | v_operando T_INICIO_ARRAY v_expresion T_FIN_ARRAY {printf("v_operando T_INICIO_ARRAY v_expresion T_FIN_ARRAY\n");}
+            | v_operando T_REF {printf("v_operando T_REF\n");}
 ;
 
-v_instrucciones: v_instruccion T_COMP_SECUENCIAL v_instrucciones {printf("v_instruccion T_COMP_SECUENCIAL v_instrucciones\n")}
-                 | v_instruccion {printf("v_instruccion\n")}
+v_instrucciones: v_instruccion T_COMP_SECUENCIAL v_instrucciones {printf("v_instruccion T_COMP_SECUENCIAL v_instrucciones\n");}
+                 | v_instruccion {printf("v_instruccion\n");}
 ;
 
-v_instruccion: T_CONTINUAR {printf("T_CONTINUAR\n")}
-               | v_asignacion {printf("v_asignacion\n")}
-               | v_alternativa {printf("v_alternativa\n")}
-               | v_iteracion {printf("v_iteracion\n")}
-               | v_accion_ll {printf("v_accion_ll\n")}
+v_instruccion: T_CONTINUAR {printf("T_CONTINUAR\n");}
+               | v_asignacion {printf("v_asignacion\n");}
+               | v_alternativa {printf("v_alternativa\n");}
+               | v_iteracion {printf("v_iteracion\n");}
+               | v_accion_ll {printf("v_accion_ll\n");}
 ;
 
-v_asignacion: v_operando T_ASIGNACION v_expresion {printf("v_operando T_ASIGNACION v_expresion\n")}
+v_asignacion: v_operando T_ASIGNACION v_expresion {printf("v_operando T_ASIGNACION v_expresion\n");}
 ;
 
-v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones T_FSI {printf("T_SI v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones T_FSI\n")}
+v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones T_FSI {printf("T_SI v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones T_FSI\n");}
 ;
 
-v_lista_opciones: T_SIMBOLO_ELSE v_expresion T_SI v_instrucciones v_lista_opciones {printf("T_SIMBOLO_ELSE v_expresion T_SI v_instrucciones v_lista_opciones\n")}
+v_lista_opciones: T_SIMBOLO_ELSE v_expresion T_SI v_instrucciones v_lista_opciones {printf("T_SIMBOLO_ELSE v_expresion T_SI v_instrucciones v_lista_opciones\n");}
                   |
 ;
 
-v_iteracion: v_it_cota_fija | v_it_cota_exp {printf("v_it_cota_fija | v_it_cota_exp\n")}
+v_iteracion: v_it_cota_fija | v_it_cota_exp {printf("v_it_cota_fija | v_it_cota_exp\n");}
 ;
 
-v_it_cota_exp: T_MIENTRAS v_expresion T_HACER v_instrucciones T_FMIENTRAS {printf("T_MIENTRAS v_expresion T_HACER v_instrucciones T_FMIENTRAS\n")}
+v_it_cota_exp: T_MIENTRAS v_expresion T_HACER v_instrucciones T_FMIENTRAS {printf("T_MIENTRAS v_expresion T_HACER v_instrucciones T_FMIENTRAS\n");}
 ;
 
-v_it_cota_fija: T_PARA T_IDENTIFICADOR T_ASIGNACION v_expresion T_HASTA v_expresion T_HACER v_instrucciones T_FPARA {printf("T_PARA T_IDENTIFICADOR T_ASIGNACION v_expresion T_HASTA v_expresion T_HACER v_instrucciones T_FPARA\n")}
+v_it_cota_fija: T_PARA T_ID T_ASIGNACION v_expresion T_HASTA v_expresion T_HACER v_instrucciones T_FPARA {printf("T_PARA T_ID T_ASIGNACION v_expresion T_HASTA v_expresion T_HACER v_instrucciones T_FPARA\n");}
 ;
 
 v_accion_d: T_ACCION v_a_cabecera v_bloque T_FACCION { printf("T_ACCION v_a_cabecera bloque T_FACCION\n"); }

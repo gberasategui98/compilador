@@ -85,7 +85,7 @@ DR_TABLA tabla
 DR_TIPO tipo
 DR_TUPLA tupla
 DR_VAR var
-
+DR_PUNTO "."
 %%
 
 {DR_ACCION}  	{printf("accion: %s\n", yytext); return T_ACCION;}
@@ -164,13 +164,15 @@ DR_VAR var
 
 {DR_OP_MOD} 	{printf("Operador mod: %s\n", yytext); return T_OP_MOD;}
 
-{DR_LITERAL_ENTERO}	{printf("Literal entero: %d \n", atoi(yytext)); return T_LITERAL_NUMERICO;}
+{DR_LITERAL_ENTERO}	{printf("Literal entero: %d \n", atoi(yytext)); return T_LITERAL;}
 
-{DR_LITERAL_REAL}	{printf("Literal real: %lf \n", atof(yytext)); return T_LITERAL_NUMERICO ;}
+{DR_LITERAL_REAL}	{printf("Literal real: %lf \n", atof(yytext)); return T_LITERAL ;}
 
-{DR_LITERAL_BOOLEANO} {printf("Literal booleano: %s \n", yytext); return T_LITERAL_BOOLEANO;}
+{DR_LITERAL_BOOLEANO} {printf("Literal booleano: %s \n", yytext); return T_LITERAL;}
 
-{DR_LITERAL_CADENA} {printf( "Literal cadena: %s\n", yytext); return T_LITERAL_CADENA;}
+{DR_LITERAL_CADENA} {printf( "Literal cadena: %s\n", yytext); return T_LITERAL;}
+
+{DR_LITERAL_CARACTER} {printf( "Literal caracter: %s\n", yytext); return T_LITERAL;}
 
 {DR_ASIGNACION} {printf("Asignación: %s\n", yytext); return T_ASIGNACION;}
 
@@ -188,7 +190,7 @@ DR_VAR var
 
 {DR_INICIO_ARRAY} {printf("Simbolo crear tipo: %s\n", yytext); return T_INICIO_ARRAY;}
 
-{DR_TIPO_BASE} {printf("Tipo de la variable: %s\n", yytext); return T_TIPO_BASE;}
+{DR_TIPO_BASE} {printf("Tipo de la variable: %s\n", yytext); return T_ID;}
 
 {DR_ID}        {printf("Identificador: %s\n", yytext ); return T_ID;}
 
@@ -212,16 +214,8 @@ DR_VAR var
 
 {DR_SPACE} {}
 
+{DR_PUNTO} {printf("Punto: %s\n", yytext); return T_PUNTO;}
+
 .           {printf( "TOKEN SIN RECONOCER: %s\n", yytext );}
 
 %%
-
-int main( int argc, char **argv )
-{
-++argv, --argc; 
-if ( argc > 0 )
-        yyin = fopen( argv[0], "r" );
-else
-        yyin = stdin;
-yylex();
-}
