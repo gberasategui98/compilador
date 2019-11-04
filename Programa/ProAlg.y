@@ -5,7 +5,6 @@
 
 /*
 * NOTA: T_LITERAL_CARACTER y T_LITERAL_NUMERICO reemplazados por 'T_LITERAL'
-* NOTA: en v_d_tipo el subrango de la tabla no puede ser un caracter (ej: tabla['a'..'d'] de v_d_tipo)
 */
 
 extern int yylex();
@@ -92,25 +91,26 @@ v_lista_d_tipo: T_ID T_CREAR_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_tipo { pr
 
 v_d_tipo: T_TUPLA v_lista_campos T_FTUPLA { printf("v_d_tipo: T_TUPLA v_lista_campos T_FTUPLA\n"); }
 	| T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo { printf("v_d_tipo: T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo\n"); }
-	| T_ID { printf("v_d_tipo: T_ID\n"); }
+	| T_ID %prec T_OP_SUMA{ printf("v_d_tipo: T_ID\n"); }
 	| v_expresion_t T_SUBRANGO v_expresion_t { printf("v_d_tipo: v_expresion_t T_SUBRANGO v_expresion_t\n"); }
 	| T_REF v_d_tipo { printf("v_d_tipo: T_REF v_d_tipo\n"); }
 	| T_TIPO_BASE { printf("v_d_tipo: T_TIPO_BASE\n"); }
 ;
 
-v_expresion_t: v_expresion { printf("v_expresion_t: v_expresion\n"); }
+v_expresion_t: v_expresion | T_LITERAL_CARACTER{ printf("v_expresion_t: v_expresion\n"); }
 ;
 
 v_lista_campos: T_ID T_DEF_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_campos { printf("v_lista_campos: T_ID T_DEF_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_campos\n"); }
 	|
 ;
 
-v_lista_d_cte: T_ID T_CREAR_TIPO T_LITERAL T_COMP_SECUENCIAL v_lista_d_cte { printf("v_lista_d_cte: T_ID T_CREAR_TIPO T_LITERAL T_COMP_SECUENCIAL v_lista_d_cte\n"); }
+v_lista_d_cte: T_ID T_CREAR_TIPO v_literal T_COMP_SECUENCIAL v_lista_d_cte { printf("v_lista_d_cte: T_ID T_CREAR_TIPO T_LITERAL T_COMP_SECUENCIAL v_lista_d_cte\n"); }
 	|
 ;
 
+v_literal: T_LITERAL_CARACTER | T_LITERAL_NUMERICO | T_LITERAL_BOOLEANO | T_LITERAL_CADENA
 
-v_lista_d_var: v_lista_id T_DEF_TIPO T_ID T_COMP_SECUENCIAL v_lista_d_var{ printf("v_lista_d_var: v_lista_id T_DEF_TIPO T_ID T_COMP_SECUENCIAL lista_d_var\n"); }
+v_lista_d_var: v_lista_id T_DEF_TIPO T_ID T_COMP_SECUENCIAL v_lista_d_var %prec T_OP_MULTI{ printf("v_lista_d_var: v_lista_id T_DEF_TIPO T_ID T_COMP_SECUENCIAL lista_d_var\n"); }
 	| v_lista_id T_DEF_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_var { printf("v_lista_d_var: v_lista_id T_DEF_TIPO d_tipo T_COMP_SECUENCIAL lista_d_var\n"); }
 	|
 ;
@@ -142,7 +142,7 @@ v_exp: v_exp T_OP_SUMA v_exp {printf("v_exp: v_exp_a T_OP_SUMA v_exp_a\n");}
        | v_exp T_OP_DIV_ENT v_exp {printf("v_exp: v_exp_a T_OP_DIV_ENT v_exp_a\n");}
        | T_PARENTESIS_APERTURA v_exp T_PARENTESIS_CLAUSURA {printf("v_exp: T_PARENTESIS_APERTURA v_exp_a T_PARENTESIS_CLAUSURA\n");}
        | v_operando {printf("v_exp: v_operando\n");}
-       | T_LITERAL {printf("v_exp: T_LITERAL\n");}
+       | T_LITERAL_NUMERICO {printf("v_exp: T_LITERAL\n");}
        | T_OP_RESTA v_exp %prec T_OP_MULTI {printf("v_exp: T_OP_RESTA v_exp_a\n");}
        | v_exp T_Y v_exp {printf("v_exp: v_exp_b T_Y v_exp_b\n");}
        | v_exp T_O v_exp {printf("v_exp: v_exp_b T_O v_exp_b\n");}

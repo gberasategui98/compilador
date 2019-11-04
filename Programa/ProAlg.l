@@ -44,8 +44,8 @@ DR_SIMBOLO_ELSE "[]"
 DR_INICIO_ARRAY "["
 DR_FIN_ARRAY "]"
 DR_SPACE [ \t\n]+
-DR_LITERAL_ENTERO ("+"|"-")?{DR_DIGIT}+(("e"|"E"){DR_DIGIT}+)?
-DR_LITERAL_REAL ("+"|"-")?{DR_DIGIT}+("."{DR_DIGIT}+)?(("e"|"E"){DR_DIGIT}+)?
+DR_LITERAL_ENTERO {DR_DIGIT}+(("e"|"E"){DR_DIGIT}+)?
+DR_LITERAL_REAL {DR_DIGIT}+("."{DR_DIGIT}+)?(("e"|"E"){DR_DIGIT}+)?
 DR_LITERAL_BOOLEANO verdadero|falso
 DR_LITERAL_CARACTER "\""(.)"\""
 DR_LITERAL_CADENA '([^']|("/""'"))*'
@@ -164,11 +164,11 @@ DR_PUNTO "."
 
 {DR_OP_MOD} 	{printf("Operador mod: %s\n", yytext); return T_OP_MOD;}
 
-{DR_LITERAL_ENTERO}	{printf("Literal entero: %d \n", atoi(yytext)); return T_LITERAL;}
+{DR_LITERAL_ENTERO}	{printf("Literal entero: %d \n", atoi(yytext)); return T_LITERAL_NUMERICO;}
 
-{DR_LITERAL_REAL}	{printf("Literal real: %lf \n", atof(yytext)); return T_LITERAL ;}
+{DR_LITERAL_REAL}	{printf("Literal real: %lf \n", atof(yytext)); return T_LITERAL_NUMERICO ;}
 
-{DR_LITERAL_BOOLEANO} {printf("Literal booleano: %s \n", yytext); return T_LITERAL;}
+{DR_LITERAL_BOOLEANO} {printf("Literal booleano: %s \n", yytext); return T_LITERAL_BOOLEANO;}
 
 {DR_LITERAL_CADENA} {printf( "Literal cadena: %s\n", yytext); return T_LITERAL;}
 
