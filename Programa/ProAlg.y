@@ -144,6 +144,7 @@ v_exp: v_exp T_OP_SUMA v_exp {printf("v_exp: v_exp_a T_OP_SUMA v_exp_a\n");}
        | v_operando {printf("v_exp: v_operando\n");}
        | T_LITERAL_NUMERICO {printf("v_exp: T_LITERAL\n");}
        | T_OP_RESTA v_exp %prec T_OP_MULTI {printf("v_exp: T_OP_RESTA v_exp_a\n");}
+	| T_OP_SUMA v_exp %prec T_OP_MULTI {printf("v_exp: T_OP_RESTA v_exp_a\n");}
        | v_exp T_Y v_exp {printf("v_exp: v_exp_b T_Y v_exp_b\n");}
        | v_exp T_O v_exp {printf("v_exp: v_exp_b T_O v_exp_b\n");}
        | T_NO v_exp {printf("v_exp: T_NO v_exp_b\n");}
@@ -227,9 +228,10 @@ v_l_ll: v_expresion T_SEPARADOR v_l_ll { printf("v_l_ll: v_expresion T_CT_SEPARA
 
 %%
 int main( int argc, char **argv ) {
-    #ifdef YYDEBUG
-    yydebug = 1;
-    #endif
+	#ifdef YYDEBUG
+	yydebug = 1;
+	#endif
+
         ++argv, --argc; 
 	yyin = fopen( argv[0], "r" );
 

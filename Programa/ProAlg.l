@@ -57,7 +57,6 @@ DR_CONSTANTE const
 DR_CONTINUAR continuar
 DR_DE de
 DR_DEV dev
-DR_DIV div
 DR_ENT ent
 DR_E_S "e/s"
 DR_FACCION faccion
@@ -161,6 +160,8 @@ DR_PUNTO "."
 {DR_OP_MULTI} 	{printf("Operador multiplicaión: %s\n", yytext); return T_OP_MULTI;}
 
 {DR_OP_DIV} 	{printf("operador división: %s\n", yytext); return T_OP_DIV;}
+
+{DR_OP_DIV_ENT} {printf("operador división entera: %s\n", yytext); return T_OP_DIV_ENT;}
 
 {DR_OP_MOD} 	{printf("Operador mod: %s\n", yytext); return T_OP_MOD;}
 
