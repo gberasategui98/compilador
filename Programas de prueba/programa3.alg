@@ -4,7 +4,7 @@ algoritmo sumacomb;
 {Prec: n= N AND m = M AND M >= N >0}
 	var
 		i, comb: entero;
-	fvar
+	fvar;
 
 	i:= 0;
 	suma:= 0;
@@ -15,4 +15,4 @@ algoritmo sumacomb;
 		i := i+1
 	fmientras;
 {Post: n =N AND suma = SUMATORIO(i=1..N)(M sobre i)}
-falgoritmo
+falgoritmo.

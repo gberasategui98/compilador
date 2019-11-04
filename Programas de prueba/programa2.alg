@@ -17,4 +17,4 @@ algoritmo orden3;
 		fsi
 	fsi
 {Post: a=A AND b = B AND c= C ...}
-falgoritmo
+falgoritmo.

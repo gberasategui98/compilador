@@ -6,7 +6,6 @@
 /*
 * NOTA: T_LITERAL_CARACTER y T_LITERAL_NUMERICO reemplazados por 'T_LITERAL'
 * NOTA: en v_d_tipo el subrango de la tabla no puede ser un caracter (ej: tabla['a'..'d'] de v_d_tipo)
-* DUDA: El token asignacion -> operando := expresion no debería ser 'identificador := expresion'
 */
 
 extern int yylex();
@@ -92,7 +91,7 @@ v_lista_d_tipo: T_ID T_CREAR_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_tipo { pr
 
 v_d_tipo: T_TUPLA v_lista_campos T_FTUPLA { printf("T_TUPLA v_lista_campos T_FTUPLA\n"); }
 	| T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo { printf("T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo\n"); }
-	| T_ID { printf("T_ID\n"); }
+	| T_ID %prec T_OP_SUMA { printf("T_ID\n"); }
 	| v_expresion_t T_SUBRANGO v_expresion_t { printf("v_expresion_t T_SUBRANGO v_expresion_t\n"); }
 	| T_REF v_d_tipo { printf("T_REF v_d_tipo\n"); }
 	| T_TIPO_BASE { printf("T_TIPO_BASE\n"); }
@@ -109,8 +108,8 @@ v_lista_d_cte: T_ID T_CREAR_TIPO T_LITERAL T_COMP_SECUENCIAL v_lista_d_cte { pri
 	|
 ;
 
-v_lista_d_var: v_lista_id T_DEF_TIPO T_ID T_COMP_SECUENCIAL v_lista_d_var{ printf("v_lista_id T_DEF_TIPO T_ID T_COMP_SECUENCIAL lista_d_var\n"); }
-	| v_lista_id T_DEF_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_var { printf("v_lista_id T_DEF_TIPO d_tipo T_COMP_SECUENCIAL lista_d_var\n"); }
+v_lista_d_var: v_lista_id T_DEF_TIPO T_ID T_COMP_SECUENCIAL v_lista_d_var %prec T_OP_MULTI { printf("v_lista_id T_DEF_TIPO T_ID T_COMP_SECUENCIAL lista_d_var\n"); }
+	| v_lista_id T_DEF_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_var{ printf("v_lista_id T_DEF_TIPO d_tipo T_COMP_SECUENCIAL lista_d_var\n"); }
 	|
 ;
 
@@ -179,7 +178,7 @@ v_asignacion: v_operando T_ASIGNACION v_expresion {printf("v_operando T_ASIGNACI
 v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones T_FSI {printf("T_SI v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones T_FSI\n");}
 ;
 
-v_lista_opciones: T_SIMBOLO_ELSE v_expresion T_SI v_instrucciones v_lista_opciones {printf("T_SIMBOLO_ELSE v_expresion T_SI v_instrucciones v_lista_opciones\n");}
+v_lista_opciones: T_SIMBOLO_ELSE v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones {printf("T_SIMBOLO_ELSE v_expresion T_SI v_instrucciones v_lista_opciones\n");}
                   |
 ;
 
@@ -225,6 +224,9 @@ v_l_ll: v_expresion T_SEPARADOR v_l_ll { printf("v_expresion T_CT_SEPARADOROMA v
 
 %%
 int main( int argc, char **argv ) {
+    #ifdef YYDEBUG
+    yydebug = 1;
+    #endif
         ++argv, --argc; 
 	yyin = fopen( argv[0], "r" );
 
