@@ -1,8 +1,13 @@
 #include "TS.h"
-void insertar(struct TS *first, char* nombre, int tipo){
+Simbolo* crear_TS(){
+    struct Simbolo *st;
+    return st;
+};
 
-}
+void insertar(Simbolo **first, char *nombre, int tipo){
 
-void buscar(struct TS *first, char* nombre){
+};
+
+void buscar(Simbolo **first, char *nombre){
     
-}
+};

@@ -4,15 +4,22 @@
 */
 
 /*
-* NOTA: DR_OP_REL_IGUAL tambien representa DR_CREAR_TIPO con el simbolo "="
-* DUDA 2: ¿El token 'T_LITERAL' engloba a 'T_LITERAL_NUMERICO', 'T_LITERAL_BOOLEANO', 'T_LITERAL_CADENA'
-*           y 'T_LITERAL_CARACTER' deberiamos devolver a bison en estos casos 'T_LITERAL' y yy.type el correspondiente
-*           tipo?
+* DUDA: ¿En flex creamos entradas para la TS? ¿En caso afirmativo como utilizar la misma tabla en 
+*       flex y bison?
 */
 
 %{
 #include <math.h>
 #include "ProAlg.tab.h"
+
+int verd_o_falso(char *yytext){
+    if (strcmp(yytext, "verdadero")==0){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
 %}
 
 DR_DIGIT    [0-9]
@@ -165,15 +172,17 @@ DR_PUNTO "."
 
 {DR_OP_MOD} 	{printf("Operador mod: %s\n", yytext); return T_OP_MOD;}
 
-{DR_LITERAL_ENTERO}	{printf("Literal entero: %d \n", atoi(yytext)); return T_LITERAL_NUMERICO;}
+{DR_LITERAL_ENTERO}	{printf("Literal entero: %d \n", atoi(yytext)); yylval.int_val = atoi(yytext); return T_LITERAL_ENTERO;}
 
-{DR_LITERAL_REAL}	{printf("Literal real: %lf \n", atof(yytext)); return T_LITERAL_NUMERICO ;}
+{DR_LITERAL_REAL}	{printf("Literal real: %lf \n", atof(yytext)); yylval.float_val = atof(yytext); return T_LITERAL_REAL ;}
 
-{DR_LITERAL_BOOLEANO} {printf("Literal booleano: %s \n", yytext); return T_LITERAL_BOOLEANO;}
+{DR_LITERAL_BOOLEANO} {printf("Literal booleano: %s \n", yytext); yylval.int_val = verd_o_falso(yytext); return T_LITERAL_BOOLEANO;}
 
-{DR_LITERAL_CADENA} {printf( "Literal cadena: %s\n", yytext); return T_LITERAL;}
+{DR_LITERAL_CADENA} {printf( "Literal cadena: %s\n", yytext); yylval.str_val = malloc(yyleng * sizeof(char));
 
-{DR_LITERAL_CARACTER} {printf( "Literal caracter: %s\n", yytext); return T_LITERAL;}
+                    strcpy(yylval.str_val, yytext);  return T_LITERAL_CADENA;}
+
+{DR_LITERAL_CARACTER} {printf( "Literal caracter: %s\n", yytext); yylval.char_val = yytext[0]; return T_LITERAL_CARACTER;}
 
 {DR_ASIGNACION} {printf("Asignación: %s\n", yytext); return T_ASIGNACION;}
 

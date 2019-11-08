@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "TS.h"
 
 /*
 * NOTA: T_LITERAL_CARACTER y T_LITERAL_NUMERICO reemplazados por 'T_LITERAL'
@@ -14,14 +15,25 @@ extern FILE* yyin;
 void yyerror(const char* s);
 %}
 
+%union{
+	char char_val;
+	int int_val;
+	double float_val;
+	char* str_val;
+	//list_t* symtab_item;
+}
 
+%token <int_val> T_LITERAL_ENTERO T_LITERAL_BOOLEANO
+%token <float_val> T_LITERAL_REAL
+%token <char_val> T_LITERAL_CARACTER
+%token <str_val> T_LITERAL_CADENA
 
 %token T_ALGORITMO T_ID T_FALGORITMO T_COMENTARIO T_COMP_SECUENCIAL
 %token T_TIPO T_FTIPO T_CONSTANTE T_FCONST T_VAR T_FVAR
 %token T_CREAR_TIPO T_TUPLA T_FTUPLA
 %token T_TABLA T_INICIO_ARRAY T_SUBRANGO T_FIN_ARRAY T_DE
 %token T_REF T_TIPO_BASE
-%token T_DEF_TIPO T_LITERAL T_SEPARADOR
+%token T_DEF_TIPO T_SEPARADOR
 %token T_ENT T_SAL
 %token T_PARENTESIS_APERTURA T_PARENTESIS_CLAUSURA
 %token T_Y T_O T_NO
@@ -43,7 +55,6 @@ void yyerror(const char* s);
 %left T_NO
 %left T_OP_SUMA T_OP_RESTA
 %left T_OP_MULTI T_OP_DIV T_OP_MOD T_OP_DIV_ENT
-%left T_PREC_MAX
 
 %%
 
@@ -97,18 +108,22 @@ v_d_tipo: T_TUPLA v_lista_campos T_FTUPLA { printf("v_d_tipo: T_TUPLA v_lista_ca
 	| T_TIPO_BASE { printf("v_d_tipo: T_TIPO_BASE\n"); }
 ;
 
-v_expresion_t: v_expresion | T_LITERAL_CARACTER{ printf("v_expresion_t: v_expresion\n"); }
+v_expresion_t: v_expresion { printf("v_expresion_t: v_expresion\n"); }
+				| T_LITERAL_CARACTER{ printf("v_expresion_t: T_LITERAL_CARACTER\n"); }
 ;
 
 v_lista_campos: T_ID T_DEF_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_campos { printf("v_lista_campos: T_ID T_DEF_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_campos\n"); }
 	|
 ;
 
-v_lista_d_cte: T_ID T_CREAR_TIPO v_literal T_COMP_SECUENCIAL v_lista_d_cte { printf("v_lista_d_cte: T_ID T_CREAR_TIPO T_LITERAL T_COMP_SECUENCIAL v_lista_d_cte\n"); }
+v_lista_d_cte: T_ID T_CREAR_TIPO v_literal T_COMP_SECUENCIAL v_lista_d_cte { printf("v_lista_d_cte: T_ID T_CREAR_TIPO v_literal T_COMP_SECUENCIAL v_lista_d_cte\n"); }
 	|
 ;
 
-v_literal: T_LITERAL_CARACTER | T_LITERAL_NUMERICO | T_LITERAL_BOOLEANO | T_LITERAL_CADENA
+v_literal: T_LITERAL_CARACTER {printf("v_literal: T_LITERAL_CARACTER\n");}
+		   | v_literal_numerico {printf("v_literal: v_literal_numerico\n");} 
+		   | T_LITERAL_BOOLEANO {printf("v_literal: T_LITERAL_BOOLEANO\n");}
+		   | T_LITERAL_CADENA {printf("v_literal: T_LITERAL_CADENA\n");}
 
 v_lista_d_var: v_lista_id T_DEF_TIPO T_ID T_COMP_SECUENCIAL v_lista_d_var %prec T_OP_MULTI{ printf("v_lista_d_var: v_lista_id T_DEF_TIPO T_ID T_COMP_SECUENCIAL lista_d_var\n"); }
 	| v_lista_id T_DEF_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_var { printf("v_lista_d_var: v_lista_id T_DEF_TIPO d_tipo T_COMP_SECUENCIAL lista_d_var\n"); }
@@ -142,7 +157,7 @@ v_exp: v_exp T_OP_SUMA v_exp {printf("v_exp: v_exp_a T_OP_SUMA v_exp_a\n");}
        | v_exp T_OP_DIV_ENT v_exp {printf("v_exp: v_exp_a T_OP_DIV_ENT v_exp_a\n");}
        | T_PARENTESIS_APERTURA v_exp T_PARENTESIS_CLAUSURA {printf("v_exp: T_PARENTESIS_APERTURA v_exp_a T_PARENTESIS_CLAUSURA\n");}
        | v_operando {printf("v_exp: v_operando\n");}
-       | T_LITERAL_NUMERICO {printf("v_exp: T_LITERAL\n");}
+       | v_literal_numerico {printf("v_exp: v_literal_numerico\n");}
        | T_OP_RESTA v_exp %prec T_OP_MULTI {printf("v_exp: T_OP_RESTA v_exp_a\n");}
 	| T_OP_SUMA v_exp %prec T_OP_MULTI {printf("v_exp: T_OP_RESTA v_exp_a\n");}
        | v_exp T_Y v_exp {printf("v_exp: v_exp_b T_Y v_exp_b\n");}
@@ -157,6 +172,9 @@ v_exp: v_exp T_OP_SUMA v_exp {printf("v_exp: v_exp_a T_OP_SUMA v_exp_a\n");}
        | v_exp T_OP_REL_MAYOR_IGUAL v_exp {printf("v_exp: v_exp_b T_OP_REL_MAYOR_IGUAL v_exp_b\n");}
        | v_exp T_OP_REL_MENOR_IGUAL v_exp {printf("v_exp: v_exp_b T_OP_REL_MENOR_IGUAL v_exp_b\n");}
 ;
+
+v_literal_numerico: T_LITERAL_ENTERO {}
+					| T_LITERAL_REAL {}
 
 v_operando: T_ID {printf("v_operando: T_ID\n");}
             | v_operando T_PUNTO v_operando {printf("v_operando: v_operando T_PUNTO v_operando\n");}
@@ -228,18 +246,23 @@ v_l_ll: v_expresion T_SEPARADOR v_l_ll { printf("v_l_ll: v_expresion T_CT_SEPARA
 
 %%
 int main( int argc, char **argv ) {
+	/*
 	#ifdef YYDEBUG
 	yydebug = 1;
 	#endif
+	*/
 
-        ++argv, --argc; 
-	yyin = fopen( argv[0], "r" );
+	/*Ejemplo de TS*/
+	Simbolo *TS = crear_TS();
+	Simbolo *aux = (struct Simbolo*) malloc(sizeof(struct Simbolo));
+	aux->entorno=1;
+	TS = aux;
+	printf("Entrono: %d\n",TS->entorno);
 
-	do {
-		yyparse();
-	} while(!feof(yyin));
-
-	return 0;
+	int flag;
+	yyin = fopen( argv[1], "r" );
+	flag = yyparse();
+	return flag;
 }
 
 void yyerror(const char* s) {
