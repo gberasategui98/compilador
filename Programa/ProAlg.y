@@ -125,16 +125,17 @@ v_literal: T_LITERAL_CARACTER {printf("v_literal: T_LITERAL_CARACTER\n");}
 		   | T_LITERAL_BOOLEANO {printf("v_literal: T_LITERAL_BOOLEANO\n");}
 		   | T_LITERAL_CADENA {printf("v_literal: T_LITERAL_CADENA\n");}
 
+//cambiada segunda produccion de v_lista_d_vars
 v_lista_d_var: v_lista_id T_DEF_TIPO T_ID T_COMP_SECUENCIAL v_lista_d_var %prec T_OP_MULTI{ printf("v_lista_d_var: v_lista_id T_DEF_TIPO T_ID T_COMP_SECUENCIAL lista_d_var\n"); }
-	| v_lista_id T_DEF_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_var { 
-			printf("v_lista_d_var: v_lista_id T_DEF_TIPO d_tipo T_COMP_SECUENCIAL lista_d_var\n"); 
+	| v_lista_id T_COMP_SECUENCIAL v_lista_d_var { 
+			printf("v_lista_d_var: v_lista_id v_lista_id T_COMP_SECUENCIAL v_lista_d_var\n"); 
 			
 		}
 	|
 ;
 
 v_lista_id: T_ID T_SEPARADOR v_lista_id { printf("v_lista_id: T_ID T_SEPARADOR v_lista_id\n"); }
-	| T_ID { printf("v_lista_id: T_ID\n"); }
+	| T_ID T_DEF_TIPO v_d_tipo{ printf("v_lista_id: T_ID T_DEF_TIPO v_d_tipo\n"); }
 ;
 
 v_decl_ent_sal: v_decl_ent { printf("v_decl_ent_sal: v_decl_ent\n"); }
@@ -256,22 +257,23 @@ int main( int argc, char **argv ) {
 	*/
 
 	/*Ejemplo de TS*/
+	/*
 	Simbolo *TS = crear_TS();
 	insertar(&TS, "Primer simbolo", "Variable");
 	insertar(&TS, "Segundo simbolo", "Funcion");
 	insertar(&TS, "Tercer simbolo", "Funcion");
 	insertar(&TS, "Cuarto simbolo", "Funcion");
 
-	/*printf("%s %s\n", TS->nombre, TS->tipo_simbolo);
+	printf("%s %s\n", TS->nombre, TS->tipo_simbolo);
 	printf("%s %s\n", TS->next->nombre, TS->next->tipo_simbolo);
 	printf("%s %s\n", TS->next->next->nombre, TS->next->next->tipo_simbolo);
-	printf("%s %s\n", TS->next->next->next->nombre, TS->next->next->next->tipo_simbolo);*/
+	printf("%s %s\n", TS->next->next->next->nombre, TS->next->next->next->tipo_simbolo);
 
 	Simbolo* s = buscar(TS, "Tercer simbolo");
 	printf("%s %s\n", s->nombre, s->tipo_simbolo);
 	s->tipo_simbolo = "pepe";
 	printf("%s %s\n", TS->next->nombre, TS->next->tipo_simbolo);
-
+	*/
 	int flag;
 	yyin = fopen( argv[1], "r" );
 	flag = yyparse();

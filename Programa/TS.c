@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
+/*
 TablaSimbolos* crear_TS(){
     TablaSimbolos *TS = (TablaSimbolos * ) malloc(sizeof(TablaSimbolos));
     TS->contador = 0;
@@ -30,4 +30,4 @@ Simbolo* buscar(TablaSimbolos *first, char *nombre){
     }
 	return NULL;
 };
-
+*/

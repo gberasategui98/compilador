@@ -30,7 +30,7 @@ struct Atributo{
 };
 
 typedef struct TablaSimbolos{
-    Simbolo * primer_simbolo;
+    struct Simbolo * primer_simbolo;
     int contador;
 }TablaSimbolos;
 
@@ -58,8 +58,9 @@ typedef struct Simbolo{
 
     struct Simbolo *next;
 }Simbolo;
-
+/*
 TablaSimbolos* crear_TS();
 void insertar(TablaSimbolos **first, char *nombre, char *tipo);
 Simbolo* buscar(TablaSimbolos *first, char *nombre);
+*/
 #endif
