@@ -11,6 +11,7 @@
 %{
 #include <math.h>
 #include "ProAlg.tab.h"
+#include "TS.h"
 
 int verd_o_falso(char *yytext){
     if (strcmp(yytext, "verdadero")==0){
@@ -204,17 +205,19 @@ DR_PUNTO "."
 
 {DR_INICIO_ARRAY} {printf("Simbolo crear tipo: %s\n", yytext); return T_INICIO_ARRAY;}
 
-{DR_TIPO_BOOLEANO} {printf("Booleano: %s\n", yytext); return T_TIPO_BOOLEANO;}
+{DR_TIPO_BOOLEANO} {printf("Booleano: %s\n", yytext); yylval.int_val = BOOLEANO; return T_TIPO_BOOLEANO;}
 
-{DR_TIPO_CARACTER} {printf("Caracter: %s\n", yytext); return T_TIPO_CARACTER;}
+{DR_TIPO_CARACTER} {printf("Caracter: %s\n", yytext); yylval.int_val = CARACTER; return T_TIPO_CARACTER;}
 
-{DR_TIPO_ENTERO} {printf("Entero: %s\n", yytext); return T_TIPO_ENTERO;}
+{DR_TIPO_ENTERO} {printf("Entero: %s\n", yytext); yylval.int_val = ENTERO;  return T_TIPO_ENTERO;}
 
-{DR_TIPO_REAL} {printf("Real: %s\n", yytext); return T_TIPO_REAL;}
+{DR_TIPO_REAL} {printf("Real: %s\n", yytext); yylval.int_val = REAL; return T_TIPO_REAL;}
 
-{DR_TIPO_CADENA} {printf("Cadena: %s\n", yytext); return T_TIPO_CADENA;}
+{DR_TIPO_CADENA} {printf("Cadena: %s\n", yytext); yylval.int_val = CADENA; return T_TIPO_CADENA;}
 
-{DR_ID}        {printf("Identificador: %s\n", yytext ); return T_ID;}
+{DR_ID}        {printf("Identificador: %s\n", yytext );  yylval.str_val = malloc(yyleng * sizeof(char));
+
+                    strcpy(yylval.str_val, yytext); return T_ID;}
 
 {DR_PARENTESIS_APERTURA} {printf("Parentesis apertura: %s\n", yytext); return T_PARENTESIS_APERTURA;}
 

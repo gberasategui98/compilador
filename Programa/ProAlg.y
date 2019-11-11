@@ -13,6 +13,8 @@ extern int yyparse();
 extern FILE* yyin;
 
 void yyerror(const char* s);
+
+TablaSimbolos *TS;
 %}
 
 %union{
@@ -23,12 +25,13 @@ void yyerror(const char* s);
 	//list_t* symtab_item;
 }
 
-%token <int_val> T_LITERAL_ENTERO T_LITERAL_BOOLEANO
+%token <int_val> T_LITERAL_ENTERO T_LITERAL_BOOLEANO 
 %token <float_val> T_LITERAL_REAL
 %token <char_val> T_LITERAL_CARACTER
 %token <str_val> T_LITERAL_CADENA
-
-%token T_ALGORITMO T_ID T_FALGORITMO T_COMENTARIO T_COMP_SECUENCIAL
+%token <int_val> T_TIPO_ENTERO T_TIPO_BOOLEANO T_TIPO_CARACTER T_TIPO_REAL T_TIPO_CADENA
+%token <str_val> T_ID
+%token T_ALGORITMO T_FALGORITMO T_COMENTARIO T_COMP_SECUENCIAL
 %token T_TIPO T_FTIPO T_CONSTANTE T_FCONST T_VAR T_FVAR
 %token T_CREAR_TIPO T_TUPLA T_FTUPLA
 %token T_TABLA T_INICIO_ARRAY T_SUBRANGO T_FIN_ARRAY T_DE
@@ -47,7 +50,9 @@ void yyerror(const char* s);
 %token T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
 %token T_OP_SUMA T_OP_RESTA
 %token T_OP_MULTI T_OP_DIV T_OP_MOD T_OP_DIV_ENT
-%token T_PUNTO T_TIPO_BOOLEANO T_TIPO_CARACTER T_TIPO_ENTERO T_TIPO_REAL T_TIPO_CADENA
+%token T_PUNTO
+
+%type<int_val> v_lista_id v_d_tipo v_tipo_base
 
 %left T_PUNTO T_INICIO_ARRAY T_REF
 %left T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
@@ -102,17 +107,23 @@ v_lista_d_tipo: T_ID T_CREAR_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_tipo { pr
 
 v_d_tipo: T_TUPLA v_lista_campos T_FTUPLA { printf("v_d_tipo: T_TUPLA v_lista_campos T_FTUPLA\n"); }
 	| T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo { printf("v_d_tipo: T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo\n"); }
-	| T_ID { printf("v_d_tipo: T_ID\n"); }
+	| T_ID { 
+		printf("v_d_tipo: T_ID\n");
+		//Falta almacenar el $$ el int correspondiente a este nuevo tipo (para que sea igual que con los tipos base)
+		}
 	| v_expresion_t T_SUBRANGO v_expresion_t { printf("v_d_tipo: v_expresion_t T_SUBRANGO v_expresion_t\n"); }
 	| T_REF v_d_tipo { printf("v_d_tipo: T_REF v_d_tipo\n"); }
-	| v_tipo_base { printf("v_d_tipo: v_tipo_base\n"); }
+	| v_tipo_base {
+		printf("v_d_tipo: v_tipo_base, %d\n", $1);
+		$$ = $1;
+		}
 ;
 
-v_tipo_base: T_TIPO_BOOLEANO {printf("v_tipo_base: booleano\n");}
-			|T_TIPO_CARACTER {printf("v_tipo_base: caracter\n");}
-			|T_TIPO_ENTERO {printf("v_tipo_base: entero\n");}
-			|T_TIPO_REAL {printf("v_tipo_base: real\n");}
-			|T_TIPO_CADENA {printf("v_tipo_base: cadena\n");}
+v_tipo_base: T_TIPO_BOOLEANO {printf("v_tipo_base: booleano\n"); $$ = $1;}
+			|T_TIPO_CARACTER {printf("v_tipo_base: caracter\n");$$ = $1;}
+			|T_TIPO_ENTERO {printf("v_tipo_base: entero, %d\n", $1);$$ = $1;}
+			|T_TIPO_REAL {printf("v_tipo_base: real\n");$$ = $1;}
+			|T_TIPO_CADENA {printf("v_tipo_base: cadena\n");$$ = $1;}
 ;
 
 v_expresion_t: v_expresion { printf("v_expresion_t: v_expresion\n"); }
@@ -135,13 +146,22 @@ v_literal: T_LITERAL_CARACTER {printf("v_literal: T_LITERAL_CARACTER\n");}
 //cambiada segunda produccion de v_lista_d_vars
 v_lista_d_var: v_lista_id T_COMP_SECUENCIAL v_lista_d_var { 
 			printf("v_lista_d_var: v_lista_id v_lista_id T_COMP_SECUENCIAL v_lista_d_var\n"); 
-			
 		}
 	|
 ;
 
-v_lista_id: T_ID T_SEPARADOR v_lista_id { printf("v_lista_id: T_ID T_SEPARADOR v_lista_id\n"); }
-	| T_ID T_DEF_TIPO v_d_tipo{ printf("v_lista_id: T_ID T_DEF_TIPO v_d_tipo\n"); }
+v_lista_id: T_ID T_SEPARADOR v_lista_id { 
+		printf("v_lista_id: T_ID T_SEPARADOR v_lista_id\n");
+		insertar_en_TS(TS, $1);
+		modificar_tipo_TS(TS, $1, $3);
+		$$ = $3; 
+		}
+	| T_ID T_DEF_TIPO v_d_tipo { 
+		printf("v_lista_id: T_ID T_DEF_TIPO v_d_tipo \n");
+		insertar_en_TS(TS, $1);
+		modificar_tipo_TS(TS, $1, $3);
+		$$ = $3;
+		}
 ;
 
 v_decl_ent_sal: v_decl_ent { printf("v_decl_ent_sal: v_decl_ent\n"); }
@@ -264,7 +284,8 @@ int main( int argc, char **argv ) {
 
 	/*Ejemplo de TS*/
 
-	/*TablaSimbolos *TS = crear_TS();
+	TS = crear_TS();
+	/*
 	insertar(TS, "Primer simbolo", VARIABLE);
 	insertar(TS, "Segundo simbolo", VARIABLE);
 	insertar(TS, "Tercer simbolo", FUNCION);
@@ -283,6 +304,8 @@ int main( int argc, char **argv ) {
 	int flag;
 	yyin = fopen( argv[1], "r" );
 	flag = yyparse();
+
+	//buscar(TS, "asdf");
 	return flag;
 }
 

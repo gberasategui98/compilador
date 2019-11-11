@@ -62,6 +62,7 @@ typedef struct TablaSimbolos{
 }TablaSimbolos;
 
 TablaSimbolos* crear_TS();
-void insertar(TablaSimbolos*, char*, int);
-Simbolo* buscar(TablaSimbolos, char*);
+void insertar_en_TS(TablaSimbolos*, char*);
+Simbolo* buscar(TablaSimbolos*, char*);
+void modificar_tipo_TS(TablaSimbolos *ts, char *nombre, int tipo);
 #endif

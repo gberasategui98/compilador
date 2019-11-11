@@ -4,10 +4,10 @@ clean:
 bison: ProAlg.y
 #bison -v -d --debug ProAlg.y
 	bison -v -d ProAlg.y
-flex: ProAlg.l ProAlg.tab.h
-	flex -i ProAlg.l
 TS: TS.c TS.h
 	gcc -c TS.c
+flex: ProAlg.l ProAlg.tab.h TS.h
+	flex -i ProAlg.l
 intermedio:
 	gcc -c lex.yy.c
 combine: TS bison flex intermedio
