@@ -20,6 +20,12 @@ void insertar(Simbolo **first, char *nombre, char *tipo){
     *first = nuevo_simbolo;
 };
 
-void buscar(Simbolo **first, char *nombre){
-    
+Simbolo* buscar(Simbolo *first, char *nombre){
+	Simbolo* actual = first;
+
+    while (actual->next != NULL) {
+		if(!strcmp(actual->nombre,nombre)) return actual;
+        actual = actual->next;
+    }
+	return NULL;
 };

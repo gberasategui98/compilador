@@ -42,5 +42,5 @@ typedef struct Simbolo{
 
 Simbolo* crear_TS();
 void insertar(Simbolo **first, char *nombre, char *tipo);
-void buscar(Simbolo **first, char *nombre);
+Simbolo* buscar(Simbolo *first, char *nombre);
 #endif
