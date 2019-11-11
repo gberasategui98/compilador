@@ -5,21 +5,40 @@
 #ifndef BC_TS
 #define BC_TS
 
+#define ETIQUETA 0
+#define VARIABLE 1
+#define FUNCION 2
+#define ACCION 3
+#define TIPO 4
+
+#define ENTERO 40
+#define REAL 41
+#define CADENA 42
+#define CARACTER 43
+#define BOOLEANO 44
+
+#define PASO_VALOR 60
+#define PASO_REFERENCIA 61
 struct Param{
-    char *tipo_param;
-    char *tipo_paso;
+    int tipo_param;
+    int tipo_paso;
 };
 
 struct Atributo{
     char *nombre;
-    char *tipo;
+    int tipo;
 };
+
+typedef struct TablaSimbolos{
+    Simbolo * primer_simbolo;
+    int contador;
+}TablaSimbolos;
 
 typedef struct Simbolo{
     /*Info general*/
     char *nombre;
-    char *tipo_simbolo;
-    char *tipo_variable; //Tipo de la variable, del array o el valor de returno de la funcion
+    int tipo_simbolo;
+    int tipo_variable; //Tipo de la variable, del array o el valor de returno de la funcion
 
     /*Info Etiqueta*/
     int ref_linea;
@@ -40,7 +59,7 @@ typedef struct Simbolo{
     struct Simbolo *next;
 }Simbolo;
 
-Simbolo* crear_TS();
-void insertar(Simbolo **first, char *nombre, char *tipo);
-void buscar(Simbolo **first, char *nombre);
+TablaSimbolos* crear_TS();
+void insertar(TablaSimbolos **first, char *nombre, char *tipo);
+void buscar(TablaSimbolos **first, char *nombre);
 #endif

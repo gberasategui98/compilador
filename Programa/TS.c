@@ -3,13 +3,13 @@
 #include <stdio.h>
 #include <string.h>
 
-Simbolo* crear_TS(){
-    struct Simbolo *st;
-    st = NULL;
-    return st;
+TablaSimbolos* crear_TS(){
+    TablaSimbolos *TS = (TablaSimbolos * ) malloc(sizeof(TablaSimbolos));
+    TS->contador = 0;
+    TS->primer_simbolo = NULL;
 };
 
-void insertar(Simbolo **first, char *nombre, char *tipo){
+void insertar(TablaSimbolos **first, char *nombre, char *tipo){
     Simbolo *nuevo_simbolo = (struct Simbolo *) malloc(sizeof(struct Simbolo));
 
     nuevo_simbolo->nombre = (char *) malloc(sizeof(char)*strlen(nombre));
@@ -20,6 +20,6 @@ void insertar(Simbolo **first, char *nombre, char *tipo){
     *first = nuevo_simbolo;
 };
 
-void buscar(Simbolo **first, char *nombre){
+void buscar(TablaSimbolos **first, char *nombre){
     
 };
