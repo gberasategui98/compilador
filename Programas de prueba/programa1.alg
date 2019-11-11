@@ -1,5 +1,5 @@
 algoritmo intercambio;
-	ent a,b,c,d,e:entero;
+	ent a,b:entero;
 	sal a,b:entero;
 {Prec: a= A AND b = B}
 var

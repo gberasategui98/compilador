@@ -57,7 +57,11 @@ DR_LITERAL_BOOLEANO verdadero|falso
 DR_LITERAL_CARACTER "\""(.)"\""
 DR_LITERAL_CADENA '([^']|("/""'"))*'
 DR_COMENTARIO "{"([^}]|"/""}")*"}"
-DR_TIPO_BASE booleano|caracter|entero|real|cadena
+DR_TIPO_BOOLEANO booleano
+DR_TIPO_CARACTER caracter
+DR_TIPO_ENTERO entero
+DR_TIPO_REAL real
+DR_TIPO_CADENA cadena
 DR_ACCION accion
 DR_ALGORITMO algoritmo
 DR_CONSTANTE const
@@ -200,7 +204,15 @@ DR_PUNTO "."
 
 {DR_INICIO_ARRAY} {printf("Simbolo crear tipo: %s\n", yytext); return T_INICIO_ARRAY;}
 
-{DR_TIPO_BASE} {printf("Tipo de la variable: %s\n", yytext); return T_ID;}
+{DR_TIPO_BOOLEANO} {printf("Booleano: %s\n", yytext); return T_TIPO_BOOLEANO;}
+
+{DR_TIPO_CARACTER} {printf("Caracter: %s\n", yytext); return T_TIPO_CARACTER;}
+
+{DR_TIPO_ENTERO} {printf("Entero: %s\n", yytext); return T_TIPO_ENTERO;}
+
+{DR_TIPO_REAL} {printf("Real: %s\n", yytext); return T_TIPO_REAL;}
+
+{DR_TIPO_CADENA} {printf("Cadena: %s\n", yytext); return T_TIPO_CADENA;}
 
 {DR_ID}        {printf("Identificador: %s\n", yytext ); return T_ID;}
 
