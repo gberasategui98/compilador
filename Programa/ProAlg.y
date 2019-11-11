@@ -254,10 +254,15 @@ int main( int argc, char **argv ) {
 
 	/*Ejemplo de TS*/
 	Simbolo *TS = crear_TS();
-	Simbolo *aux = (struct Simbolo*) malloc(sizeof(struct Simbolo));
-	aux->entorno=1;
-	TS = aux;
-	printf("Entrono: %d\n",TS->entorno);
+	insertar(&TS, "Primer simbolo", "Variable");
+	insertar(&TS, "Segundo simbolo", "Funcion");
+	insertar(&TS, "Segundo simbolo", "Funcion");
+	insertar(&TS, "Segundo simbolo", "Funcion");
+
+	printf("%s %s\n", TS->nombre, TS->tipo_simbolo);
+	printf("%s %s\n", TS->next->nombre, TS->next->tipo_simbolo);
+	printf("%s %s\n", TS->next->next->nombre, TS->next->next->tipo_simbolo);
+	printf("%s %s\n", TS->next->next->next->nombre, TS->next->next->next->tipo_simbolo);
 
 	int flag;
 	yyin = fopen( argv[1], "r" );

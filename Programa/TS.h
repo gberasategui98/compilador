@@ -1,3 +1,7 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
 #ifndef BC_TS
 #define BC_TS
 
@@ -37,6 +41,6 @@ typedef struct Simbolo{
 }Simbolo;
 
 Simbolo* crear_TS();
-void insertar(Simbolo **first, char *nombre, int tipo);
+void insertar(Simbolo **first, char *nombre, char *tipo);
 void buscar(Simbolo **first, char *nombre);
 #endif
