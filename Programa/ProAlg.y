@@ -256,21 +256,21 @@ int main( int argc, char **argv ) {
 	*/
 
 	/*Ejemplo de TS*/
-	Simbolo *TS = crear_TS();
-	insertar(&TS, "Primer simbolo", "Variable");
-	insertar(&TS, "Segundo simbolo", "Funcion");
-	insertar(&TS, "Tercer simbolo", "Funcion");
-	insertar(&TS, "Cuarto simbolo", "Funcion");
+	/*TablaSimbolos *TS = crear_TS();
+	insertar(TS, "Primer simbolo", VARIABLE);
+	insertar(TS, "Segundo simbolo", VARIABLE);
+	insertar(TS, "Tercer simbolo", FUNCION);
+	insertar(TS, "Cuarto simbolo", FUNCION);
 
-	/*printf("%s %s\n", TS->nombre, TS->tipo_simbolo);
-	printf("%s %s\n", TS->next->nombre, TS->next->tipo_simbolo);
-	printf("%s %s\n", TS->next->next->nombre, TS->next->next->tipo_simbolo);
-	printf("%s %s\n", TS->next->next->next->nombre, TS->next->next->next->tipo_simbolo);*/
+	printf("%s %d\n", TS->primer_simbolo->nombre, TS->primer_simbolo->tipo_simbolo);
+	printf("%s %d\n", TS->primer_simbolo->next->nombre, TS->primer_simbolo->next->tipo_simbolo);
+	printf("%s %d\n", TS->primer_simbolo->next->next->nombre, TS->primer_simbolo->next->next->tipo_simbolo);
+	printf("%s %d\n", TS->primer_simbolo->next->next->next->nombre, TS->primer_simbolo->next->next->next->tipo_simbolo);
 
-	Simbolo* s = buscar(TS, "Tercer simbolo");
-	printf("%s %s\n", s->nombre, s->tipo_simbolo);
-	s->tipo_simbolo = "pepe";
-	printf("%s %s\n", TS->next->nombre, TS->next->tipo_simbolo);
+	Simbolo* s = buscar(*TS, "Tercer simbolo");
+	printf("%s %d\n", TS->primer_simbolo->next->nombre, TS->primer_simbolo->next->tipo_simbolo);
+	s->tipo_simbolo = 35;
+	printf("%s %d\n", TS->primer_simbolo->next->nombre, TS->primer_simbolo->next->tipo_simbolo);*/
 
 	int flag;
 	yyin = fopen( argv[1], "r" );
