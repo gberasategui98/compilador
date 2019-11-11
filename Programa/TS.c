@@ -20,6 +20,14 @@ void insertar(TablaSimbolos **first, char *nombre, char *tipo){
     *first = nuevo_simbolo;
 };
 
-void buscar(TablaSimbolos **first, char *nombre){
-    
+
+Simbolo* buscar(TablaSimbolos *first, char *nombre){
+	Simbolo* actual = first;
+
+    while (actual->next != NULL) {
+		if(!strcmp(actual->nombre,nombre)) return actual;
+        actual = actual->next;
+    }
+	return NULL;
 };
+
