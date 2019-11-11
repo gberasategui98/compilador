@@ -19,6 +19,7 @@
 
 #define PASO_VALOR 60
 #define PASO_REFERENCIA 61
+
 struct Param{
     int tipo_param;
     int tipo_paso;
@@ -28,11 +29,6 @@ struct Atributo{
     char *nombre;
     int tipo;
 };
-
-typedef struct TablaSimbolos{
-    struct Simbolo * primer_simbolo;
-    int contador;
-}TablaSimbolos;
 
 typedef struct Simbolo{
     /*Info general*/
@@ -58,9 +54,14 @@ typedef struct Simbolo{
 
     struct Simbolo *next;
 }Simbolo;
-/*
+
+
+typedef struct TablaSimbolos{
+    Simbolo* primer_simbolo;
+    int contador;
+}TablaSimbolos;
+
 TablaSimbolos* crear_TS();
-void insertar(TablaSimbolos **first, char *nombre, char *tipo);
-Simbolo* buscar(TablaSimbolos *first, char *nombre);
-*/
+void insertar(TablaSimbolos*, char*, int);
+Simbolo* buscar(TablaSimbolos, char*);
 #endif
