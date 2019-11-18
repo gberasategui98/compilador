@@ -199,7 +199,11 @@ v_expresion: v_exp  {printf("v_expresion: v_exp_a\n");}
 
 v_exp: v_exp T_OP_SUMA v_exp {printf("v_exp: v_exp_a T_OP_SUMA v_exp_a\n");}
        | v_exp T_OP_RESTA v_exp {printf("v_exp: v_exp_a T_OP_RESTA v_exp_a\n");}
-       | v_exp T_OP_MULTI v_exp {printf("v_exp: v_exp_a T_OP_MULTI v_exp_a\n");}
+       | v_exp T_OP_MULTI v_exp {
+		   printf("v_exp: v_exp_a T_OP_MULTI v_exp_a\n");
+		   T_id = newtemp(TS);
+		   $$.place
+		   }
        | v_exp T_OP_DIV v_exp {printf("v_exp: v_exp_a T_OP_DIV v_exp_a\n");}
        | v_exp T_OP_MOD v_exp {printf("v_exp: v_exp_a T_OP_MOD v_exp_a\n");}
        | v_exp T_OP_DIV_ENT v_exp {printf("v_exp: v_exp_a T_OP_DIV_ENT v_exp_a\n");}
@@ -215,7 +219,18 @@ v_exp: v_exp T_OP_SUMA v_exp {printf("v_exp: v_exp_a T_OP_SUMA v_exp_a\n");}
 		   printf("%d\n", $$.type);
 		   }
        | v_literal_numerico {printf("v_exp: v_literal_numerico\n");}
-       | T_OP_RESTA v_exp %prec T_OP_MULTI {printf("v_exp: T_OP_RESTA v_exp_a\n");}
+       | T_OP_RESTA v_exp %prec T_OP_MULTI {
+		   printf("v_exp: T_OP_RESTA v_exp_a\n");
+		   T_id = newtemp(TS);
+		   modificar_tipo_TS(TS, T_id, $1.type);
+		   $$.place = T_id;
+		   /*
+		   if ($1.type == ENTERO){
+			   gen($$.place, T_ASIGNACION, T_OP_RESTA, $1.place);
+		   }else if($1.type == REAL){
+			   gen($$.place, T_ASIGNACION, T_OP_RESTA, $1.place);
+		   }*/
+		   modificar_tipo_TS(TS, )}
 	| T_OP_SUMA v_exp %prec T_OP_MULTI {printf("v_exp: T_OP_RESTA v_exp_a\n");}
        | v_exp T_Y v_exp {printf("v_exp: v_exp_b T_Y v_exp_b\n");}
        | v_exp T_O v_exp {printf("v_exp: v_exp_b T_O v_exp_b\n");}
@@ -336,7 +351,7 @@ int main( int argc, char **argv ) {
 	yyin = fopen( argv[1], "r" );
 	flag = yyparse();
 
-	buscar(TS, "asdf");
+	buscar(TS, 1234);
 	return flag;
 }
 

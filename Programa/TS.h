@@ -70,7 +70,7 @@ typedef struct tipo_lista{
 
 TablaSimbolos* crear_TS();
 int insertar_en_TS(TablaSimbolos*, char*);
-Simbolo* buscar(TablaSimbolos*, char*);
+Simbolo* buscar(TablaSimbolos*, int);
 void modificar_tipo_TS(TablaSimbolos*, int, int);
 int consulta_tipo(TablaSimbolos*, char*);
 #endif
