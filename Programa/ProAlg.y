@@ -44,7 +44,7 @@ TablaSimbolos *TS;
 %token <char_val> T_LITERAL_CARACTER
 %token <str_val> T_LITERAL_CADENA
 %token <int_val> T_TIPO_ENTERO T_TIPO_BOOLEANO T_TIPO_CARACTER T_TIPO_REAL T_TIPO_CADENA
-%token <st_id> T_ID
+%token <str_val> T_ID
 
 %token T_ALGORITMO T_FALGORITMO T_COMENTARIO T_COMP_SECUENCIAL
 %token T_TIPO T_FTIPO T_CONSTANTE T_FCONST T_VAR T_FVAR
@@ -167,14 +167,14 @@ v_lista_d_var: v_lista_id T_COMP_SECUENCIAL v_lista_d_var {
 
 v_lista_id: T_ID T_SEPARADOR v_lista_id { 
 		printf("v_lista_id: T_ID T_SEPARADOR v_lista_id\n");
-		insertar_en_TS(TS, $1.val);
-		modificar_tipo_TS(TS, $1.val, $3.type);
+		insertar_en_TS(TS, $1);
+		modificar_tipo_TS(TS, $1, $3.type);
 		$$.type = $3.type; 
 		}
 	| T_ID T_DEF_TIPO v_d_tipo { 
 		printf("v_lista_id: T_ID T_DEF_TIPO v_d_tipo \n");
-		insertar_en_TS(TS, $1.val);
-		modificar_tipo_TS(TS, $1.val, $3.type);
+		insertar_en_TS(TS, $1);
+		modificar_tipo_TS(TS, $1, $3.type);
 		$$.type = $3.type;
 		}
 ;
