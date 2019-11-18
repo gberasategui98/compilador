@@ -34,6 +34,7 @@ typedef struct Simbolo{
     /*Info general*/
     char *nombre;
     int tipo_simbolo;
+    int id;
     int tipo_variable; //Tipo de la variable, del array o el valor de returno de la funcion
 
     /*Info Etiqueta*/
@@ -60,6 +61,16 @@ typedef struct TablaSimbolos{
     Simbolo* primer_simbolo;
     int contador;
 }TablaSimbolos;
+
+/*Struct's utilizados en el union*/
+/*
+typedef struct tipo_id{
+	char * val;
+}tipo_id;
+
+typedef struct tipo_lista{
+    int type;
+}tipo_lista;*/
 
 TablaSimbolos* crear_TS();
 void insertar_en_TS(TablaSimbolos*, char*);

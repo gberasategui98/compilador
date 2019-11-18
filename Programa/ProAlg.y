@@ -5,7 +5,9 @@
 #include "TS.h"
 
 /*
-* NOTA: T_LITERAL_CARACTER y T_LITERAL_NUMERICO reemplazados por 'T_LITERAL'
+* DUDA: ¿Todas las zonas de declaración de variables funcionan igual?
+* Entiendo que en la entrada y en la salida se puede repetir el nombre de las variables pero 
+* en la declaración de variables generales no.
 */
 
 extern int yylex();
@@ -15,14 +17,26 @@ extern FILE* yyin;
 void yyerror(const char* s);
 
 TablaSimbolos *TS;
+
+
 %}
+%code requires {
+    typedef struct tipo_id{
+		char * val;
+	}tipo_id;
+
+	typedef struct tipo_lista{
+    	int type;
+	}tipo_lista;
+}
 
 %union{
 	char char_val;
 	int int_val;
 	double float_val;
 	char* str_val;
-	//list_t* symtab_item;
+	struct tipo_id st_id;
+	struct tipo_lista st_lista;
 }
 
 %token <int_val> T_LITERAL_ENTERO T_LITERAL_BOOLEANO 
@@ -30,7 +44,8 @@ TablaSimbolos *TS;
 %token <char_val> T_LITERAL_CARACTER
 %token <str_val> T_LITERAL_CADENA
 %token <int_val> T_TIPO_ENTERO T_TIPO_BOOLEANO T_TIPO_CARACTER T_TIPO_REAL T_TIPO_CADENA
-%token <str_val> T_ID
+%token <st_id> T_ID
+
 %token T_ALGORITMO T_FALGORITMO T_COMENTARIO T_COMP_SECUENCIAL
 %token T_TIPO T_FTIPO T_CONSTANTE T_FCONST T_VAR T_FVAR
 %token T_CREAR_TIPO T_TUPLA T_FTUPLA
@@ -52,7 +67,7 @@ TablaSimbolos *TS;
 %token T_OP_MULTI T_OP_DIV T_OP_MOD T_OP_DIV_ENT
 %token T_PUNTO
 
-%type<int_val> v_lista_id v_d_tipo v_tipo_base
+%type<st_lista> v_lista_id v_d_tipo v_tipo_base
 
 %left T_PUNTO T_INICIO_ARRAY T_REF
 %left T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
@@ -114,16 +129,16 @@ v_d_tipo: T_TUPLA v_lista_campos T_FTUPLA { printf("v_d_tipo: T_TUPLA v_lista_ca
 	| v_expresion_t T_SUBRANGO v_expresion_t { printf("v_d_tipo: v_expresion_t T_SUBRANGO v_expresion_t\n"); }
 	| T_REF v_d_tipo { printf("v_d_tipo: T_REF v_d_tipo\n"); }
 	| v_tipo_base {
-		printf("v_d_tipo: v_tipo_base, %d\n", $1);
-		$$ = $1;
+		printf("v_d_tipo: v_tipo_base\n");
+		$$.type = $1.type;
 		}
 ;
 
-v_tipo_base: T_TIPO_BOOLEANO {printf("v_tipo_base: booleano\n"); $$ = $1;}
-			|T_TIPO_CARACTER {printf("v_tipo_base: caracter\n");$$ = $1;}
-			|T_TIPO_ENTERO {printf("v_tipo_base: entero, %d\n", $1);$$ = $1;}
-			|T_TIPO_REAL {printf("v_tipo_base: real\n");$$ = $1;}
-			|T_TIPO_CADENA {printf("v_tipo_base: cadena\n");$$ = $1;}
+v_tipo_base: T_TIPO_BOOLEANO {printf("v_tipo_base: booleano\n"); $$.type = $1;}
+			|T_TIPO_CARACTER {printf("v_tipo_base: caracter\n");$$.type = $1;}
+			|T_TIPO_ENTERO {printf("v_tipo_base: entero\n");$$.type = $1;}
+			|T_TIPO_REAL {printf("v_tipo_base: real\n");$$.type = $1;}
+			|T_TIPO_CADENA {printf("v_tipo_base: cadena\n");$$.type = $1;}
 ;
 
 v_expresion_t: v_expresion { printf("v_expresion_t: v_expresion\n"); }
@@ -152,15 +167,15 @@ v_lista_d_var: v_lista_id T_COMP_SECUENCIAL v_lista_d_var {
 
 v_lista_id: T_ID T_SEPARADOR v_lista_id { 
 		printf("v_lista_id: T_ID T_SEPARADOR v_lista_id\n");
-		insertar_en_TS(TS, $1);
-		modificar_tipo_TS(TS, $1, $3);
-		$$ = $3; 
+		insertar_en_TS(TS, $1.val);
+		modificar_tipo_TS(TS, $1.val, $3.type);
+		$$.type = $3.type; 
 		}
 	| T_ID T_DEF_TIPO v_d_tipo { 
 		printf("v_lista_id: T_ID T_DEF_TIPO v_d_tipo \n");
-		insertar_en_TS(TS, $1);
-		modificar_tipo_TS(TS, $1, $3);
-		$$ = $3;
+		insertar_en_TS(TS, $1.val);
+		modificar_tipo_TS(TS, $1.val, $3.type);
+		$$.type = $3.type;
 		}
 ;
 
@@ -305,7 +320,7 @@ int main( int argc, char **argv ) {
 	yyin = fopen( argv[1], "r" );
 	flag = yyparse();
 
-	//buscar(TS, "asdf");
+	buscar(TS, "asdf");
 	return flag;
 }
 

@@ -15,6 +15,8 @@ void insertar_en_TS(TablaSimbolos *ts, char *nombre){
 
     nuevo_simbolo->nombre = (char *) malloc(sizeof(char)*strlen(nombre));
     strcpy(nuevo_simbolo->nombre,nombre);
+    ts->contador++;
+    nuevo_simbolo->id = ts->contador;
 
     nuevo_simbolo->next = ts->primer_simbolo;
     ts->primer_simbolo = nuevo_simbolo;
@@ -26,7 +28,7 @@ Simbolo* buscar(TablaSimbolos *ts, char *nombre){
 
     while (actual != NULL) {
 		//if(!strcmp(actual->nombre,nombre)) return actual;
-        printf("Nombre variable: %s. Tipo variable: %d\n", actual->nombre, actual->tipo_simbolo);
+        printf("Nombre variable: %s. Tipo variable: %d. Id: %d\n", actual->nombre, actual->tipo_simbolo, actual->id);
         actual = actual->next;
     }
 	return NULL;
