@@ -162,14 +162,14 @@ v_lista_d_var: v_lista_id T_COMP_SECUENCIAL v_lista_d_var {
 
 v_lista_id: T_ID T_SEPARADOR v_lista_id { 
 		printf("v_lista_id: T_ID T_SEPARADOR v_lista_id\n");
-		insertar_en_TS(TS, $1);
-		modificar_tipo_TS(TS, $1, $3.type);
+		int id_simbolo = insertar_en_TS(TS, $1);
+		modificar_tipo_TS(TS, id_simbolo, $3.type);
 		$$.type = $3.type; 
 		}
 	| T_ID T_DEF_TIPO v_d_tipo { 
 		printf("v_lista_id: T_ID T_DEF_TIPO v_d_tipo \n");
-		insertar_en_TS(TS, $1);
-		modificar_tipo_TS(TS, $1, $3.type);
+		int id_simbolo = insertar_en_TS(TS, $1);
+		modificar_tipo_TS(TS, id_simbolo, $3.type);
 		$$.type = $3.type;
 		}
 ;
@@ -314,8 +314,11 @@ int main( int argc, char **argv ) {
 	int flag;
 	yyin = fopen( argv[1], "r" );
 	flag = yyparse();
-
-	buscar(TS, "asdf");
+	newtemp(TS);
+newtemp(TS);
+newtemp(TS);
+newtemp(TS);
+	buscar(TS, 1234);
 	return flag;
 }
 
