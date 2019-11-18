@@ -1717,8 +1717,8 @@ yyreduce:
 #line 163 "ProAlg.y" /* yacc.c:1646  */
     { 
 		printf("v_lista_id: T_ID T_SEPARADOR v_lista_id\n");
-		insertar_en_TS(TS, (yyvsp[-2].str_val).val);
-		modificar_tipo_TS(TS, (yyvsp[-2].str_val).val, (yyvsp[0].st_lista).type);
+		insertar_en_TS(TS, (yyvsp[-2].str_val));
+		modificar_tipo_TS(TS, (yyvsp[-2].str_val), (yyvsp[0].st_lista).type);
 		(yyval.st_lista).type = (yyvsp[0].st_lista).type; 
 		}
 #line 1725 "ProAlg.tab.c" /* yacc.c:1646  */
@@ -1728,8 +1728,8 @@ yyreduce:
 #line 169 "ProAlg.y" /* yacc.c:1646  */
     { 
 		printf("v_lista_id: T_ID T_DEF_TIPO v_d_tipo \n");
-		insertar_en_TS(TS, (yyvsp[-2].str_val).val);
-		modificar_tipo_TS(TS, (yyvsp[-2].str_val).val, (yyvsp[0].st_lista).type);
+		insertar_en_TS(TS, (yyvsp[-2].str_val));
+		modificar_tipo_TS(TS, (yyvsp[-2].str_val), (yyvsp[0].st_lista).type);
 		(yyval.st_lista).type = (yyvsp[0].st_lista).type;
 		}
 #line 1736 "ProAlg.tab.c" /* yacc.c:1646  */

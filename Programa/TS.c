@@ -9,7 +9,7 @@ TablaSimbolos* crear_TS(){
     TablaSimbolos *TS = (TablaSimbolos*) malloc(sizeof(TablaSimbolos));
     TS->contador = 0;
     TS->primer_simbolo = NULL;
-};
+}
 
 void insertar_en_TS(TablaSimbolos *ts, char *nombre){
     Simbolo *nuevo_simbolo = (struct Simbolo *) malloc(sizeof(struct Simbolo));
@@ -21,7 +21,7 @@ void insertar_en_TS(TablaSimbolos *ts, char *nombre){
 
     nuevo_simbolo->next = ts->primer_simbolo;
     ts->primer_simbolo = nuevo_simbolo;
-};
+}
 
 
 Simbolo* buscar(TablaSimbolos *ts, char *nombre){
@@ -33,7 +33,7 @@ Simbolo* buscar(TablaSimbolos *ts, char *nombre){
         actual = actual->next;
     }
 	return NULL;
-};
+}
 
 void modificar_tipo_TS(TablaSimbolos *ts, char *nombre, int tipo){
     Simbolo* actual = ts->primer_simbolo;
@@ -56,5 +56,5 @@ int consulta_tipo(TablaSimbolos *ts, char *nombre){
 		if(!strcmp(actual->nombre,nombre)) return actual->tipo_variable;
         actual = actual->next;
     }
-	return NULL;
-};
+	return -1;
+}

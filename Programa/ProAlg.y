@@ -316,7 +316,6 @@ int main( int argc, char **argv ) {
 	flag = yyparse();
 
 	buscar(TS, "asdf");
-	printf("Tipo de a = %d", consulta_tipo(TS,"a"));
 	return flag;
 }
 
