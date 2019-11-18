@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "TS.h"
+#include "TablaCuadruplas.h"
 
 /*
 * DUDA: ¿Todas las zonas de declaración de variables funcionan igual?
@@ -17,7 +18,7 @@ extern FILE* yyin;
 void yyerror(const char* s);
 
 TablaSimbolos *TS;
-
+TablaCuadruplas *TC;
 
 %}
 %code requires {
@@ -27,7 +28,7 @@ TablaSimbolos *TS;
 
 	typedef struct tipo_exp{
 		int type;
-		char * place;
+		int place;
 	} tipo_exp;
 }
 
@@ -197,17 +198,55 @@ v_expresion: v_exp  {printf("v_expresion: v_exp_a\n");}
            |v_funcion_ll  {printf("v_expresion: v_funcion_ll\n");}
 ;
 
-v_exp: v_exp T_OP_SUMA v_exp {printf("v_exp: v_exp_a T_OP_SUMA v_exp_a\n");}
+v_exp: v_exp T_OP_SUMA v_exp {
+			printf("v_exp: v_exp_a T_OP_SUMA v_exp_a\n");
+			int T_id = newtemp(TS);
+			$$.place = T_id;
+			if (($1.type == ENTERO) && ($3.type == ENTERO)){
+			   	modificar_tipo_TS(TS, T_id, ENTERO);
+			  	gen(TC, TC_OP_SUMA, $1.place, $3.place, T_id);
+				$$.type = ENTERO;
+		   }else if(($1.type == ENTERO) && ($3.type == REAL)){
+				modificar_tipo_TS(TS, T_id, REAL);
+				gen(TC_INTTOREAL, $1.place, TC_NULO, T_id);
+				gen(TC_OP_SUMA, T_id, $3.place, T_id);
+				$$.type = REAL;
+		   }else if(($1.type == REAL) && ($3.type == ENTERO)){
+				modificar_tipo_TS(TS, T_id, REAL);
+				gen(TC_INTTOREAL, $3.place, TC_NULO, T_id);
+				gen(TC_OP_SUMA, $1.place, T_id, T_id);
+				$$.type = REAL;
+		   }else if(($1.type == REAL) && ($3.type == REAL)){
+				modificar_tipo_TS(TS, T_id, REAL);
+				gen(TC_OP_SUMA, $1.place, $3.place, T_id);
+				$$.type = REAL;
+		   }
+		}
        | v_exp T_OP_RESTA v_exp {printf("v_exp: v_exp_a T_OP_RESTA v_exp_a\n");}
        | v_exp T_OP_MULTI v_exp {
 		   printf("v_exp: v_exp_a T_OP_MULTI v_exp_a\n");
-		   T_id = newtemp(TS);
+		   int T_id = newtemp(TS);
 		   $$.place = T_id;
 		   if (($1.type == ENTERO) && ($3.type == ENTERO)){
-			   modificar_tipo_TS(TS, T_id, ENTERO);
-			   gen(T_id, T_ASIGNACION, $1.place * $1.place );
+			   	modificar_tipo_TS(TS, T_id, ENTERO);
+			  	gen(TC, TC_OP_SUMA, $1.place, $3.place, T_id);
+				$$.type = ENTERO;
+		   }else if(($1.type == ENTERO) && ($3.type == REAL)){
+				modificar_tipo_TS(TS, T_id, REAL);
+				gen(TC_INTTOREAL, $1.place, TC_NULO, T_id);
+				gen(TC_OP_MULTI, T_id, $3.place, T_id);
+				$$.type = REAL;
+		   }else if(($1.type == REAL) && ($3.type == ENTERO)){
+				modificar_tipo_TS(TS, T_id, REAL);
+				gen(TC_INTTOREAL, $3.place, TC_NULO, T_id);
+				gen(TC_OP_MULTI, $1.place, T_id, T_id);
+				$$.type = REAL;
+		   }else if(($1.type == REAL) && ($3.type == REAL)){
+				modificar_tipo_TS(TS, T_id, REAL);
+				gen(TC_OP_MULTI, $1.place, $3.place, T_id);
+				$$.type = REAL;
 		   }
-		   }
+		  }
        | v_exp T_OP_DIV v_exp {printf("v_exp: v_exp_a T_OP_DIV v_exp_a\n");}
        | v_exp T_OP_MOD v_exp {printf("v_exp: v_exp_a T_OP_MOD v_exp_a\n");}
        | v_exp T_OP_DIV_ENT v_exp {printf("v_exp: v_exp_a T_OP_DIV_ENT v_exp_a\n");}
@@ -218,23 +257,23 @@ v_exp: v_exp T_OP_SUMA v_exp {printf("v_exp: v_exp_a T_OP_SUMA v_exp_a\n");}
 		   }
        | v_operando {
 		   printf("v_exp: v_operando\n");
-		   $$.place = $1;
+		   Simbolo* sim = buscar_nombre(TS, $1);
+		   $$.place = sim->id;
 		   $$.type = consulta_tipo(TS, $1);
 		   printf("%d\n", $$.type);
 		   }
        | v_literal_numerico {printf("v_exp: v_literal_numerico\n");}
        | T_OP_RESTA v_exp %prec T_OP_MULTI {
 		   printf("v_exp: T_OP_RESTA v_exp_a\n");
-		   T_id = newtemp(TS);
-		   modificar_tipo_TS(TS, T_id, $1.type);
+		   int T_id = newtemp(TS);
+		   modificar_tipo_TS(TS, T_id, $2.type);
 		   $$.place = T_id;
-		   /*
-		   if ($1.type == ENTERO){
-			   gen($$.place, T_ASIGNACION, T_OP_RESTA, $1.place);
-		   }else if($1.type == REAL){
-			   gen($$.place, T_ASIGNACION, T_OP_RESTA, $1.place);
+		   /*if ($2.type == ENTERO){
+			   //gen(T_OP_RESTA, $2.place, NULO, $$.place);
+		   }else if($2.type == REAL){
+			   //gen(T_OP_RESTA, $2.place, NULL, $$.place);
 		   }*/
-		   modificar_tipo_TS(TS, )}
+		}
 	| T_OP_SUMA v_exp %prec T_OP_MULTI {printf("v_exp: T_OP_RESTA v_exp_a\n");}
        | v_exp T_Y v_exp {printf("v_exp: v_exp_b T_Y v_exp_b\n");}
        | v_exp T_O v_exp {printf("v_exp: v_exp_b T_O v_exp_b\n");}
@@ -332,29 +371,14 @@ int main( int argc, char **argv ) {
 	#endif
 	*/
 
-	/*Ejemplo de TS*/
-
-	TS = crear_TS();
-	/*
-	insertar(TS, "Primer simbolo", VARIABLE);
-	insertar(TS, "Segundo simbolo", VARIABLE);
-	insertar(TS, "Tercer simbolo", FUNCION);
-	insertar(TS, "Cuarto simbolo", FUNCION);
-
-	printf("%s %d\n", TS->primer_simbolo->nombre, TS->primer_simbolo->tipo_simbolo);
-	printf("%s %d\n", TS->primer_simbolo->next->nombre, TS->primer_simbolo->next->tipo_simbolo);
-	printf("%s %d\n", TS->primer_simbolo->next->next->nombre, TS->primer_simbolo->next->next->tipo_simbolo);
-	printf("%s %d\n", TS->primer_simbolo->next->next->next->nombre, TS->primer_simbolo->next->next->next->tipo_simbolo);
-
-	Simbolo* s = buscar(*TS, "Tercer simbolo");
-	printf("%s %d\n", TS->primer_simbolo->next->nombre, TS->primer_simbolo->next->tipo_simbolo);
-	s->tipo_simbolo = 35;
-	printf("%s %d\n", TS->primer_simbolo->next->nombre, TS->primer_simbolo->next->tipo_simbolo);*/
-
+	TS = crear_TS(); // Crear tabla de simbolos
+	TC = crear_TC(); // Crear tabla de cuadruplas
+	
 	int flag;
 	yyin = fopen( argv[1], "r" );
 	flag = yyparse();
-	buscar(TS, 1234);
+	imprimir_ts(TS);
+	imprimir_tc(TC);
 	return flag;
 }
 
