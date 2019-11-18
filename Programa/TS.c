@@ -29,7 +29,7 @@ Simbolo* buscar(TablaSimbolos *ts, char *nombre){
 
     while (actual != NULL) {
 		//if(!strcmp(actual->nombre,nombre)) return actual;
-        printf("Nombre variable: %s. Tipo variable: %d. Id: %d\n", actual->nombre, actual->tipo_simbolo, actual->id);
+        printf("Nombre variable: %s. Tipo variable: %d. Id: %d\n", actual->nombre, actual->tipo_variable, actual->id);
         actual = actual->next;
     }
 	return NULL;
@@ -40,7 +40,7 @@ void modificar_tipo_TS(TablaSimbolos *ts, char *nombre, int tipo){
     
     while (actual != NULL) {
 		if(!strcmp(actual->nombre,nombre)){
-            actual->tipo_simbolo=tipo;
+            actual->tipo_variable=tipo;
             printf("Nombre variable: %s. Tipo variable: %d\n", actual->nombre, actual->tipo_simbolo);
             return;
         }

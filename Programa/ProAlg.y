@@ -28,6 +28,11 @@ TablaSimbolos *TS;
 	typedef struct tipo_lista{
     	int type;
 	}tipo_lista;
+
+	typedef struct tipo_exp{
+		int tipo;
+		char * place;
+	} tipo_exp;
 }
 
 %union{
@@ -37,6 +42,7 @@ TablaSimbolos *TS;
 	char* str_val;
 	struct tipo_id st_id;
 	struct tipo_lista st_lista;
+	struct tipo_exp exp;
 }
 
 %token <int_val> T_LITERAL_ENTERO T_LITERAL_BOOLEANO 
@@ -68,6 +74,8 @@ TablaSimbolos *TS;
 %token T_PUNTO
 
 %type<st_lista> v_lista_id v_d_tipo v_tipo_base
+%type<exp> v_exp
+%type<str_val> v_operando
 
 %left T_PUNTO T_INICIO_ARRAY T_REF
 %left T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
@@ -201,7 +209,12 @@ v_exp: v_exp T_OP_SUMA v_exp {printf("v_exp: v_exp_a T_OP_SUMA v_exp_a\n");}
        | v_exp T_OP_MOD v_exp {printf("v_exp: v_exp_a T_OP_MOD v_exp_a\n");}
        | v_exp T_OP_DIV_ENT v_exp {printf("v_exp: v_exp_a T_OP_DIV_ENT v_exp_a\n");}
        | T_PARENTESIS_APERTURA v_exp T_PARENTESIS_CLAUSURA {printf("v_exp: T_PARENTESIS_APERTURA v_exp_a T_PARENTESIS_CLAUSURA\n");}
-       | v_operando {printf("v_exp: v_operando\n");}
+       | v_operando {
+		   printf("v_exp: v_operando\n");
+		   $$.place = $1;
+		   $$.type = consulta_tipo(TS, $1);
+		   print("%d\n", $$.type);
+		   }
        | v_literal_numerico {printf("v_exp: v_literal_numerico\n");}
        | T_OP_RESTA v_exp %prec T_OP_MULTI {printf("v_exp: T_OP_RESTA v_exp_a\n");}
 	| T_OP_SUMA v_exp %prec T_OP_MULTI {printf("v_exp: T_OP_RESTA v_exp_a\n");}
@@ -220,8 +233,12 @@ v_exp: v_exp T_OP_SUMA v_exp {printf("v_exp: v_exp_a T_OP_SUMA v_exp_a\n");}
 
 v_literal_numerico: T_LITERAL_ENTERO {}
 					| T_LITERAL_REAL {}
+;
 
-v_operando: T_ID {printf("v_operando: T_ID\n");}
+v_operando: T_ID {
+				printf("v_operando: T_ID\n");
+				$$ = $1;
+				}
             | v_operando T_PUNTO v_operando {printf("v_operando: v_operando T_PUNTO v_operando\n");}
             | v_operando T_INICIO_ARRAY v_expresion T_FIN_ARRAY {printf("v_operando: v_operando T_INICIO_ARRAY v_expresion T_FIN_ARRAY\n");}
             | v_operando T_REF {printf("v_operando: v_operando T_REF\n");}
