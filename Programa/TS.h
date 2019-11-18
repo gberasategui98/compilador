@@ -69,8 +69,8 @@ typedef struct tipo_lista{
 }tipo_lista;*/
 
 TablaSimbolos* crear_TS();
-void insertar_en_TS(TablaSimbolos*, char*);
+int insertar_en_TS(TablaSimbolos*, char*);
 Simbolo* buscar(TablaSimbolos*, char*);
-void modificar_tipo_TS(TablaSimbolos*, char*, int);
+void modificar_tipo_TS(TablaSimbolos*, int, int);
 int consulta_tipo(TablaSimbolos*, char*);
 #endif
