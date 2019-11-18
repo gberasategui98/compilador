@@ -21,10 +21,6 @@ TablaSimbolos *TS;
 
 %}
 %code requires {
-    typedef struct tipo_id{
-		char * val;
-	}tipo_id;
-
 	typedef struct tipo_lista{
     	int type;
 	}tipo_lista;
@@ -40,7 +36,6 @@ TablaSimbolos *TS;
 	int int_val;
 	double float_val;
 	char* str_val;
-	struct tipo_id st_id;
 	struct tipo_lista st_lista;
 	struct tipo_exp exp;
 }
