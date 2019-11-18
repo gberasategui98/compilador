@@ -24,6 +24,17 @@ int insertar_en_TS(TablaSimbolos *ts, char *nombre){
 	return nuevo_simbolo->id;
 }
 
+int newtemp(TablaSimbolos *ts){
+	Simbolo *nuevo_simbolo = (struct Simbolo*) malloc(sizeof(struct Simbolo));
+
+    ts->contador++;
+    nuevo_simbolo->id = ts->contador;
+    nuevo_simbolo->next = ts->primer_simbolo;
+    ts->primer_simbolo = nuevo_simbolo;
+
+	return nuevo_simbolo->id;
+}
+
 
 Simbolo* buscar(TablaSimbolos *ts, int id){
 	Simbolo* actual = ts->primer_simbolo;

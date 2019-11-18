@@ -202,7 +202,11 @@ v_exp: v_exp T_OP_SUMA v_exp {printf("v_exp: v_exp_a T_OP_SUMA v_exp_a\n");}
        | v_exp T_OP_MULTI v_exp {
 		   printf("v_exp: v_exp_a T_OP_MULTI v_exp_a\n");
 		   T_id = newtemp(TS);
-		   $$.place
+		   $$.place = T_id;
+		   if (($1.type == ENTERO) && ($3.type == ENTERO)){
+			   modificar_tipo_TS(TS, T_id, ENTERO);
+			   gen(T_id, T_ASIGNACION, $1.place * $1.place );
+		   }
 		   }
        | v_exp T_OP_DIV v_exp {printf("v_exp: v_exp_a T_OP_DIV v_exp_a\n");}
        | v_exp T_OP_MOD v_exp {printf("v_exp: v_exp_a T_OP_MOD v_exp_a\n");}
