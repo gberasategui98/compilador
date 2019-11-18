@@ -8,6 +8,7 @@
 TablaSimbolos* crear_TS(){
     TablaSimbolos *TS = (TablaSimbolos*) malloc(sizeof(TablaSimbolos));
     TS->contador = 0;
+	TS->contador_vartemp = 0;
     TS->primer_simbolo = NULL;
 }
 
@@ -27,7 +28,10 @@ int insertar_en_TS(TablaSimbolos *ts, char *nombre){
 int newtemp(TablaSimbolos *ts){
 	Simbolo *nuevo_simbolo = (struct Simbolo*) malloc(sizeof(struct Simbolo));
 
-    ts->contador++;
+	nuevo_simbolo->nombre = (char*) malloc(sizeof(char));
+    ts->contador_vartemp++;
+	sprintf(nuevo_simbolo->nombre, "t_%d", ts->contador_vartemp);
+	ts->contador++;
     nuevo_simbolo->id = ts->contador;
     nuevo_simbolo->next = ts->primer_simbolo;
     ts->primer_simbolo = nuevo_simbolo;

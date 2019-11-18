@@ -56,6 +56,7 @@ typedef struct Simbolo{
 typedef struct TablaSimbolos{
     Simbolo* primer_simbolo;
     int contador;
+	int contador_vartemp;
 }TablaSimbolos;
 
 /*Struct's utilizados en el union*/

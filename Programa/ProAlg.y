@@ -354,7 +354,6 @@ int main( int argc, char **argv ) {
 	int flag;
 	yyin = fopen( argv[1], "r" );
 	flag = yyparse();
-
 	buscar(TS, 1234);
 	return flag;
 }
