@@ -26,7 +26,7 @@ TablaSimbolos *TS;
 	}tipo_lista;
 
 	typedef struct tipo_exp{
-		int tipo;
+		int type;
 		char * place;
 	} tipo_exp;
 }
@@ -170,14 +170,14 @@ v_lista_d_var: v_lista_id T_COMP_SECUENCIAL v_lista_d_var {
 
 v_lista_id: T_ID T_SEPARADOR v_lista_id { 
 		printf("v_lista_id: T_ID T_SEPARADOR v_lista_id\n");
-		insertar_en_TS(TS, $1);
-		modificar_tipo_TS(TS, $1, $3.type);
+		int id_simbolo = insertar_en_TS(TS, $1);
+		modificar_tipo_TS(TS, id_simbolo, $3.type);
 		$$.type = $3.type; 
 		}
 	| T_ID T_DEF_TIPO v_d_tipo { 
 		printf("v_lista_id: T_ID T_DEF_TIPO v_d_tipo \n");
-		insertar_en_TS(TS, $1);
-		modificar_tipo_TS(TS, $1, $3.type);
+		int id_simbolo = insertar_en_TS(TS, $1);
+		modificar_tipo_TS(TS, id_simbolo, $3.type);
 		$$.type = $3.type;
 		}
 ;
@@ -203,12 +203,16 @@ v_exp: v_exp T_OP_SUMA v_exp {printf("v_exp: v_exp_a T_OP_SUMA v_exp_a\n");}
        | v_exp T_OP_DIV v_exp {printf("v_exp: v_exp_a T_OP_DIV v_exp_a\n");}
        | v_exp T_OP_MOD v_exp {printf("v_exp: v_exp_a T_OP_MOD v_exp_a\n");}
        | v_exp T_OP_DIV_ENT v_exp {printf("v_exp: v_exp_a T_OP_DIV_ENT v_exp_a\n");}
-       | T_PARENTESIS_APERTURA v_exp T_PARENTESIS_CLAUSURA {printf("v_exp: T_PARENTESIS_APERTURA v_exp_a T_PARENTESIS_CLAUSURA\n");}
+       | T_PARENTESIS_APERTURA v_exp T_PARENTESIS_CLAUSURA {
+		   printf("v_exp: T_PARENTESIS_APERTURA v_exp_a T_PARENTESIS_CLAUSURA\n");
+		   $$.place = $2.place;
+		   $$.type = $2.type;
+		   }
        | v_operando {
 		   printf("v_exp: v_operando\n");
 		   $$.place = $1;
 		   $$.type = consulta_tipo(TS, $1);
-		   print("%d\n", $$.type);
+		   printf("%d\n", $$.type);
 		   }
        | v_literal_numerico {printf("v_exp: v_literal_numerico\n");}
        | T_OP_RESTA v_exp %prec T_OP_MULTI {printf("v_exp: T_OP_RESTA v_exp_a\n");}
