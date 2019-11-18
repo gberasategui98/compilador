@@ -162,14 +162,14 @@ v_lista_d_var: v_lista_id T_COMP_SECUENCIAL v_lista_d_var {
 
 v_lista_id: T_ID T_SEPARADOR v_lista_id { 
 		printf("v_lista_id: T_ID T_SEPARADOR v_lista_id\n");
-		insertar_en_TS(TS, $1.val);
-		modificar_tipo_TS(TS, $1.val, $3.type);
+		insertar_en_TS(TS, $1);
+		modificar_tipo_TS(TS, $1, $3.type);
 		$$.type = $3.type; 
 		}
 	| T_ID T_DEF_TIPO v_d_tipo { 
 		printf("v_lista_id: T_ID T_DEF_TIPO v_d_tipo \n");
-		insertar_en_TS(TS, $1.val);
-		modificar_tipo_TS(TS, $1.val, $3.type);
+		insertar_en_TS(TS, $1);
+		modificar_tipo_TS(TS, $1, $3.type);
 		$$.type = $3.type;
 		}
 ;

@@ -4,6 +4,7 @@
 #include <string.h>
 
 
+
 TablaSimbolos* crear_TS(){
     TablaSimbolos *TS = (TablaSimbolos*) malloc(sizeof(TablaSimbolos));
     TS->contador = 0;

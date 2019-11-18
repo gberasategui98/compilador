@@ -1,9 +1,5 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
 #ifndef BC_TS
-#define BC_TS
+#define BC_TS_H
 
 #define ETIQUETA 0
 #define VARIABLE 1
