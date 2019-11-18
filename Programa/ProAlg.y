@@ -21,10 +21,6 @@ TablaSimbolos *TS;
 
 %}
 %code requires {
-    typedef struct tipo_id{
-		char * val;
-	}tipo_id;
-
 	typedef struct tipo_lista{
     	int type;
 	}tipo_lista;
@@ -35,7 +31,6 @@ TablaSimbolos *TS;
 	int int_val;
 	double float_val;
 	char* str_val;
-	struct tipo_id st_id;
 	struct tipo_lista st_lista;
 }
 
@@ -44,7 +39,7 @@ TablaSimbolos *TS;
 %token <char_val> T_LITERAL_CARACTER
 %token <str_val> T_LITERAL_CADENA
 %token <int_val> T_TIPO_ENTERO T_TIPO_BOOLEANO T_TIPO_CARACTER T_TIPO_REAL T_TIPO_CADENA
-%token <st_id> T_ID
+%token <str_val> T_ID
 
 %token T_ALGORITMO T_FALGORITMO T_COMENTARIO T_COMP_SECUENCIAL
 %token T_TIPO T_FTIPO T_CONSTANTE T_FCONST T_VAR T_FVAR
@@ -321,6 +316,7 @@ int main( int argc, char **argv ) {
 	flag = yyparse();
 
 	buscar(TS, "asdf");
+	printf("Tipo de a = %d", consulta_tipo(TS,"a"));
 	return flag;
 }
 
