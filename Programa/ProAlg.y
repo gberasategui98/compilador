@@ -394,7 +394,10 @@ v_exp: v_exp T_OP_SUMA v_exp {//Bien
 
 M: {$$.quad = TC->nextquad;}
 ;
-v_literal_numerico: T_LITERAL_ENTERO {}
+
+v_literal_numerico: T_LITERAL_ENTERO {
+                    int T_id = newtemp(TS);
+                    }
 					| T_LITERAL_REAL {}
 ;
 
