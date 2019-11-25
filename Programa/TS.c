@@ -40,7 +40,7 @@ int newtemp(TablaSimbolos *ts){
 }
 
 
-Simbolo* buscar(TablaSimbolos *ts, int id){
+Simbolo* buscar_id(TablaSimbolos *ts, int id){
 	Simbolo* actual = ts->primer_simbolo;
 
     while (actual != NULL) {
@@ -49,6 +49,27 @@ Simbolo* buscar(TablaSimbolos *ts, int id){
         actual = actual->next;
     }
 	return NULL;
+}
+
+Simbolo* buscar_nombre(TablaSimbolos *ts, char* nombre){
+	Simbolo* actual = ts->primer_simbolo;
+
+    while (actual != NULL) {
+		if(!strcmp(actual->nombre,nombre)) return actual;
+        //printf("Nombre variable: %s. Tipo variable: %d. Id: %d\n", actual->nombre, actual->tipo_variable, actual->id);
+        actual = actual->next;
+    }
+	return NULL;
+}
+
+void imprimir_ts(TablaSimbolos *ts){
+	printf("--- Tabla de Simbolos ---\n");
+	Simbolo* actual = ts->primer_simbolo;
+  	while (actual != NULL) {
+        printf("Nombre variable: %s. Tipo variable: %d. Id: %d\n", actual->nombre, actual->tipo_variable, actual->id);
+        actual = actual->next;
+    }
+	printf("---------------------------\n");
 }
 
 void modificar_tipo_TS(TablaSimbolos *ts, int id, int tipo){
