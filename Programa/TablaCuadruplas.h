@@ -21,6 +21,8 @@
 #define TC_OP_RESTA_UNI_REAL 19
 #define TC_OP_SUMA_UNI_ENT 20
 #define TC_OP_SUMA_UNI_REAL 21
+#define TC_ASIG_LITERAL_ENTERO 22
+#define TC_ASIG_LITERAL_REAL 23
 
 
 typedef struct Quad{

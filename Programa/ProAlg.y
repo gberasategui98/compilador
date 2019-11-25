@@ -6,9 +6,7 @@
 #include "TablaCuadruplas.h"
 
 /*
-* DUDA: ¿Todas las zonas de declaración de variables funcionan igual?
-* Entiendo que en la entrada y en la salida se puede repetir el nombre de las variables pero 
-* en la declaración de variables generales no.
+*
 */
 
 extern int yylex();
@@ -22,20 +20,26 @@ TablaCuadruplas *TC;
 
 %}
 %code requires {
-	typedef struct tipo_lista{
-    	int type;
-	}tipo_lista;
 
 	typedef struct tipo_exp{
 		int type;
 		int place;
-		int True;
-		int False;
+		struct lista T;
+		struct lista F;
 	} tipo_exp;
 	
 	typedef struct M{
         int quad;
 	}M;
+
+	typedef struct elem_lista{
+		int valor;
+		struct elem_lista *next;
+	}elem_lista;
+
+	typedef struct lista{
+		struct elem_lista *first;
+	}lista;
 }
 
 %union{
@@ -43,7 +47,6 @@ TablaCuadruplas *TC;
 	int int_val;
 	double float_val;
 	char* str_val;
-	struct tipo_lista st_lista;
 	struct tipo_exp exp;
 	struct M m;
 }
@@ -76,8 +79,8 @@ TablaCuadruplas *TC;
 %token T_OP_MULTI T_OP_DIV T_OP_MOD T_OP_DIV_ENT
 %token T_PUNTO
 
-%type<st_lista> v_lista_id v_d_tipo v_tipo_base
-%type<exp> v_exp
+%type<int_val> v_lista_id v_d_tipo v_tipo_base
+%type<exp> v_exp v_literal_numerico
 %type<str_val> v_operando
 %type<m> M
 
@@ -142,15 +145,15 @@ v_d_tipo: T_TUPLA v_lista_campos T_FTUPLA { printf("v_d_tipo: T_TUPLA v_lista_ca
 	| T_REF v_d_tipo { printf("v_d_tipo: T_REF v_d_tipo\n"); }
 	| v_tipo_base {
 		printf("v_d_tipo: v_tipo_base\n");
-		$$.type = $1.type;
+		$$ = $1;
 		}
 ;
 
-v_tipo_base: T_TIPO_BOOLEANO {printf("v_tipo_base: booleano\n"); $$.type = $1;}
-			|T_TIPO_CARACTER {printf("v_tipo_base: caracter\n");$$.type = $1;}
-			|T_TIPO_ENTERO {printf("v_tipo_base: entero\n");$$.type = $1;}
-			|T_TIPO_REAL {printf("v_tipo_base: real\n");$$.type = $1;}
-			|T_TIPO_CADENA {printf("v_tipo_base: cadena\n");$$.type = $1;}
+v_tipo_base: T_TIPO_BOOLEANO {printf("v_tipo_base: booleano\n"); $$ = $1;}
+			|T_TIPO_CARACTER {printf("v_tipo_base: caracter\n");$$ = $1;}
+			|T_TIPO_ENTERO {printf("v_tipo_base: entero\n");$$ = $1;}
+			|T_TIPO_REAL {printf("v_tipo_base: real\n");$$ = $1;}
+			|T_TIPO_CADENA {printf("v_tipo_base: cadena\n");$$ = $1;}
 ;
 
 v_expresion_t: v_expresion { printf("v_expresion_t: v_expresion\n"); }
@@ -180,14 +183,14 @@ v_lista_d_var: v_lista_id T_COMP_SECUENCIAL v_lista_d_var {
 v_lista_id: T_ID T_SEPARADOR v_lista_id { 
 		printf("v_lista_id: T_ID T_SEPARADOR v_lista_id\n");
 		int id_simbolo = insertar_en_TS(TS, $1);
-		modificar_tipo_TS(TS, id_simbolo, $3.type);
-		$$.type = $3.type; 
+		modificar_tipo_TS(TS, id_simbolo, $3);
+		$$ = $3; 
 		}
 	| T_ID T_DEF_TIPO v_d_tipo { 
 		printf("v_lista_id: T_ID T_DEF_TIPO v_d_tipo \n");
 		int id_simbolo = insertar_en_TS(TS, $1);
-		modificar_tipo_TS(TS, id_simbolo, $3.type);
-		$$.type = $3.type;
+		modificar_tipo_TS(TS, id_simbolo, $3);
+		$$ = $3;
 		}
 ;
 
@@ -336,15 +339,19 @@ v_exp: v_exp T_OP_SUMA v_exp {//Bien
        | v_operando {//Bien
 		   printf("v_exp: v_operando\n");
 		   Simbolo* sim = buscar_nombre(TS, $1);
-		   char* mensaje = (char*) malloc(sizeof(char));
-           sprintf(mensaje, "Error: Variable %s no declarada", $1);
-		   if (sim==NULL) yyerror(mensaje);
+		   if (sim==NULL){
+			   char* mensaje = (char*) malloc(sizeof(char));
+				sprintf(mensaje, "Error: Variable %s no declarada", $1);
+				yyerror(mensaje);
+		   } 
 		   $$.place = sim->id;
 		   $$.type = consulta_tipo(TS, $1);
 		   printf("%d\n", $$.type);
 		   }
-       | v_literal_numerico {//Duda
+       | v_literal_numerico {
             printf("v_exp: v_literal_numerico\n");
+			$$.place = $1.place;
+			$$.type = $1.type;
         }
        | T_OP_RESTA v_exp %prec T_OP_MULTI {
 		   printf("v_exp: T_OP_RESTA v_exp_a\n");
@@ -358,8 +365,7 @@ v_exp: v_exp T_OP_SUMA v_exp {//Bien
 		   }
 		}
 	   | T_OP_SUMA v_exp %prec T_OP_MULTI {
-            printf("v_exp: T_OP_RESTA v_exp_a\n");
-            printf("v_exp: T_OP_RESTA v_exp_a\n");
+            printf("v_exp: T_OP_SUMA v_exp_a\n");
             int T_id = newtemp(TS);
             modificar_tipo_TS(TS, T_id, $2.type);
             $$.place = T_id;
@@ -396,9 +402,21 @@ M: {$$.quad = TC->nextquad;}
 ;
 
 v_literal_numerico: T_LITERAL_ENTERO {
-                    int T_id = newtemp(TS);
+						printf("v_literal_numerico: T_LITERAL_ENTERO\n");
+						int T_id = newtemp(TS);
+						modificar_tipo_TS(TS, T_id, ENTERO);
+						gen(TC, TC_ASIG_LITERAL_ENTERO, $1, TC_NULO, T_id);
+						$$.place = T_id;
+						$$.type = ENTERO;
                     }
-					| T_LITERAL_REAL {}
+					| T_LITERAL_REAL {
+						printf("v_literal_numerico: T_LITERAL_REAL\n");
+						int T_id = newtemp(TS);
+						modificar_tipo_TS(TS, T_id, REAL);
+						gen(TC, TC_ASIG_LITERAL_REAL, $1, TC_NULO, T_id);
+						$$.place = T_id;
+						$$.type = REAL;
+					}
 ;
 
 v_operando: T_ID {

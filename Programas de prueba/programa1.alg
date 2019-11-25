@@ -5,10 +5,8 @@ algoritmo intercambio;
 var
 	aux: entero;
 fvar;
-ejemploentero:=43;
-ejermploreal:=54.23;
-aux:=-a;
 aux:=a;
+a:=2 + 2.3;
 a:=b;
 b:=aux
 {Post: b=A AND a = B}
