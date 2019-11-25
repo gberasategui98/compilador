@@ -7,7 +7,7 @@ var
 fvar;
 ejemploentero:=43;
 ejermploreal:=54.23;
-a:=a + b;
+aux:=-a;
 aux:=a;
 a:=b;
 b:=aux{Post: b=A AND a = B}
