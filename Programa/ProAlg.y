@@ -203,7 +203,7 @@ v_exp: v_exp T_OP_SUMA v_exp {
 			int T_id = newtemp(TS);
 			$$.place = T_id;
 			if (($1.type == ENTERO) && ($3.type == ENTERO)){
-			   	modificar_tipo_TS(TS, T_id, ENTERO);
+			   modificar_tipo_TS(TS, T_id, ENTERO);
 			  	gen(TC, TC_OP_SUMA_ENT, $1.place, $3.place, T_id);
 				$$.type = ENTERO;
 		   }else if(($1.type == ENTERO) && ($3.type == REAL)){
@@ -222,31 +222,53 @@ v_exp: v_exp T_OP_SUMA v_exp {
 				$$.type = REAL;
 		   }
 		}
-       | v_exp T_OP_RESTA v_exp {printf("v_exp: v_exp_a T_OP_RESTA v_exp_a\n");}
+       | v_exp T_OP_RESTA v_exp {
+			printf("v_exp: v_exp_a T_OP_RESTA v_exp_a\n");
+			int T_id = newtemp(TS);
+		   $$.place = T_id;
+		   if (($1.type == ENTERO) && ($3.type == ENTERO)){
+			   modificar_tipo_TS(TS, T_id, ENTERO);
+			  	gen(TC, TC_OP_RESTA_ENT, $1.place, $3.place, T_id);
+				$$.type = ENTERO;
+		   }else if(($1.type == ENTERO) && ($3.type == REAL)){
+				modificar_tipo_TS(TS, T_id, REAL);
+				gen(TC, TC_INTTOREAL, $1.place, TC_NULO, T_id);
+				gen(TC, TC_OP_RESTA_REAL, T_id, $3.place, T_id);
+				$$.type = REAL;
+		   }else if(($1.type == REAL) && ($3.type == ENTERO)){
+				modificar_tipo_TS(TS, T_id, REAL);
+				gen(TC, TC_INTTOREAL, $3.place, TC_NULO, T_id);
+				gen(TC, TC_OP_RESTA_REAL, $1.place, T_id, T_id);
+				$$.type = REAL;
+		   }else if(($1.type == REAL) && ($3.type == REAL)){
+				modificar_tipo_TS(TS, T_id, REAL);
+				gen(TC, TC_OP_RESTA_REAL, $1.place, $3.place, T_id);
+				$$.type = REAL;
+		   }
+			}
        | v_exp T_OP_MULTI v_exp {
 		   printf("v_exp: v_exp_a T_OP_MULTI v_exp_a\n");
 		   int T_id = newtemp(TS);
 		   $$.place = T_id;
-		   /*
 		   if (($1.type == ENTERO) && ($3.type == ENTERO)){
-			   	modificar_tipo_TS(TS, T_id, ENTERO);
-			  	gen(TC, TC_OP_SUMA, $1.place, $3.place, T_id);
+			   modificar_tipo_TS(TS, T_id, ENTERO);
+			  	gen(TC, TC_OP_DIV_ENT, $1.place, $3.place, T_id);
 				$$.type = ENTERO;
 		   }else if(($1.type == ENTERO) && ($3.type == REAL)){
 				modificar_tipo_TS(TS, T_id, REAL);
-				gen(TC_INTTOREAL, $1.place, TC_NULO, T_id);
-				gen(TC_OP_MULTI, T_id, $3.place, T_id);
+				gen(TC, TC_INTTOREAL, $1.place, TC_NULO, T_id);
+				gen(TC, TC_OP_DIV_REAL, T_id, $3.place, T_id);
 				$$.type = REAL;
 		   }else if(($1.type == REAL) && ($3.type == ENTERO)){
 				modificar_tipo_TS(TS, T_id, REAL);
-				gen(TC_INTTOREAL, $3.place, TC_NULO, T_id);
-				gen(TC_OP_MULTI, $1.place, T_id, T_id);
+				gen(TC, TC_INTTOREAL, $3.place, TC_NULO, T_id);
+				gen(TC, TC_OP_DIV_REAL, $1.place, T_id, T_id);
 				$$.type = REAL;
 		   }else if(($1.type == REAL) && ($3.type == REAL)){
 				modificar_tipo_TS(TS, T_id, REAL);
-				gen(TC_OP_MULTI, $1.place, $3.place, T_id);
+				gen(TC, TC_OP_DIV_REAL, $1.place, $3.place, T_id);
 				$$.type = REAL;
-		   }*/
+		   }
 		  }
        | v_exp T_OP_DIV v_exp {
             printf("v_exp: v_exp_a T_OP_DIV v_exp_a\n");}
@@ -270,11 +292,11 @@ v_exp: v_exp T_OP_SUMA v_exp {
 		   int T_id = newtemp(TS);
 		   modificar_tipo_TS(TS, T_id, $2.type);
 		   $$.place = T_id;
-		   /*if ($2.type == ENTERO){
-			   //gen(T_OP_RESTA, $2.place, NULO, $$.place);
+		   if ($2.type == ENTERO){
+			   gen(TC, T_OP_RESTA, $2.place, TC_NULO, $$.place);
 		   }else if($2.type == REAL){
-			   //gen(T_OP_RESTA, $2.place, NULL, $$.place);
-		   }*/
+			   gen(TC, T_OP_RESTA, $2.place, TC_NULO, $$.place);
+		   }
 		}
 	   | T_OP_SUMA v_exp %prec T_OP_MULTI {printf("v_exp: T_OP_RESTA v_exp_a\n");}
        | v_exp T_Y v_exp {printf("v_exp: v_exp_b T_Y v_exp_b\n");}
