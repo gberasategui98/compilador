@@ -198,7 +198,7 @@ v_expresion: v_exp  {printf("v_expresion: v_exp_a\n");}
            |v_funcion_ll  {printf("v_expresion: v_funcion_ll\n");}
 ;
 
-v_exp: v_exp T_OP_SUMA v_exp {
+v_exp: v_exp T_OP_SUMA v_exp {//Bien
 			printf("v_exp: v_exp_a T_OP_SUMA v_exp_a\n");
 			int T_id = newtemp(TS);
 			$$.place = T_id;
@@ -248,9 +248,42 @@ v_exp: v_exp T_OP_SUMA v_exp {
 				$$.type = REAL;
 		   }*/
 		  }
-       | v_exp T_OP_DIV v_exp {
-            printf("v_exp: v_exp_a T_OP_DIV v_exp_a\n");}
-       | v_exp T_OP_MOD v_exp {printf("v_exp: v_exp_a T_OP_MOD v_exp_a\n");}
+       | v_exp T_OP_DIV v_exp { //--> guille
+            printf("v_exp: v_exp_a T_OP_DIV v_exp_a\n");
+            int T_id = newtemp(TS);
+			$$.place = T_id;
+			if (($1.type == ENTERO) && ($3.type == ENTERO)){
+			   	modificar_tipo_TS(TS, T_id, ENTERO);
+			  	gen(TC, TC_OP_RESTA_ENT, $1.place, $3.place, T_id);
+				$$.type = ENTERO; // La división de dos enteros pasa a ser real???
+		   }else if(($1.type == ENTERO) && ($3.type == REAL)){
+				modificar_tipo_TS(TS, T_id, REAL);
+				gen(TC, TC_INTTOREAL, $1.place, TC_NULO, T_id);
+				gen(TC, TC_OP_RESTA_REAL, T_id, $3.place, T_id);
+				$$.type = REAL;
+		   }else if(($1.type == REAL) && ($3.type == ENTERO)){
+				modificar_tipo_TS(TS, T_id, REAL);
+				gen(TC, TC_INTTOREAL, $3.place, TC_NULO, T_id);
+				gen(TC, TC_OP_RESTA_REAL, $1.place, T_id, T_id);
+				$$.type = REAL;
+		   }else if(($1.type == REAL) && ($3.type == REAL)){
+				modificar_tipo_TS(TS, T_id, REAL);
+				gen(TC, TC_OP_RESTA_REAL, $1.place, $3.place, T_id);
+				$$.type = REAL;
+		   }
+        }
+       | v_exp T_OP_MOD v_exp { //El modulo es solo para enteros??
+            printf("v_exp: v_exp_a T_OP_MOD v_exp_a\n");
+            int T_id = newtemp(TS);
+			$$.place = T_id;
+			if (($1.type == ENTERO) && ($3.type == ENTERO)){
+			   	modificar_tipo_TS(TS, T_id, ENTERO);
+			  	gen(TC, TC_OP_RESTA_ENT, $1.place, $3.place, T_id);
+				$$.type = ENTERO; // La división de dos enteros pasa a ser real
+		   }else{
+                yyerror("Error: el modulo solo esta definido para enteros");
+		   }
+        }
        | v_exp T_OP_DIV_ENT v_exp {printf("v_exp: v_exp_a T_OP_DIV_ENT v_exp_a\n");}
        | T_PARENTESIS_APERTURA v_exp T_PARENTESIS_CLAUSURA {
 		   printf("v_exp: T_PARENTESIS_APERTURA v_exp_a T_PARENTESIS_CLAUSURA\n");

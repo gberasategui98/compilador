@@ -15,6 +15,7 @@
 #define TC_OP_SUMA_REAL 12
 #define TC_OP_MULTI_REAL 13
 #define TC_OP_RESTA_REAL 14
+#define TC_OP_MOD 15
 
 
 typedef struct Quad{
