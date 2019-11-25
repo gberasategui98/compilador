@@ -52,5 +52,6 @@ Simbolo* buscar_id(TablaSimbolos*, int);
 Simbolo* buscar_nombre(TablaSimbolos *, char*);
 void imprimir_ts(TablaSimbolos*);
 void modificar_tipo_TS(TablaSimbolos*, int, int);
+void modificar_valor_variable_TS(TablaSimbolos*, int, int);
 int consulta_tipo(TablaSimbolos*, char*);
 #endif
