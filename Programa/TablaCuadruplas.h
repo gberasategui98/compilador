@@ -8,7 +8,6 @@
 #define TC_OP_RESTA_ENT 4
 #define TC_OP_MULTI_ENT 5
 #define TC_OP_DIV 6 // Falta por tratar la division en .y
-#define TC_OP_MULTI_ENT 7
 #define TC_OP_DIV_ENT 8
 #define TC_ASIGNACION 9
 #define TC_DEFINICION 10
