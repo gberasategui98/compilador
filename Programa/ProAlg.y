@@ -29,7 +29,13 @@ TablaCuadruplas *TC;
 	typedef struct tipo_exp{
 		int type;
 		int place;
+		int True;
+		int False;
 	} tipo_exp;
+	
+	typedef struct M{
+        int quad;
+	}M;
 }
 
 %union{
@@ -39,6 +45,7 @@ TablaCuadruplas *TC;
 	char* str_val;
 	struct tipo_lista st_lista;
 	struct tipo_exp exp;
+	struct M m;
 }
 
 %token <int_val> T_LITERAL_ENTERO T_LITERAL_BOOLEANO 
@@ -72,6 +79,7 @@ TablaCuadruplas *TC;
 %type<st_lista> v_lista_id v_d_tipo v_tipo_base
 %type<exp> v_exp
 %type<str_val> v_operando
+%type<m> M
 
 %left T_PUNTO T_INICIO_ARRAY T_REF
 %left T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
@@ -335,7 +343,7 @@ v_exp: v_exp T_OP_SUMA v_exp {//Bien
 		   $$.type = consulta_tipo(TS, $1);
 		   printf("%d\n", $$.type);
 		   }
-       | v_literal_numerico {
+       | v_literal_numerico {//Duda
             printf("v_exp: v_literal_numerico\n");
         }
        | T_OP_RESTA v_exp %prec T_OP_MULTI {
@@ -349,12 +357,33 @@ v_exp: v_exp T_OP_SUMA v_exp {//Bien
 			   gen(TC, TC_OP_RESTA_UNI_REAL, $2.place, TC_NULO, $$.place);
 		   }
 		}
-	   | T_OP_SUMA v_exp %prec T_OP_MULTI {printf("v_exp: T_OP_RESTA v_exp_a\n");}
-       | v_exp T_Y v_exp {printf("v_exp: v_exp_b T_Y v_exp_b\n");}
-       | v_exp T_O v_exp {printf("v_exp: v_exp_b T_O v_exp_b\n");}
-       | T_NO v_exp {printf("v_exp: T_NO v_exp_b\n");}
-       | T_VERDADERO {printf("v_exp: T_VERDADERO\n");}
-       | T_FALSO {printf("v_exp: T_FALSO\n");}
+	   | T_OP_SUMA v_exp %prec T_OP_MULTI {
+            printf("v_exp: T_OP_RESTA v_exp_a\n");
+            printf("v_exp: T_OP_RESTA v_exp_a\n");
+            int T_id = newtemp(TS);
+            modificar_tipo_TS(TS, T_id, $2.type);
+            $$.place = T_id;
+            if ($2.type == ENTERO){
+                gen(TC, TC_OP_SUMA_UNI_ENT, $2.place, TC_NULO, $$.place);
+            }else if($2.type == REAL){
+                gen(TC, TC_OP_SUMA_UNI_REAL, $2.place, TC_NULO, $$.place);
+            }
+        }
+       | v_exp T_Y M v_exp {
+            printf("v_exp: v_exp_b T_Y v_exp_b\n");
+        }
+       | v_exp T_O M v_exp {
+            printf("v_exp: v_exp_b T_O v_exp_b\n");
+        }
+       | T_NO v_exp {
+            printf("v_exp: T_NO v_exp_b\n");
+        }
+       | T_VERDADERO {
+            printf("v_exp: T_VERDADERO\n");
+        }
+       | T_FALSO {
+            printf("v_exp: T_FALSO\n");
+        }
        | v_exp T_OP_REL_MENOR v_exp {printf("v_exp: v_exp_b T_OP_REL_MENOR v_exp_b\n");}
        | v_exp T_OP_REL_MAYOR v_exp {printf("v_exp: v_exp_b T_OP_REL_MAYOR v_exp_b\n");}
        | v_exp T_OP_REL_IGUAL v_exp {printf("v_exp: v_exp_b T_OP_REL_IGUAL v_exp_b\n");}
@@ -363,6 +392,8 @@ v_exp: v_exp T_OP_SUMA v_exp {//Bien
        | v_exp T_OP_REL_MENOR_IGUAL v_exp {printf("v_exp: v_exp_b T_OP_REL_MENOR_IGUAL v_exp_b\n");}
 ;
 
+M: {$$.quad = TC->nextquad;}
+;
 v_literal_numerico: T_LITERAL_ENTERO {}
 					| T_LITERAL_REAL {}
 ;
