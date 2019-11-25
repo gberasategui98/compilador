@@ -9,5 +9,6 @@ ejemploentero:=43;
 ejermploreal:=54.23;
 aux:=a;
 a:=b;
-b:=aux{Post: b=A AND a = B}
+b:=aux
+{Post: b=A AND a = B}
 falgoritmo.
