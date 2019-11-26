@@ -3,13 +3,9 @@
 * 07/10/2019
 */
 
-/*
-* DUDA: ¿En flex creamos entradas para la TS? ¿En caso afirmativo como utilizar la misma tabla en 
-*       flex y bison?
-*/
-
 %{
 #include <math.h>
+#include "TablaCuadruplas.h"
 #include "ProAlg.tab.h"
 #include "TS.h"
 

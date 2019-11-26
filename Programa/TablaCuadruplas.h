@@ -24,6 +24,25 @@
 #define TC_ASIG_LITERAL_ENTERO 22
 #define TC_ASIG_LITERAL_REAL 23
 
+typedef struct elem_lista{
+	int valor;
+	struct elem_lista *next;
+}elem_lista;
+
+typedef struct lista{
+	struct elem_lista *first;
+}lista;
+
+typedef struct tipo_exp{
+	int type;
+	int place;
+	struct lista T;
+	struct lista F;
+} tipo_exp;
+
+typedef struct M{
+        int quad;
+}M;
 
 typedef struct Quad{
  	int operador;
@@ -43,4 +62,7 @@ typedef struct TablaCuadruplas{
 TablaCuadruplas* crear_TC();
 void gen(TablaCuadruplas*,int,int,int,int);
 void imprimir_tc(TablaCuadruplas*);
+
+lista makelist(int);
+lista merge(lista*, lista*);
 #endif

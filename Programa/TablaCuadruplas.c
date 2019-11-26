@@ -34,3 +34,43 @@ void imprimir_tc(TablaCuadruplas *tc){
     }
 	printf("---------------------------\n");
 }
+
+lista makelist(int val){
+    lista *l = (lista*) malloc(sizeof(struct lista));
+    l->first = (elem_lista*) malloc(sizeof(struct elem_lista));
+    l->first->valor = val;
+    l->first->next = NULL;
+    return *l;
+}
+
+lista merge(lista *l1, lista *l2){//No esta bien hecha
+    lista * nueva_lista = (lista*) malloc(sizeof(struct lista));
+    elem_lista *recorrer, *nuevo, *aux;
+    recorrer = l1->first;
+    while(recorrer!=NULL){
+        nuevo = (elem_lista*) malloc(sizeof(struct elem_lista));
+        nuevo->valor = recorrer->valor;
+        nuevo->next = recorrer->next;
+        if(nueva_lista->first==NULL){
+            nueva_lista->first=nuevo;
+        }
+        else{
+            nuevo->next = nueva_lista->first;
+            nueva_lista->first = nuevo;
+        }
+        recorrer = recorrer->next;
+    }
+    recorrer = l2->first;
+    while(recorrer!=NULL){
+        nuevo = (elem_lista*) malloc(sizeof(struct elem_lista));
+        nuevo->valor = recorrer->valor;
+        nuevo->next = recorrer->next;
+        if(nueva_lista->first==NULL){
+            nueva_lista->first=nuevo;
+        }
+        else{
+            nuevo->next = nueva_lista->first;
+            nueva_lista->first = nuevo;
+        }
+    }
+}

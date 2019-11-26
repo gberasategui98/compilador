@@ -19,28 +19,6 @@ TablaSimbolos *TS;
 TablaCuadruplas *TC;
 
 %}
-%code requires {
-
-	typedef struct tipo_exp{
-		int type;
-		int place;
-		struct lista T;
-		struct lista F;
-	} tipo_exp;
-	
-	typedef struct M{
-        int quad;
-	}M;
-
-	typedef struct elem_lista{
-		int valor;
-		struct elem_lista *next;
-	}elem_lista;
-
-	typedef struct lista{
-		struct elem_lista *first;
-	}lista;
-}
 
 %union{
 	char char_val;
@@ -506,6 +484,17 @@ int main( int argc, char **argv ) {
 	flag = yyparse();
 	imprimir_ts(TS);
 	imprimir_tc(TC);
+	lista l1 = makelist(5);
+	lista l2 = makelist(6);
+	lista l3 = makelist(7);
+	lista l6 = merge(&l1,&l2);
+	//lista l4 = merge(l6,l3,1);
+	printf("Lista 6: %d, %d\n", l6.first->valor, l6.first->next->valor);
+	//printf("Lista 4: %d, %d, %d\n", l4.first->valor, l6.first->next->valor, l6.first->next->next->valor);
+	//lista l4 = merge(l2,l3,1);
+	//printf("%d\n", l3.first->valor);
+	//printf("%d\n", l3.first->next->valor);
+	//printf("%d\n", l3.first->next->next->valor);
 	return flag;
 }
 
