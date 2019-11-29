@@ -484,17 +484,14 @@ int main( int argc, char **argv ) {
 	flag = yyparse();
 	imprimir_ts(TS);
 	imprimir_tc(TC);
+
+
 	lista l1 = makelist(5);
 	lista l2 = makelist(6);
-	lista l3 = makelist(7);
-	lista l6 = merge(&l1,&l2);
-	//lista l4 = merge(l6,l3,1);
-	printf("Lista 6: %d, %d\n", l6.first->valor, l6.first->next->valor);
-	//printf("Lista 4: %d, %d, %d\n", l4.first->valor, l6.first->next->valor, l6.first->next->next->valor);
-	//lista l4 = merge(l2,l3,1);
-	//printf("%d\n", l3.first->valor);
-	//printf("%d\n", l3.first->next->valor);
-	//printf("%d\n", l3.first->next->next->valor);
+	lista l3 = merge(l1,l2,1);
+	printf("%d,%d,%p\n",l3.first->valor, l3.first->next->valor, l3.first->next->next);
+	lista l4 = merge(l3,l2,1);
+	printf("%d,%d,%p\n",l4.first->valor, l4.first->next->valor, l4.first->next->next);
 	return flag;
 }
 

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 
 
@@ -13,16 +14,30 @@ TablaCuadruplas* crear_TC(){
 
 void gen(TablaCuadruplas *tc, int operador, int operando1, int operando2, int destino){
     Quad *new_quad = (struct Quad*) malloc(sizeof(struct Quad));
-	
-	new_quad->operador = operador;
+	Quad *aux;
+    new_quad->operador = operador;
 	new_quad->operando1 = operando1;
 	new_quad->operando2 = operando2;
 	new_quad->destino = destino;
 
     tc->nextquad++;
 
-    new_quad->next = tc->primer_quad;
-    tc->primer_quad = new_quad;
+    if(tc->primer_quad==NULL){
+        tc->primer_quad = new_quad;
+    }
+    else{
+        aux=tc->primer_quad;
+        while(aux->next!=NULL){
+            aux = aux->next;
+        }
+        aux->next = new_quad;
+    }
+
+	
+
+    
+    //new_quad->next = tc->primer_quad;
+    //tc->primer_quad = new_quad;
 }
 
 void imprimir_tc(TablaCuadruplas *tc){
@@ -43,34 +58,31 @@ lista makelist(int val){
     return *l;
 }
 
-lista merge(lista *l1, lista *l2){//No esta bien hecha
+void anadir_final(lista **nueva_lista, elem_lista * elem){
+    elem_lista * aux;
+    aux = (*nueva_lista)->first;
+    printf("Nada mas entrar: %p, %p\n", aux, aux->next);
+    
+    while(aux->next!=NULL){
+        sleep(5);
+        aux = aux->next;
+        printf("%p, %p, %d\n", aux, aux->next,aux->valor);
+    }
+    aux->next = elem;
+    
+    return;
+}
+
+lista merge(lista l1, lista l2,int bien){//No esta bien hecha
     lista * nueva_lista = (lista*) malloc(sizeof(struct lista));
-    elem_lista *recorrer, *nuevo, *aux;
-    recorrer = l1->first;
-    while(recorrer!=NULL){
-        nuevo = (elem_lista*) malloc(sizeof(struct elem_lista));
-        nuevo->valor = recorrer->valor;
-        nuevo->next = recorrer->next;
-        if(nueva_lista->first==NULL){
-            nueva_lista->first=nuevo;
-        }
-        else{
-            nuevo->next = nueva_lista->first;
-            nueva_lista->first = nuevo;
-        }
-        recorrer = recorrer->next;
-    }
-    recorrer = l2->first;
-    while(recorrer!=NULL){
-        nuevo = (elem_lista*) malloc(sizeof(struct elem_lista));
-        nuevo->valor = recorrer->valor;
-        nuevo->next = recorrer->next;
-        if(nueva_lista->first==NULL){
-            nueva_lista->first=nuevo;
-        }
-        else{
-            nuevo->next = nueva_lista->first;
-            nueva_lista->first = nuevo;
+    elem_lista *recorrer;
+    nueva_lista = &l1;
+    if(bien){
+        recorrer = l2.first;
+        while(recorrer!=NULL){
+            anadir_final(&nueva_lista, recorrer);
+            recorrer = recorrer->next;
         }
     }
+    return *nueva_lista;
 }
