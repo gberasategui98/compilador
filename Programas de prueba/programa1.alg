@@ -6,7 +6,6 @@ var
 	aux: entero;
 fvar;
 aux:=a;
-a:=2 + 2.3;
 a:=b;
 b:=aux
 {Post: b=A AND a = B}

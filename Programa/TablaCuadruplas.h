@@ -3,7 +3,6 @@
 
 #define TC_NULO 0
 #define TC_GOTO 1
-#define TC_GOTO_REL 2
 #define TC_OP_SUMA_ENT 3
 #define TC_OP_RESTA_ENT 4
 #define TC_OP_MULTI_ENT 5
@@ -23,6 +22,16 @@
 #define TC_OP_SUMA_UNI_REAL 21
 #define TC_ASIG_LITERAL_ENTERO 22
 #define TC_ASIG_LITERAL_REAL 23
+#define TC_GOTO_OP_REL_IGUAL 24
+#define TC_GOTO_OP_REL_MENOR 25
+#define TC_GOTO_OP_REL_MENOR_IGUAL 26
+#define TC_GOTO_OP_REL_MAYOR 27
+#define TC_GOTO_OP_REL_MAYOR_IGUAL 28
+#define TC_GOTO_OP_REL_DIF 29
+#define TC_VERDADERO 30
+#define TC_FALSO 31
+#define TC_ASIGNACION_INT_TO_REAL 32
+
 
 typedef struct elem_lista{
 	int valor;
@@ -36,8 +45,8 @@ typedef struct lista{
 typedef struct tipo_exp{
 	int type;
 	int place;
-	struct lista T;
-	struct lista F;
+	struct lista true;
+	struct lista false;
 } tipo_exp;
 
 typedef struct M{
@@ -64,5 +73,6 @@ void gen(TablaCuadruplas*,int,int,int,int);
 void imprimir_tc(TablaCuadruplas*);
 
 lista makelist(int);
-lista merge(lista, lista,int);
+lista merge(lista*, lista*);
+void backpatch(TablaCuadruplas*, lista, int);
 #endif
