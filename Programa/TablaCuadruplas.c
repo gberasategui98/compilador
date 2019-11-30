@@ -112,3 +112,12 @@ void backpatch(TablaCuadruplas* TC, lista list, int valor){
     }
     return;
 }
+
+int empty(tipo_sentencia elem){
+    if(elem.next.first==NULL){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}

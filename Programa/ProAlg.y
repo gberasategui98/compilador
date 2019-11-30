@@ -27,6 +27,7 @@ TablaCuadruplas *TC;
 	char* str_val;
 	struct tipo_exp exp;
 	struct M m;
+	struct tipo_sentencia sentencia;
 }
 
 %token <int_val> T_LITERAL_ENTERO T_LITERAL_BOOLEANO 
@@ -61,6 +62,7 @@ TablaCuadruplas *TC;
 %type<exp> v_exp v_literal_numerico v_expresion
 %type<str_val> v_operando
 %type<m> M
+%type <sentencia> v_alternativa v_lista_opciones
 
 %left T_PUNTO T_INICIO_ARRAY T_REF
 %left T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
@@ -505,10 +507,22 @@ v_asignacion: v_operando T_ASIGNACION v_expresion {
 ;
 
 
-v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones T_FSI {printf("v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones T_FSI\n");}
+v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones v_lista_opciones T_FSI {
+	printf("v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones T_FSI\n");
+	backpatch(TC, $2.true, $4.quad);
+	if(!empty($6)){
+		$$.next = merge(&$2.false, &$6.next);
+	}
+	else{
+		lista l = makelist(TC->nextquad);
+		$$.next = merge(&$2.false, &l);
+		gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);
+	}
+	}
 ;
+
 v_lista_opciones: T_SIMBOLO_ELSE v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones {printf("v_lista_opciones: T_SIMBOLO_ELSE v_expresion T_SI v_instrucciones v_lista_opciones\n");}
-                  |
+                  | {}
 ;
 
 N: {}

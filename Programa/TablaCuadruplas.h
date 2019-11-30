@@ -49,6 +49,10 @@ typedef struct tipo_exp{
 	struct lista false;
 } tipo_exp;
 
+typedef struct tipo_sentencia{
+	struct lista next;
+}tipo_sentencia;
+
 typedef struct M{
         int quad;
 }M;
@@ -75,4 +79,6 @@ void imprimir_tc(TablaCuadruplas*);
 lista makelist(int);
 lista merge(lista*, lista*);
 void backpatch(TablaCuadruplas*, lista, int);
+
+int empty(tipo_sentencia);
 #endif
