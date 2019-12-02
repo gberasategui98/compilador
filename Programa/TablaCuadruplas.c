@@ -119,10 +119,16 @@ int empty(tipo_sentencia elem){
 }
 
 void generarCodigo(TablaCuadruplas* tc,TablaSimbolos* ts){
-	printf("\n Codigo generado en out.proalg\n");
+	printf("\nGenerando codigo de tres direcciones en out.proalg ...\n");
 	int fd = open("out.proalg", O_WRONLY | O_CREAT, 0644);
-	if (fd == -1) exit(1);
-	if (dup2(fd, 1) == -1)exit(1);
+	if (fd == -1){
+		printf("Error generando codigo: no se pudo crear el archivo.");
+		exit(-1);
+	}
+	if (dup2(fd, 1) == -1){
+		printf("Error generando codigo: no se pudo redireccionar la salida.");
+		exit(-1);
+	}
 
 	Quad* actual = tc->primer_quad;
   	while (actual != NULL) {
@@ -236,7 +242,7 @@ void generarCodigo(TablaCuadruplas* tc,TablaSimbolos* ts){
 			case TC_OP_SUMA_UNI_ENT:
 				s1 = buscar_id(ts, actual->destino);
 				s2 = buscar_id(ts, actual->operando1);
-				printf("%s := -%s\n", s1->nombre, s2->nombre);
+				printf("%s := +%s\n", s1->nombre, s2->nombre);
 				break;
 			case TC_INPUT:
 				s1 = buscar_id(ts, actual->destino);
@@ -246,8 +252,9 @@ void generarCodigo(TablaCuadruplas* tc,TablaSimbolos* ts){
 				printf("NO RECONOCIDO\n");
 				break; 
 		}       
-		actual = actual->next;
-    }
+		actual = actual->next; 
+	}
+	close(fd);
 }
 
 
