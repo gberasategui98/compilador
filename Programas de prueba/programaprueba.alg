@@ -14,3 +14,4 @@ a:=4.2;
 a:=d
 {Post: a=A AND b = B AND c= C ...}
 falgoritmo.
+

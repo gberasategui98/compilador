@@ -81,13 +81,13 @@ Simbolo* buscar_nombre(TablaSimbolos *ts, char* nombre){
 }
 
 void imprimir_ts(TablaSimbolos *ts){
-	printf("--- Tabla de Simbolos ---\n");
+	printf("\n---------------- Tabla de Simbolos ----------------\n");
 	Simbolo* actual = ts->primer_simbolo;
   	while (actual != NULL) {
-        printf("Nombre variable: %s. Tipo variable: %d. Id: %d\n", actual->nombre, actual->tipo_variable, actual->id);
+        printf("  Nombre variable: %s. Tipo variable: %d. Id: %d\n", actual->nombre, actual->tipo_variable, actual->id);
         actual = actual->next;
     }
-	printf("---------------------------\n");
+	printf("---------------------------------------------------\n");
 }
 
 void modificar_tipo_TS(TablaSimbolos *ts, int id, int tipo){
