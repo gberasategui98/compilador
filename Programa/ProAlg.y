@@ -169,7 +169,7 @@ v_lista_id: T_ID T_SEPARADOR v_lista_id {
 			sprintf(mensaje, "Error: Variable %s declarada anteriormente", $1);
 			yyerror(mensaje);
 		}
-		gen(TC, TC_INPUT, TC_NULO, TC_NULO, id_simbolo);
+		if(!ent_sal) gen(TC, TC_INPUT, TC_NULO, TC_NULO, id_simbolo);
 		modificar_tipo_TS(TS, id_simbolo, $3);
 		$$ = $3; 
 		}
@@ -633,8 +633,7 @@ int main( int argc, char **argv ) {
 	flag = yyparse();
 	imprimir_ts(TS);
 	imprimir_tc(TC);
-
-	//generarCodigo(TC, TS);
+	generarCodigo(TC, TS);
 	return flag;
 }
 

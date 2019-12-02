@@ -1,6 +1,6 @@
 algoritmo prueba;
 ent a, b, c ,d:real;
-sal d,s:real;
+sal d,f,s:real;
 {Prec: a = A AND b = B AND c = C}
 var
 	z:entero;
