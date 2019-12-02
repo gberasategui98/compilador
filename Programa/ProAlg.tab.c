@@ -535,14 +535,14 @@ static const yytype_uint16 yyrline[] =
       93,    96,    99,   100,   101,   102,   105,   108,   111,   114,
      115,   119,   120,   121,   125,   126,   127,   133,   134,   135,
      136,   137,   140,   141,   144,   145,   148,   149,   152,   153,
-     154,   155,   158,   161,   164,   176,   189,   189,   189,   193,
-     193,   199,   202,   203,   206,   210,   213,   237,   261,   285,
-     311,   323,   335,   346,   367,   372,   383,   394,   402,   408,
-     413,   416,   419,   426,   433,   440,   447,   454,   462,   465,
-     473,   483,   487,   488,   489,   492,   499,   505,   506,   507,
-     508,   509,   512,   538,   550,   565,   570,   570,   573,   586,
-     589,   592,   595,   598,   601,   602,   605,   606,   607,   610,
-     613,   616,   617
+     154,   155,   158,   161,   164,   176,   190,   190,   190,   194,
+     194,   200,   203,   204,   207,   211,   214,   238,   262,   286,
+     312,   324,   336,   347,   368,   373,   384,   395,   403,   409,
+     414,   417,   420,   427,   434,   441,   448,   455,   463,   466,
+     474,   484,   488,   489,   490,   493,   500,   506,   507,   508,
+     509,   510,   513,   539,   551,   566,   571,   571,   574,   587,
+     590,   593,   596,   599,   602,   603,   606,   607,   608,   611,
+     614,   617,   618
 };
 #endif
 
@@ -1725,7 +1725,7 @@ yyreduce:
 			sprintf(mensaje, "Error: Variable %s declarada anteriormente", (yyvsp[-2].str_val));
 			yyerror(mensaje);
 		}
-		gen(TC, TC_INPUT, TC_NULO, TC_NULO, id_simbolo);
+		if(ent_sal==0) gen(TC, TC_INPUT, TC_NULO, TC_NULO, id_simbolo);
 		modificar_tipo_TS(TS, id_simbolo, (yyvsp[0].int_val));
 		(yyval.int_val) = (yyvsp[0].int_val); 
 		}
@@ -1743,76 +1743,77 @@ yyreduce:
 			yyerror(mensaje);
 		}
 		modificar_tipo_TS(TS, id_simbolo, (yyvsp[0].int_val));
+		if(ent_sal==0) gen(TC, TC_INPUT, TC_NULO, TC_NULO, id_simbolo);
 		(yyval.int_val) = (yyvsp[0].int_val);
 		}
-#line 1749 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1750 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 189 "ProAlg.y" /* yacc.c:1646  */
+#line 190 "ProAlg.y" /* yacc.c:1646  */
     {ent_sal=0;}
-#line 1755 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1756 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 189 "ProAlg.y" /* yacc.c:1646  */
+#line 190 "ProAlg.y" /* yacc.c:1646  */
     {ent_sal=1;}
-#line 1761 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1762 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 189 "ProAlg.y" /* yacc.c:1646  */
+#line 190 "ProAlg.y" /* yacc.c:1646  */
     {
 		printf("v_decl_ent_sal: v_decl_ent v_decl_sal\n"); 
 		ent_sal=2;
 		}
-#line 1770 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1771 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 193 "ProAlg.y" /* yacc.c:1646  */
+#line 194 "ProAlg.y" /* yacc.c:1646  */
     {ent_sal=0;}
-#line 1776 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1777 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 193 "ProAlg.y" /* yacc.c:1646  */
+#line 194 "ProAlg.y" /* yacc.c:1646  */
     {
 		 printf("v_decl_ent_sal: v_decl_sal\n");
 		 ent_sal=2;
 	}
-#line 1785 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1786 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 199 "ProAlg.y" /* yacc.c:1646  */
+#line 200 "ProAlg.y" /* yacc.c:1646  */
     {printf("v_decl_ent: T_ENT v_lista_d_var\n"); }
-#line 1791 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1792 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 202 "ProAlg.y" /* yacc.c:1646  */
+#line 203 "ProAlg.y" /* yacc.c:1646  */
     { printf("v_decl_sal: T_SAL v_lista_d_var\n"); }
-#line 1797 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1798 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 206 "ProAlg.y" /* yacc.c:1646  */
+#line 207 "ProAlg.y" /* yacc.c:1646  */
     {
 		printf("v_expresion: v_exp_a\n");
 		(yyval.exp)=(yyvsp[0].exp);
 		}
-#line 1806 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1807 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 210 "ProAlg.y" /* yacc.c:1646  */
+#line 211 "ProAlg.y" /* yacc.c:1646  */
     {printf("v_expresion: v_funcion_ll\n");}
-#line 1812 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1813 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 213 "ProAlg.y" /* yacc.c:1646  */
+#line 214 "ProAlg.y" /* yacc.c:1646  */
     {//Bien
 			printf("v_exp: v_exp_a T_OP_SUMA v_exp_a\n");
 			int T_id = newtemp(TS);
@@ -1837,11 +1838,11 @@ yyreduce:
 				(yyval.exp).type = REAL;
 		   }
 		}
-#line 1841 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1842 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 237 "ProAlg.y" /* yacc.c:1646  */
+#line 238 "ProAlg.y" /* yacc.c:1646  */
     {//Bien
 			printf("v_exp: v_exp_a T_OP_RESTA v_exp_a\n");
 			int T_id = newtemp(TS);
@@ -1866,11 +1867,11 @@ yyreduce:
 				(yyval.exp).type = REAL;
 		   }
 			}
-#line 1870 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1871 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 261 "ProAlg.y" /* yacc.c:1646  */
+#line 262 "ProAlg.y" /* yacc.c:1646  */
     {//Bien
 		   printf("v_exp: v_exp_a T_OP_MULTI v_exp_a\n");
 		   int T_id = newtemp(TS);
@@ -1895,11 +1896,11 @@ yyreduce:
 				(yyval.exp).type = REAL;
 		   }
 		  }
-#line 1899 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1900 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 285 "ProAlg.y" /* yacc.c:1646  */
+#line 286 "ProAlg.y" /* yacc.c:1646  */
     { //Bien
             printf("v_exp: v_exp_a T_OP_DIV v_exp_a\n");
             int T_id = newtemp(TS);
@@ -1926,11 +1927,11 @@ yyreduce:
 				(yyval.exp).type = REAL;
 		   }
         }
-#line 1930 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1931 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 311 "ProAlg.y" /* yacc.c:1646  */
+#line 312 "ProAlg.y" /* yacc.c:1646  */
     { //Bien
             printf("v_exp: v_exp_a T_OP_MOD v_exp_a\n");
             int T_id = newtemp(TS);
@@ -1943,11 +1944,11 @@ yyreduce:
                 yyerror("Error: el modulo solo esta definido para enteros");
 		   }
         }
-#line 1947 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1948 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 323 "ProAlg.y" /* yacc.c:1646  */
+#line 324 "ProAlg.y" /* yacc.c:1646  */
     {//Bien 
             printf("v_exp: v_exp_a T_OP_DIV_ENT v_exp_a\n");
             int T_id = newtemp(TS);
@@ -1960,11 +1961,11 @@ yyreduce:
                 yyerror("Error: La división de enteros solo esta definido para enteros");
 		   }
         }
-#line 1964 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1965 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 335 "ProAlg.y" /* yacc.c:1646  */
+#line 336 "ProAlg.y" /* yacc.c:1646  */
     {//Bien (incluye exp_aritmetica y booleana)
 		   printf("v_exp: T_PARENTESIS_APERTURA v_exp_a T_PARENTESIS_CLAUSURA\n");
 		   if((yyval.exp).type==ENTERO || (yyval.exp).type==REAL){
@@ -1976,11 +1977,11 @@ yyreduce:
 			   (yyval.exp).false = (yyvsp[-1].exp).false;
 		   }
 		   }
-#line 1980 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 1981 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 346 "ProAlg.y" /* yacc.c:1646  */
+#line 347 "ProAlg.y" /* yacc.c:1646  */
     {//Duda:¿Como saber cuando se lee un operando si es para exp_aritmetica o booleana
 	   				//Otra duda: ¿Como podemos evitar que el operando en el caso de los booleanos cree sus correspondientes
 					//lineas de codigo intermedio según sea una condición de 'v_operando' o 'exp_a op_rel exp_b'?
@@ -2002,21 +2003,21 @@ yyreduce:
 		   gen(TC, TC_GOTO_OP_REL_IGUAL, sim->id, TC_VERDADERO, TC_NULO);
 		   gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);*/
 		   }
-#line 2006 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2007 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 367 "ProAlg.y" /* yacc.c:1646  */
+#line 368 "ProAlg.y" /* yacc.c:1646  */
     {
             printf("v_exp: v_literal_numerico\n");
 			(yyval.exp).place = (yyvsp[0].exp).place;
 			(yyval.exp).type = (yyvsp[0].exp).type;
         }
-#line 2016 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2017 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 372 "ProAlg.y" /* yacc.c:1646  */
+#line 373 "ProAlg.y" /* yacc.c:1646  */
     {
 		   printf("v_exp: T_OP_RESTA v_exp_a\n");
 		   int T_id = newtemp(TS);
@@ -2028,11 +2029,11 @@ yyreduce:
 			   gen(TC, TC_OP_RESTA_UNI_REAL, (yyvsp[0].exp).place, TC_NULO, (yyval.exp).place);
 		   }
 		}
-#line 2032 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2033 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 383 "ProAlg.y" /* yacc.c:1646  */
+#line 384 "ProAlg.y" /* yacc.c:1646  */
     {
             printf("v_exp: T_OP_SUMA v_exp_a\n");
             int T_id = newtemp(TS);
@@ -2044,11 +2045,11 @@ yyreduce:
                 gen(TC, TC_OP_SUMA_UNI_REAL, (yyvsp[0].exp).place, TC_NULO, (yyval.exp).place);
             }
         }
-#line 2048 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2049 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 394 "ProAlg.y" /* yacc.c:1646  */
+#line 395 "ProAlg.y" /* yacc.c:1646  */
     {
             printf("v_exp: v_exp_b T_Y v_exp_b\n");
 			backpatch(TC, (yyvsp[-3].exp).true, (yyvsp[-1].m).quad);
@@ -2057,48 +2058,48 @@ yyreduce:
 			printf("Aqui ya no llega\n");
 			(yyval.exp).true= (yyvsp[0].exp).true;
         }
-#line 2061 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2062 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 402 "ProAlg.y" /* yacc.c:1646  */
+#line 403 "ProAlg.y" /* yacc.c:1646  */
     {
             printf("v_exp: v_exp_b T_O v_exp_b\n");
 			backpatch(TC, (yyvsp[-3].exp).false, (yyvsp[-1].m).quad);
 			(yyval.exp).true = merge((yyvsp[-3].exp).true, (yyvsp[0].exp).true);
 			(yyval.exp).false = (yyvsp[0].exp).false;
         }
-#line 2072 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2073 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 408 "ProAlg.y" /* yacc.c:1646  */
+#line 409 "ProAlg.y" /* yacc.c:1646  */
     {
             printf("v_exp: T_NO v_exp_b\n");
 			(yyval.exp).true = (yyvsp[0].exp).false;
 			(yyval.exp).false = (yyvsp[0].exp).true;
         }
-#line 2082 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2083 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 413 "ProAlg.y" /* yacc.c:1646  */
+#line 414 "ProAlg.y" /* yacc.c:1646  */
     {
             printf("v_exp: T_VERDADERO\n");
         }
-#line 2090 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2091 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 416 "ProAlg.y" /* yacc.c:1646  */
+#line 417 "ProAlg.y" /* yacc.c:1646  */
     {
             printf("v_exp: T_FALSO\n");
         }
-#line 2098 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2099 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 419 "ProAlg.y" /* yacc.c:1646  */
+#line 420 "ProAlg.y" /* yacc.c:1646  */
     {
 		   printf("v_exp: v_exp_b T_OP_REL_MENOR v_exp_b\n");
 		   (yyval.exp).true= makelist(TC->nextquad);
@@ -2106,11 +2107,11 @@ yyreduce:
 		   gen(TC, TC_GOTO_OP_REL_MENOR, (yyvsp[-2].exp).place, (yyvsp[0].exp).place, TC_NULO);
 		   gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);
 		   }
-#line 2110 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2111 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 73:
-#line 426 "ProAlg.y" /* yacc.c:1646  */
+#line 427 "ProAlg.y" /* yacc.c:1646  */
     {
 		   printf("v_exp: v_exp_b T_OP_REL_MAYOR v_exp_b\n");
 		   (yyval.exp).true= makelist(TC->nextquad);
@@ -2118,11 +2119,11 @@ yyreduce:
 		   gen(TC, TC_GOTO_OP_REL_MAYOR, (yyvsp[-2].exp).place, (yyvsp[0].exp).place, TC_NULO);
 		   gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);
 		   }
-#line 2122 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2123 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 74:
-#line 433 "ProAlg.y" /* yacc.c:1646  */
+#line 434 "ProAlg.y" /* yacc.c:1646  */
     {
 		   printf("v_exp: v_exp_b T_OP_REL_IGUAL v_exp_b\n");
 		   (yyval.exp).true= makelist(TC->nextquad);
@@ -2130,11 +2131,11 @@ yyreduce:
 		   gen(TC, TC_GOTO_OP_REL_IGUAL, (yyvsp[-2].exp).place, (yyvsp[0].exp).place, TC_NULO);
 		   gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);
 		   }
-#line 2134 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2135 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 75:
-#line 440 "ProAlg.y" /* yacc.c:1646  */
+#line 441 "ProAlg.y" /* yacc.c:1646  */
     {
 		   printf("v_exp: v_exp_b T_OP_REL_DIF v_exp_b\n");
 		   (yyval.exp).true= makelist(TC->nextquad);
@@ -2142,11 +2143,11 @@ yyreduce:
 		   gen(TC, TC_GOTO_OP_REL_DIF, (yyvsp[-2].exp).place, (yyvsp[0].exp).place, TC_NULO);
 		   gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);
 		   }
-#line 2146 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2147 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 76:
-#line 447 "ProAlg.y" /* yacc.c:1646  */
+#line 448 "ProAlg.y" /* yacc.c:1646  */
     {
 		   printf("v_exp: v_exp_b T_OP_REL_MAYOR_IGUAL v_exp_b\n");
 		   (yyval.exp).true= makelist(TC->nextquad);
@@ -2154,28 +2155,28 @@ yyreduce:
 		   gen(TC, TC_GOTO_OP_REL_MAYOR_IGUAL, (yyvsp[-2].exp).place, (yyvsp[0].exp).place, TC_NULO);
 		   gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);
 		   }
-#line 2158 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2159 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 77:
-#line 454 "ProAlg.y" /* yacc.c:1646  */
+#line 455 "ProAlg.y" /* yacc.c:1646  */
     {
 		   printf("v_exp: v_exp_b T_OP_REL_MENOR_IGUAL v_exp_b\n");
 		   (yyval.exp).true= makelist(TC->nextquad);
 		   (yyval.exp).false= makelist((TC->nextquad)+1);
 		   gen(TC, TC_GOTO_OP_REL_MENOR_IGUAL, (yyvsp[-2].exp).place, (yyvsp[0].exp).place, TC_NULO);
 		   gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);}
-#line 2169 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2170 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 78:
-#line 462 "ProAlg.y" /* yacc.c:1646  */
+#line 463 "ProAlg.y" /* yacc.c:1646  */
     {(yyval.m).quad = TC->nextquad;}
-#line 2175 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2176 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 79:
-#line 465 "ProAlg.y" /* yacc.c:1646  */
+#line 466 "ProAlg.y" /* yacc.c:1646  */
     {
 						printf("v_literal_numerico: T_LITERAL_ENTERO\n");
 						int T_id = newtemp(TS);
@@ -2184,11 +2185,11 @@ yyreduce:
 						(yyval.exp).place = T_id;
 						(yyval.exp).type = ENTERO;
                     }
-#line 2188 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2189 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 80:
-#line 473 "ProAlg.y" /* yacc.c:1646  */
+#line 474 "ProAlg.y" /* yacc.c:1646  */
     {
 						printf("v_literal_numerico: T_LITERAL_REAL\n");
 						int T_id = newtemp(TS);
@@ -2197,38 +2198,38 @@ yyreduce:
 						(yyval.exp).place = T_id;
 						(yyval.exp).type = REAL;
 					}
-#line 2201 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2202 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 81:
-#line 483 "ProAlg.y" /* yacc.c:1646  */
+#line 484 "ProAlg.y" /* yacc.c:1646  */
     {
 				printf("v_operando: T_ID\n");
 				(yyval.str_val) = (yyvsp[0].str_val);
 				}
-#line 2210 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2211 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 82:
-#line 487 "ProAlg.y" /* yacc.c:1646  */
+#line 488 "ProAlg.y" /* yacc.c:1646  */
     {printf("v_operando: v_operando T_PUNTO v_operando\n");}
-#line 2216 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2217 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 83:
-#line 488 "ProAlg.y" /* yacc.c:1646  */
+#line 489 "ProAlg.y" /* yacc.c:1646  */
     {printf("v_operando: v_operando T_INICIO_ARRAY v_expresion T_FIN_ARRAY\n");}
-#line 2222 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2223 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 84:
-#line 489 "ProAlg.y" /* yacc.c:1646  */
+#line 490 "ProAlg.y" /* yacc.c:1646  */
     {printf("v_operando: v_operando T_REF\n");}
-#line 2228 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2229 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 85:
-#line 492 "ProAlg.y" /* yacc.c:1646  */
+#line 493 "ProAlg.y" /* yacc.c:1646  */
     {
 			printf("v_instrucciones: v_instruccion T_COMP_SECUENCIAL v_instrucciones\n");
 			if(!empty((yyvsp[-3].sentencia))){
@@ -2236,50 +2237,50 @@ yyreduce:
 			}
 			(yyval.sentencia).next = (yyvsp[0].sentencia).next;
 			}
-#line 2240 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2241 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 86:
-#line 499 "ProAlg.y" /* yacc.c:1646  */
+#line 500 "ProAlg.y" /* yacc.c:1646  */
     {
 			printf("v_instrucciones: v_instruccion\n");
 				(yyval.sentencia).next = (yyvsp[0].sentencia).next;
 			}
-#line 2249 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2250 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 87:
-#line 505 "ProAlg.y" /* yacc.c:1646  */
+#line 506 "ProAlg.y" /* yacc.c:1646  */
     {printf("v_instruccion: T_CONTINUAR\n");}
-#line 2255 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2256 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 88:
-#line 506 "ProAlg.y" /* yacc.c:1646  */
+#line 507 "ProAlg.y" /* yacc.c:1646  */
     {printf("v_instruccion: v_asignacion\n");}
-#line 2261 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2262 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 89:
-#line 507 "ProAlg.y" /* yacc.c:1646  */
+#line 508 "ProAlg.y" /* yacc.c:1646  */
     {printf("v_instruccion: v_alternativa\n");}
-#line 2267 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2268 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 90:
-#line 508 "ProAlg.y" /* yacc.c:1646  */
+#line 509 "ProAlg.y" /* yacc.c:1646  */
     {printf("v_instruccion: v_iteracion\n");}
-#line 2273 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2274 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 91:
-#line 509 "ProAlg.y" /* yacc.c:1646  */
+#line 510 "ProAlg.y" /* yacc.c:1646  */
     {printf("v_instruccion: v_accion_ll\n");}
-#line 2279 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2280 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 92:
-#line 512 "ProAlg.y" /* yacc.c:1646  */
+#line 513 "ProAlg.y" /* yacc.c:1646  */
     {
 	printf("v_asignacion: v_operando T_ASIGNACION v_expresion\n");
 	Simbolo *sim = buscar_nombre(TS, (yyvsp[-2].str_val));
@@ -2302,11 +2303,11 @@ yyreduce:
 		}
 	}
 	}
-#line 2306 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2307 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 93:
-#line 538 "ProAlg.y" /* yacc.c:1646  */
+#line 539 "ProAlg.y" /* yacc.c:1646  */
     {
 	printf("v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones T_FSI\n");
 	backpatch(TC, (yyvsp[-4].exp).true, (yyvsp[-2].m).quad);
@@ -2319,11 +2320,11 @@ yyreduce:
 		gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);
 	}
 	}
-#line 2323 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2324 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 94:
-#line 550 "ProAlg.y" /* yacc.c:1646  */
+#line 551 "ProAlg.y" /* yacc.c:1646  */
     {
 		printf("v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones N T_SIMBOLO_ELSE M v_instrucciones T_FSI");
 		backpatch(TC, (yyvsp[-10].exp).true, (yyvsp[-8].m).quad);
@@ -2337,25 +2338,25 @@ yyreduce:
 		}
 
 	}
-#line 2341 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2342 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 95:
-#line 565 "ProAlg.y" /* yacc.c:1646  */
+#line 566 "ProAlg.y" /* yacc.c:1646  */
     {(yyval.sentencia).next=makelist(TC->nextquad);
 	gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);
 	}
-#line 2349 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2350 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 97:
-#line 570 "ProAlg.y" /* yacc.c:1646  */
+#line 571 "ProAlg.y" /* yacc.c:1646  */
     {printf("v_iteracion: v_it_cota_fija | v_it_cota_exp\n");}
-#line 2355 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2356 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 98:
-#line 573 "ProAlg.y" /* yacc.c:1646  */
+#line 574 "ProAlg.y" /* yacc.c:1646  */
     {
 	printf("v_it_cota_exp: T_MIENTRAS v_expresion T_HACER v_instrucciones T_FMIENTRAS\n");
 	backpatch(TC, (yyvsp[-4].exp).true, (yyvsp[-2].m).quad);
@@ -2367,89 +2368,89 @@ yyreduce:
 	}
 	(yyval.sentencia).next = (yyvsp[-4].exp).false;
 	}
-#line 2371 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2372 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 99:
-#line 586 "ProAlg.y" /* yacc.c:1646  */
+#line 587 "ProAlg.y" /* yacc.c:1646  */
     {printf("v_it_cota_fija: T_PARA T_ID T_ASIGNACION v_expresion T_HASTA v_expresion T_HACER v_instrucciones T_FPARA\n");}
-#line 2377 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2378 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 100:
-#line 589 "ProAlg.y" /* yacc.c:1646  */
+#line 590 "ProAlg.y" /* yacc.c:1646  */
     { printf("v_accion_d: T_ACCION v_a_cabecera bloque T_FACCION\n"); }
-#line 2383 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2384 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 101:
-#line 592 "ProAlg.y" /* yacc.c:1646  */
+#line 593 "ProAlg.y" /* yacc.c:1646  */
     { printf("v_funcion_d: T_FUNCION v_f_cabecera v_bloque T_DEV v_expresion T_FFUNCION\n"); }
-#line 2389 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2390 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 102:
-#line 595 "ProAlg.y" /* yacc.c:1646  */
+#line 596 "ProAlg.y" /* yacc.c:1646  */
     { printf("v_a_cabecera: T_ID T_PARENTESIS_APERTURA v_d_par_form T_PARENTESIS_CLAUSURA T_COMP_SECUENCIAL\n"); }
-#line 2395 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2396 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 103:
-#line 598 "ProAlg.y" /* yacc.c:1646  */
+#line 599 "ProAlg.y" /* yacc.c:1646  */
     { printf("v_f_cabecera: T_ID T_PARENTESIS_APERTURA v_lista_d_var T_PARENTESIS_CLAUSURA T_DEV v_d_tipo T_COMP_SECUENCIAL"); }
-#line 2401 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2402 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 104:
-#line 601 "ProAlg.y" /* yacc.c:1646  */
+#line 602 "ProAlg.y" /* yacc.c:1646  */
     { printf("v_d_par_form: v_d_p_form T_COMP_SECUENCIAL v_d_par_form\n"); }
-#line 2407 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2408 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 106:
-#line 605 "ProAlg.y" /* yacc.c:1646  */
+#line 606 "ProAlg.y" /* yacc.c:1646  */
     { printf("v_d_p_form: T_ENT v_lista_id T_DEF_TIPO\n"); }
-#line 2413 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2414 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 107:
-#line 606 "ProAlg.y" /* yacc.c:1646  */
+#line 607 "ProAlg.y" /* yacc.c:1646  */
     { printf("v_d_p_form: T_SAL v_lista_id T_DEF_TIPO\n"); }
-#line 2419 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2420 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 108:
-#line 607 "ProAlg.y" /* yacc.c:1646  */
+#line 608 "ProAlg.y" /* yacc.c:1646  */
     { printf("v_d_p_form: T_E_S v_lista_id T_DEF_TIPO\n"); }
-#line 2425 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2426 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 109:
-#line 610 "ProAlg.y" /* yacc.c:1646  */
+#line 611 "ProAlg.y" /* yacc.c:1646  */
     { printf("v_accion_ll: T_ID T_PARENTESIS_APERTURA v_l_ll T_PARENTESIS_CLAUSURA\n"); }
-#line 2431 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2432 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 110:
-#line 613 "ProAlg.y" /* yacc.c:1646  */
+#line 614 "ProAlg.y" /* yacc.c:1646  */
     { printf("v_funcion_ll: T_ID T_PARENTESIS_APERTURA v_l_ll T_PARENTESIS_CLAUSURA\n"); }
-#line 2437 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2438 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 111:
-#line 616 "ProAlg.y" /* yacc.c:1646  */
+#line 617 "ProAlg.y" /* yacc.c:1646  */
     { printf("v_l_ll: v_expresion T_CT_SEPARADOROMA v_l_ll\n"); }
-#line 2443 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2444 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
   case 112:
-#line 617 "ProAlg.y" /* yacc.c:1646  */
+#line 618 "ProAlg.y" /* yacc.c:1646  */
     { printf("v_l_ll: v_expresion\n"); }
-#line 2449 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2450 "ProAlg.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 2453 "ProAlg.tab.c" /* yacc.c:1646  */
+#line 2454 "ProAlg.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2677,7 +2678,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 620 "ProAlg.y" /* yacc.c:1906  */
+#line 621 "ProAlg.y" /* yacc.c:1906  */
 
 int main( int argc, char **argv ) {
 	/*
@@ -2695,7 +2696,7 @@ int main( int argc, char **argv ) {
 	imprimir_ts(TS);
 	imprimir_tc(TC);
 
-	//generarCodigo(TC, TS);
+	generarCodigo(TC, TS);
 	return flag;
 }
 

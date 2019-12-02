@@ -37,6 +37,7 @@ int insertar_en_TS(TablaSimbolos *ts, char *nombre, int i_o){
     strcpy(nuevo_simbolo->nombre,nombre);
     ts->contador++;
     nuevo_simbolo->id = ts->contador;
+    nuevo_simbolo->i_o_variable = i_o;
 
     nuevo_simbolo->next = ts->primer_simbolo;
     ts->primer_simbolo = nuevo_simbolo;
@@ -84,7 +85,7 @@ void imprimir_ts(TablaSimbolos *ts){
 	printf("\n---------------- Tabla de Simbolos ----------------\n");
 	Simbolo* actual = ts->primer_simbolo;
   	while (actual != NULL) {
-        printf("  Nombre variable: %s. Tipo variable: %d. Id: %d\n", actual->nombre, actual->tipo_variable, actual->id);
+        printf("  Nombre variable: %s. Tipo variable: %d. Id: %d....%d\n", actual->nombre, actual->tipo_variable, actual->id, actual->i_o_variable);
         actual = actual->next;
     }
 	printf("---------------------------------------------------\n");

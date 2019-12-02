@@ -1,0 +1,12 @@
+input d
+input c
+input b
+input a
+if a >= b goto 6
+goto 10
+a := b
+goto 11
+b := a
+t_1 := 4.20
+a := t_1
+a := d
