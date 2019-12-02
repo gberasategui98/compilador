@@ -62,7 +62,7 @@ TablaCuadruplas *TC;
 %type<exp> v_exp v_literal_numerico v_expresion
 %type<str_val> v_operando
 %type<m> M
-%type <sentencia> v_instrucciones v_instruccion v_alternativa N
+%type <sentencia> v_instrucciones v_instruccion v_alternativa N v_it_cota_exp
 
 %left T_PUNTO T_INICIO_ARRAY T_REF
 %left T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
@@ -471,8 +471,17 @@ v_operando: T_ID {
             | v_operando T_REF {printf("v_operando: v_operando T_REF\n");}
 ;
 
-v_instrucciones: v_instruccion T_COMP_SECUENCIAL v_instrucciones {printf("v_instrucciones: v_instruccion T_COMP_SECUENCIAL v_instrucciones\n");}
-                 | v_instruccion {printf("v_instrucciones: v_instruccion\n");}
+v_instrucciones: v_instruccion T_COMP_SECUENCIAL M v_instrucciones {
+			printf("v_instrucciones: v_instruccion T_COMP_SECUENCIAL v_instrucciones\n");
+			if(!empty($1)){
+				backpatch(TC, $1.next, $3.quad);
+			}
+			$$.next = $4.next;
+			}
+        	| v_instruccion {
+			printf("v_instrucciones: v_instruccion\n");
+				$$.next = $1.next;
+			}
 ;
 
 v_instruccion: T_CONTINUAR {printf("v_instruccion: T_CONTINUAR\n");}
@@ -519,12 +528,12 @@ v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones T_FSI {
 		gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);
 	}
 	}
-	| T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones N T_SIMBOLO_ELSE M v_instrucciones T_FSI{
+	| T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones N T_SIMBOLO_ELSE v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones T_FSI{
 		printf("v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones N T_SIMBOLO_ELSE M v_instrucciones T_FSI");
 		backpatch(TC, $2.true, $4.quad);
-		backpatch(TC, $2.false, $8.quad);
-		if(!empty($9)){
-			$$.next = merge($6.next, merge($5.next, $9.next));
+		backpatch(TC, $2.false, $10.quad);
+		if(!empty($11)){
+			$$.next = merge($6.next, merge($5.next, $11.next));
 		}
 		else{
 			$$.next = merge($6.next, merge($5.next, makelist(TC->nextquad)));
@@ -542,7 +551,17 @@ N: {$$.next=makelist(TC->nextquad);
 v_iteracion: v_it_cota_fija | v_it_cota_exp {printf("v_iteracion: v_it_cota_fija | v_it_cota_exp\n");}
 ;
 
-v_it_cota_exp: T_MIENTRAS v_expresion T_HACER v_instrucciones T_FMIENTRAS {printf("v_it_cota_exp: T_MIENTRAS v_expresion T_HACER v_instrucciones T_FMIENTRAS\n");}
+v_it_cota_exp: T_MIENTRAS M v_expresion T_HACER M v_instrucciones T_FMIENTRAS {
+	printf("v_it_cota_exp: T_MIENTRAS v_expresion T_HACER v_instrucciones T_FMIENTRAS\n");
+	backpatch(TC, $3.true, $5.quad);
+	if(!empty($6)){
+		backpatch(TC, $6.next, $2.quad);
+	}
+	else{
+		gen(TC, TC_GOTO, TC_NULO, TC_NULO, $2.quad);
+	}
+	$$.next = $3.false;
+	}
 ;
 
 v_it_cota_fija: T_PARA T_ID T_ASIGNACION v_expresion T_HASTA v_expresion T_HACER v_instrucciones T_FPARA {printf("v_it_cota_fija: T_PARA T_ID T_ASIGNACION v_expresion T_HASTA v_expresion T_HACER v_instrucciones T_FPARA\n");}
