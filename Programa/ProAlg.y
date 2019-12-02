@@ -504,7 +504,7 @@ v_asignacion: v_operando T_ASIGNACION v_expresion {
 	}
 	else{
 		if ((consulta_tipo(TS, $1)==REAL) && ($3.type==ENTERO)){
-			gen(TC, TC_ASIGNACION_INT_TO_REAL, $3.place, TC_NULO, sim->id);
+			gen(TC, TC_INTTOREAL, $3.place, TC_NULO, sim->id);
 		}
 		else{
 			if ((consulta_tipo(TS, $1)==ENTERO) && ($3.type==REAL)){
