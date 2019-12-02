@@ -1,23 +1,16 @@
-<<<<<<< HEAD
 algoritmo prueba;
-ent a, b, c ,d:entero;
+ent a, b, c ,d:real;
+sal d,s:real;
 {Prec: a = A AND b = B AND c = C}
+var
+	z:entero;
+fvar;
 si a >= b ->
 	a:=b
 [] a < b ->
 	b:=a
 fsi;
-a:=c;
+a:=4.2;
 a:=d
-=======
-algoritmo orden3;
-	ent a, b, c: entero;
-	sal max, min, med: entero; 
-	{Prec: a = A AND b = B AND c = C}
-	si a<b -> 
-		a:=b;
-		b:=c
-	fsi
->>>>>>> 80d1e4830bfe61407deccc9d8a68c91cf13934f3
 {Post: a=A AND b = B AND c= C ...}
 falgoritmo.

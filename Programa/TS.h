@@ -32,6 +32,7 @@ typedef struct Simbolo{
     int tipo_simbolo;
     int id;
     int tipo_variable; //Tipo de la variable, del array o el valor de returno de la funcion
+    int i_o_variable; //0:Variable de entrada, 1:Variable de salida y 2:Variable de ejecución
 
     struct Simbolo *next;
 }Simbolo;
@@ -46,7 +47,7 @@ typedef struct TablaSimbolos{
 
 
 TablaSimbolos* crear_TS();
-int insertar_en_TS(TablaSimbolos*, char*);
+int insertar_en_TS(TablaSimbolos*, char*,int);
 int newtemp(TablaSimbolos*);
 Simbolo* buscar_id(TablaSimbolos*, int);
 Simbolo* buscar_nombre(TablaSimbolos *, char*);

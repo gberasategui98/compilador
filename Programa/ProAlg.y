@@ -17,6 +17,7 @@ void yyerror(const char* s);
 
 TablaSimbolos *TS;
 TablaCuadruplas *TC;
+int ent_sal = 2; //0:Variable de entrada, 1:Variable de salida y 2:Variable de ejecución
 
 %}
 
@@ -162,27 +163,44 @@ v_lista_d_var: v_lista_id T_COMP_SECUENCIAL v_lista_d_var {
 
 v_lista_id: T_ID T_SEPARADOR v_lista_id { 
 		printf("v_lista_id: T_ID T_SEPARADOR v_lista_id\n");
-		int id_simbolo = insertar_en_TS(TS, $1);
+		int id_simbolo = insertar_en_TS(TS, $1, ent_sal);
+		if (id_simbolo==-1){
+			char* mensaje = (char*) malloc(sizeof(char));
+			sprintf(mensaje, "Error: Variable %s declarada anteriormente", $1);
+			yyerror(mensaje);
+		}
+		gen(TC, TC_INPUT, TC_NULO, TC_NULO, id_simbolo);
 		modificar_tipo_TS(TS, id_simbolo, $3);
 		$$ = $3; 
 		}
 	| T_ID T_DEF_TIPO v_d_tipo { 
 		printf("v_lista_id: T_ID T_DEF_TIPO v_d_tipo \n");
-		int id_simbolo = insertar_en_TS(TS, $1);
+		int id_simbolo = insertar_en_TS(TS, $1, ent_sal);
+		if (id_simbolo==-1){
+			char* mensaje = (char*) malloc(sizeof(char));
+			sprintf(mensaje, "Error: Variable %s declarada anteriormente", $1);
+			yyerror(mensaje);
+		}
 		modificar_tipo_TS(TS, id_simbolo, $3);
 		$$ = $3;
 		}
 ;
 
-v_decl_ent_sal: v_decl_ent { printf("v_decl_ent_sal: v_decl_ent\n"); }
-	| v_decl_ent v_decl_sal { printf("v_decl_ent_sal: v_decl_ent v_decl_sal\n"); }
-	| v_decl_sal { printf("v_decl_ent_sal: v_decl_sal\n"); }
+v_decl_ent_sal: {ent_sal=0;} v_decl_ent {ent_sal=1;} v_decl_sal {
+		printf("v_decl_ent_sal: v_decl_ent v_decl_sal\n"); 
+		ent_sal=2;
+		}
+	| {ent_sal=0;} v_decl_sal {
+		 printf("v_decl_ent_sal: v_decl_sal\n");
+		 ent_sal=2;
+	}
 ;
 
-v_decl_ent: T_ENT v_lista_d_var { printf("v_decl_ent: T_ENT v_lista_d_var\n"); }
+v_decl_ent: T_ENT v_lista_d_var {printf("v_decl_ent: T_ENT v_lista_d_var\n"); }
 ;
 
 v_decl_sal: T_SAL v_lista_d_var  { printf("v_decl_sal: T_SAL v_lista_d_var\n"); }
+			|
 ;
 
 v_expresion: v_exp  {
@@ -504,7 +522,7 @@ v_asignacion: v_operando T_ASIGNACION v_expresion {
 	}
 	else{
 		if ((consulta_tipo(TS, $1)==REAL) && ($3.type==ENTERO)){
-			gen(TC, TC_ASIGNACION_INT_TO_REAL, $3.place, TC_NULO, sim->id);
+			gen(TC, TC_INTTOREAL, $3.place, TC_NULO, sim->id);
 		}
 		else{
 			if ((consulta_tipo(TS, $1)==ENTERO) && ($3.type==REAL)){
@@ -514,6 +532,7 @@ v_asignacion: v_operando T_ASIGNACION v_expresion {
 	}
 	}
 ;
+
 
 
 v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones T_FSI {
@@ -615,7 +634,7 @@ int main( int argc, char **argv ) {
 	imprimir_ts(TS);
 	imprimir_tc(TC);
 
-	generarCodigo(TC, TS);
+	//generarCodigo(TC, TS);
 	return flag;
 }
 

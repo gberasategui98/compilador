@@ -32,7 +32,8 @@
 #define TC_GOTO_OP_REL_DIF 29
 #define TC_VERDADERO 30
 #define TC_FALSO 31
-#define TC_ASIGNACION_INT_TO_REAL 32
+#define TC_INPUT 33
+#define TC_OUTPUT 34
 
 
 typedef struct elem_lista{

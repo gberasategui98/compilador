@@ -12,9 +12,27 @@ TablaSimbolos* crear_TS(){
     TS->primer_simbolo = NULL;
 }
 
-int insertar_en_TS(TablaSimbolos *ts, char *nombre){
-    Simbolo *nuevo_simbolo = (struct Simbolo *) malloc(sizeof(struct Simbolo));
+int existe_simbolo(TablaSimbolos *ts, char *nombre, int i_o){
+    Simbolo *recorrer = ts->primer_simbolo;
+    while(recorrer!=NULL){
+        if(!strcmp(recorrer->nombre, nombre)){
+            if(i_o==2){
+                return 1;
+            }
+            if(recorrer->i_o_variable==i_o){
+                return 1;
+            }
+        }
+        recorrer = recorrer->next;
+    }
+    return 0;
+}
 
+int insertar_en_TS(TablaSimbolos *ts, char *nombre, int i_o){
+    if (existe_simbolo(ts, nombre, i_o)){
+        return -1;
+    }
+    Simbolo *nuevo_simbolo = (struct Simbolo *) malloc(sizeof(struct Simbolo));
     nuevo_simbolo->nombre = (char *) malloc(sizeof(char)*strlen(nombre));
     strcpy(nuevo_simbolo->nombre,nombre);
     ts->contador++;
