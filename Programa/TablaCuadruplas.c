@@ -86,7 +86,7 @@ lista merge(lista l1, lista l2){//Creo que ahora esta bien
 int quad_en_lista(int indice, lista list){
     elem_lista *recorrer = list.first;
     while(recorrer!=NULL){
-        printf("%d, %d\n", indice, recorrer->valor);
+        //printf("%d, %d\n", indice, recorrer->valor);
         if(indice==recorrer->valor){
             return 1;
         }
