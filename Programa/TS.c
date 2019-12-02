@@ -44,8 +44,8 @@ Simbolo* buscar_id(TablaSimbolos *ts, int id){
 	Simbolo* actual = ts->primer_simbolo;
 
     while (actual != NULL) {
-		//if(actual->id == id) return actual;
-        printf("Nombre variable: %s. Tipo variable: %d. Id: %d\n", actual->nombre, actual->tipo_variable, actual->id);
+	if(actual->id == id) return actual;
+        //printf("Nombre variable: %s. Tipo variable: %d. Id: %d\n", actual->nombre, actual->tipo_variable, actual->id);
         actual = actual->next;
     }
 	return NULL;

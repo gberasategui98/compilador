@@ -1,4 +1,5 @@
 #include "TablaCuadruplas.h"
+#include "TS.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -115,3 +116,46 @@ int empty(tipo_sentencia elem){
         return 0;
     }
 }
+
+void generarCodigo(TablaCuadruplas* tc,TablaSimbolos* ts){
+	printf("------ CODIGO ------\n");
+	Quad* actual = tc->primer_quad;
+  	while (actual != NULL) {
+		//printf("Operador: Operando1: Operando2: Destino:", actual->operador, actual->operando1, actual->operando2, actual->destino);
+		Simbolo *s1, *s2;
+		switch(actual->operador){
+			case TC_GOTO:
+				printf("goto %d", actual->destino);
+				break;
+			case TC_ASIGNACION:
+				s1 = buscar_id(ts, actual->destino);
+				s2 = buscar_id(ts, actual->operando1);
+				printf("%s := %s", s1->nombre, s2->nombre);
+				break;
+			default:
+				printf("NO RECONOCIDO");
+				break;        
+		actual = actual->next;
+	}
+    }
+	printf("---------------------------\n");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

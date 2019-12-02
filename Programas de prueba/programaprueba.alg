@@ -3,6 +3,8 @@ ent a, b, c ,d:entero;
 {Prec: a = A AND b = B AND c = C}
 si a >= b ->
 	a:=b
+[] a < b ->
+	b:=a
 fsi;
 a:=c;
 a:=d

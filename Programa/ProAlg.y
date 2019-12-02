@@ -595,24 +595,8 @@ int main( int argc, char **argv ) {
 	flag = yyparse();
 	imprimir_ts(TS);
 	imprimir_tc(TC);
-	/*
-	lista l1 = makelist(5);
-	lista l2 = makelist(6);
-	lista l3 = merge(l1,l2);
-	lista l4 = makelist(1);
-	lista l5 = makelist(3);
-	lista l6 = merge(l4,l5);
-	lista l7 = makelist(4);
-	lista l8 = makelist(98);
-	lista l9 = merge(l7, l8);
-	lista l10 = merge(l3, l6);
-	lista l11 = merge(l9, l10);
-	elem_lista *aux;
-	aux = l11.first;
-	while(aux!=NULL){
-		printf("%d\n", aux->valor);
-		aux = aux->next;
-	}*/
+
+	generarCodigo(TC, TS);
 	return flag;
 }
 

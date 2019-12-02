@@ -1,6 +1,8 @@
 #ifndef BC_TC_H
 #define BC_TC_H
 
+#include "TS.h"
+
 #define TC_NULO 0
 #define TC_GOTO 1
 #define TC_OP_SUMA_ENT 3
@@ -75,10 +77,9 @@ typedef struct TablaCuadruplas{
 TablaCuadruplas* crear_TC();
 void gen(TablaCuadruplas*,int,int,int,int);
 void imprimir_tc(TablaCuadruplas*);
-
 lista makelist(int);
 lista merge(lista, lista);
 void backpatch(TablaCuadruplas*, lista, int);
-
 int empty(tipo_sentencia);
+void generarCodigo(TablaCuadruplas*,TablaSimbolos*);
 #endif
