@@ -33,12 +33,6 @@ void gen(TablaCuadruplas *tc, int operador, int operando1, int operando2, int de
         }
         aux->next = new_quad;
     }
-
-	
-
-    
-    //new_quad->next = tc->primer_quad;
-    //tc->primer_quad = new_quad;
 }
 
 void imprimir_tc(TablaCuadruplas *tc){

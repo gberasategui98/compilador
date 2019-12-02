@@ -521,6 +521,16 @@ v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones T_FSI {
 	}
 	| T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones N T_SIMBOLO_ELSE M v_instrucciones T_FSI{
 		printf("v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones N T_SIMBOLO_ELSE M v_instrucciones T_FSI");
+		backpatch(TC, $2.true, $4.quad);
+		backpatch(TC, $2.false, $8.quad);
+		if(!empty($9)){
+			$$.next = merge($6.next, merge($5.next, $9.next));
+		}
+		else{
+			$$.next = merge($6.next, merge($5.next, makelist(TC->nextquad)));
+			gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);
+		}
+
 	}
 ;
 
@@ -585,7 +595,7 @@ int main( int argc, char **argv ) {
 	flag = yyparse();
 	imprimir_ts(TS);
 	imprimir_tc(TC);
-	
+	/*
 	lista l1 = makelist(5);
 	lista l2 = makelist(6);
 	lista l3 = merge(l1,l2);
@@ -602,7 +612,7 @@ int main( int argc, char **argv ) {
 	while(aux!=NULL){
 		printf("%d\n", aux->valor);
 		aux = aux->next;
-	}
+	}*/
 	return flag;
 }
 
