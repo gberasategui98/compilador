@@ -62,7 +62,7 @@ TablaCuadruplas *TC;
 %type<exp> v_exp v_literal_numerico v_expresion
 %type<str_val> v_operando
 %type<m> M
-%type <sentencia> v_alternativa v_lista_opciones
+%type <sentencia> v_instrucciones v_instruccion v_alternativa N
 
 %left T_PUNTO T_INICIO_ARRAY T_REF
 %left T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
@@ -377,14 +377,14 @@ v_exp: v_exp T_OP_SUMA v_exp {//Bien
             printf("v_exp: v_exp_b T_Y v_exp_b\n");
 			backpatch(TC, $1.true, $3.quad);
 			printf("Peta aqui\n");
-			$$.false= merge(&($1.false), &($4.false));
+			$$.false= merge($1.false, $4.false);
 			printf("Aqui ya no llega\n");
 			$$.true= $4.true;
         }
        | v_exp T_O M v_exp {
             printf("v_exp: v_exp_b T_O v_exp_b\n");
 			backpatch(TC, $1.false, $3.quad);
-			$$.true = merge(&($1.true), &($4.true));
+			$$.true = merge($1.true, $4.true);
 			$$.false = $4.false;
         }
        | T_NO v_exp {
@@ -507,25 +507,26 @@ v_asignacion: v_operando T_ASIGNACION v_expresion {
 ;
 
 
-v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones v_lista_opciones T_FSI {
+v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones T_FSI {
 	printf("v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones T_FSI\n");
 	backpatch(TC, $2.true, $4.quad);
-	if(!empty($6)){
-		$$.next = merge(&$2.false, &$6.next);
+	if(!empty($5)){
+		$$.next = merge($2.false, $5.next);
 	}
 	else{
 		lista l = makelist(TC->nextquad);
-		$$.next = merge(&$2.false, &l);
+		$$.next = merge($2.false, l);
 		gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);
 	}
 	}
+	| T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones N T_SIMBOLO_ELSE M v_instrucciones T_FSI{
+		printf("v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones N T_SIMBOLO_ELSE M v_instrucciones T_FSI");
+	}
 ;
 
-v_lista_opciones: T_SIMBOLO_ELSE v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones {printf("v_lista_opciones: T_SIMBOLO_ELSE v_expresion T_SI v_instrucciones v_lista_opciones\n");}
-                  | {}
-;
-
-N: {}
+N: {$$.next=makelist(TC->nextquad);
+	gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);
+	}
 ;
 
 v_iteracion: v_it_cota_fija | v_it_cota_exp {printf("v_iteracion: v_it_cota_fija | v_it_cota_exp\n");}
@@ -584,25 +585,24 @@ int main( int argc, char **argv ) {
 	flag = yyparse();
 	imprimir_ts(TS);
 	imprimir_tc(TC);
-
-	/*
+	
 	lista l1 = makelist(5);
 	lista l2 = makelist(6);
-	lista l3 = merge(&l1,&l2);
+	lista l3 = merge(l1,l2);
 	lista l4 = makelist(1);
 	lista l5 = makelist(3);
-	lista l6 = merge(&l4,&l5);
+	lista l6 = merge(l4,l5);
 	lista l7 = makelist(4);
 	lista l8 = makelist(98);
-	lista l9 = merge(&l7, &l8);
-	lista l10 = merge(&l3, &l6);
-	lista l11 = merge(&l9, &l10);
+	lista l9 = merge(l7, l8);
+	lista l10 = merge(l3, l6);
+	lista l11 = merge(l9, l10);
 	elem_lista *aux;
 	aux = l11.first;
 	while(aux!=NULL){
 		printf("%d\n", aux->valor);
 		aux = aux->next;
-	}*/
+	}
 	return flag;
 }
 

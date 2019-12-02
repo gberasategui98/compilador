@@ -77,7 +77,7 @@ void gen(TablaCuadruplas*,int,int,int,int);
 void imprimir_tc(TablaCuadruplas*);
 
 lista makelist(int);
-lista merge(lista*, lista*);
+lista merge(lista, lista);
 void backpatch(TablaCuadruplas*, lista, int);
 
 int empty(tipo_sentencia);

@@ -76,16 +76,16 @@ void anadir_final(lista **nueva_lista, elem_lista * elem){
     return;
 }*/
 
-lista merge(lista* l1, lista* l2){//No esta bien hecha
-    lista * nueva_lista = (lista*) malloc(sizeof(struct lista));
+lista merge(lista l1, lista l2){//Creo que ahora esta bien
+    lista nueva_lista;
     elem_lista *recorrer;
     nueva_lista = l1;
-    recorrer = nueva_lista->first;
+    recorrer = nueva_lista.first;
     while(recorrer->next!=NULL){
         recorrer = recorrer->next;
     }
-    recorrer->next = l2->first;
-    return *nueva_lista;
+    recorrer->next = l2.first;
+    return nueva_lista;
 }
 
 int quad_en_lista(int indice, lista list){
