@@ -38,6 +38,7 @@ int insertar_en_TS(TablaSimbolos *ts, char *nombre, int i_o){
     ts->contador++;
     nuevo_simbolo->id = ts->contador;
     nuevo_simbolo->i_o_variable = i_o;
+    nuevo_simbolo->tipo_simbolo = VARIABLE;
 
     nuevo_simbolo->next = ts->primer_simbolo;
     ts->primer_simbolo = nuevo_simbolo;
@@ -97,7 +98,7 @@ void modificar_tipo_TS(TablaSimbolos *ts, int id, int tipo){
     while (actual != NULL) {
 		if(actual->id == id){
             actual->tipo_variable=tipo;
-            printf("Nombre variable: %s. Tipo variable: %d\n", actual->nombre, actual->tipo_simbolo);
+            printf("Nombre variable: %s. Tipo variable: %d\n", actual->nombre, actual->tipo_variable);
             return;
         }
         actual = actual->next;

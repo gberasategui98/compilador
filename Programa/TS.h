@@ -1,6 +1,7 @@
 #ifndef BC_TS_H
 #define BC_TS_H
 
+
 #define ETIQUETA 0
 #define VARIABLE 1
 #define FUNCION 2
@@ -15,6 +16,8 @@
 
 #define PASO_VALOR 60
 #define PASO_REFERENCIA 61
+
+
 
 struct Param{
     int tipo_param;

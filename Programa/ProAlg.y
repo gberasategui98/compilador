@@ -19,6 +19,17 @@ TablaSimbolos *TS;
 TablaCuadruplas *TC;
 int ent_sal = 2; //0:Variable de entrada, 1:Variable de salida y 2:Variable de ejecución
 
+void generar_instrucciones_output(TablaSimbolos *TS, TablaCuadruplas *TC){
+	Simbolo *recorrer = TS->primer_simbolo;
+	while(recorrer!=NULL){
+		if((recorrer->tipo_simbolo==VARIABLE)&&(recorrer->i_o_variable==1)){
+			gen(TC, TC_OUTPUT, TC_NULO, TC_NULO, recorrer->id);
+		}
+		recorrer = recorrer->next;
+	}
+	return;
+}
+
 %}
 
 %union{
@@ -63,11 +74,11 @@ int ent_sal = 2; //0:Variable de entrada, 1:Variable de salida y 2:Variable de e
 %type<exp> v_exp v_literal_numerico v_expresion
 %type<str_val> v_operando
 %type<m> M
-%type <sentencia> v_instrucciones v_instruccion v_alternativa N v_it_cota_exp
+%type <sentencia> v_instrucciones v_instruccion N v_it_cota_exp v_alternativa v_opciones
 
 %left T_PUNTO T_INICIO_ARRAY T_REF
-%left T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
 %left T_Y T_O
+%left T_OP_REL_MENOR T_OP_REL_MAYOR T_OP_REL_IGUAL T_OP_REL_DIF T_OP_REL_MAYOR_IGUAL T_OP_REL_MENOR_IGUAL
 %left T_NO
 %left T_OP_SUMA T_OP_RESTA
 %left T_OP_MULTI T_OP_DIV T_OP_MOD T_OP_DIV_ENT
@@ -80,7 +91,10 @@ v_desc_algoritmo: T_ALGORITMO T_ID T_COMP_SECUENCIAL v_cabecera_alg v_bloque_alg
 v_cabecera_alg: v_decl_globales v_decl_a_f v_decl_ent_sal T_COMENTARIO { printf("v_cabecera_alg: v_decl_globales v_decl_a_f v_decl_ent_sal T_COMENTARIO\n"); }
 ;
 
-v_bloque_alg: v_bloque T_COMENTARIO { printf("v_bloque_alg: v_bloque T_COMENTARIO\n"); }
+v_bloque_alg: v_bloque T_COMENTARIO {
+	printf("v_bloque_alg: v_bloque T_COMENTARIO\n");
+	generar_instrucciones_output(TS, TC);
+	}
 ;
 
 v_decl_globales: v_declaracion_tipo v_decl_globales { printf("v_decl_globales: v_declaracion_tipo v_decl_globales\n"); }
@@ -145,7 +159,7 @@ v_lista_campos: T_ID T_DEF_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_campos { prin
 	|
 ;
 
-v_lista_d_cte: T_ID T_CREAR_TIPO v_literal T_COMP_SECUENCIAL v_lista_d_cte { printf("v_lista_d_cte: T_ID T_CREAR_TIPO v_literal T_COMP_SECUENCIAL v_lista_d_cte\n"); }
+v_lista_d_cte: T_ID T_OP_REL_IGUAL v_literal T_COMP_SECUENCIAL v_lista_d_cte { printf("v_lista_d_cte: T_ID T_CREAR_TIPO v_literal T_COMP_SECUENCIAL v_lista_d_cte\n"); }
 	|
 ;
 
@@ -208,7 +222,7 @@ v_expresion: v_exp  {
 		printf("v_expresion: v_exp_a\n");
 		$$=$1;
 		}
-           |v_funcion_ll  {printf("v_expresion: v_funcion_ll\n");}
+        |v_funcion_ll  {printf("v_expresion: v_funcion_ll\n");}
 ;
 
 v_exp: v_exp T_OP_SUMA v_exp {//Bien
@@ -325,6 +339,8 @@ v_exp: v_exp T_OP_SUMA v_exp {//Bien
             printf("v_exp: v_exp_a T_OP_DIV_ENT v_exp_a\n");
             int T_id = newtemp(TS);
 			$$.place = T_id;
+			imprimir_ts(TS);
+			printf("%d, %d\n", $1.type, $3.type);
 			if (($1.type == ENTERO) && ($3.type == ENTERO)){
 			   	modificar_tipo_TS(TS, T_id, ENTERO);
 			  	gen(TC, TC_OP_DIVISION_ENTERA, $1.place, $3.place, T_id);
@@ -335,7 +351,7 @@ v_exp: v_exp T_OP_SUMA v_exp {//Bien
         }
        | T_PARENTESIS_APERTURA v_exp T_PARENTESIS_CLAUSURA {//Bien (incluye exp_aritmetica y booleana)
 		   printf("v_exp: T_PARENTESIS_APERTURA v_exp_a T_PARENTESIS_CLAUSURA\n");
-		   if($$.type==ENTERO || $$.type==REAL){
+		   if($2.type==ENTERO || $2.type==REAL){
 				$$.place = $2.place;
 				$$.type = $2.type;
 		   }
@@ -343,6 +359,7 @@ v_exp: v_exp T_OP_SUMA v_exp {//Bien
 			   $$.true = $2.true;
 			   $$.false = $2.false;
 		   }
+		   printf("%d\n", $$.type);
 		   }
        | v_operando {//Duda:¿Como saber cuando se lee un operando si es para exp_aritmetica o booleana
 	   				//Otra duda: ¿Como podemos evitar que el operando en el caso de los booleanos cree sus correspondientes
@@ -361,6 +378,7 @@ v_exp: v_exp T_OP_SUMA v_exp {//Bien
 		   
 		   $$.true= makelist(TC->nextquad);
 		   $$.false= makelist((TC->nextquad)+1);
+		   
 		   /*
 		   gen(TC, TC_GOTO_OP_REL_IGUAL, sim->id, TC_VERDADERO, TC_NULO);
 		   gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);*/
@@ -392,20 +410,7 @@ v_exp: v_exp T_OP_SUMA v_exp {//Bien
                 gen(TC, TC_OP_SUMA_UNI_REAL, $2.place, TC_NULO, $$.place);
             }
         }
-       | v_exp T_Y M v_exp {
-            printf("v_exp: v_exp_b T_Y v_exp_b\n");
-			backpatch(TC, $1.true, $3.quad);
-			printf("Peta aqui\n");
-			$$.false= merge($1.false, $4.false);
-			printf("Aqui ya no llega\n");
-			$$.true= $4.true;
-        }
-       | v_exp T_O M v_exp {
-            printf("v_exp: v_exp_b T_O v_exp_b\n");
-			backpatch(TC, $1.false, $3.quad);
-			$$.true = merge($1.true, $4.true);
-			$$.false = $4.false;
-        }
+       
        | T_NO v_exp {
             printf("v_exp: T_NO v_exp_b\n");
 			$$.true = $2.false;
@@ -458,6 +463,18 @@ v_exp: v_exp T_OP_SUMA v_exp {//Bien
 		   $$.false= makelist((TC->nextquad)+1);
 		   gen(TC, TC_GOTO_OP_REL_MENOR_IGUAL, $1.place, $3.place, TC_NULO);
 		   gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);}
+		| v_exp T_Y M v_exp {
+            printf("v_exp: v_exp_b T_Y v_exp_b\n");
+			backpatch(TC, $1.true, $3.quad);
+			$$.false= merge($1.false, $4.false);
+			$$.true= $4.true;
+        }
+       | v_exp T_O M v_exp {
+            printf("v_exp: v_exp_b T_O v_exp_b\n");
+			backpatch(TC, $1.false, $3.quad);
+			$$.true = merge($1.true, $4.true);
+			$$.false = $4.false;
+        }
 ;
 
 M: {$$.quad = TC->nextquad;}
@@ -499,13 +516,16 @@ v_instrucciones: v_instruccion T_COMP_SECUENCIAL M v_instrucciones {
 			}
         	| v_instruccion {
 			printf("v_instrucciones: v_instruccion\n");
-				$$.next = $1.next;
+			$$.next = $1.next;
+			if(!empty($1)){
+				backpatch(TC, $1.next, TC->nextquad);
+			}
 			}
 ;
 
 v_instruccion: T_CONTINUAR {printf("v_instruccion: T_CONTINUAR\n");}
                | v_asignacion {printf("v_instruccion: v_asignacion\n");}
-               | v_alternativa {printf("v_instruccion: v_alternativa\n");}
+               | v_alternativa {printf("v_instruccion: v_alternativa\n"); $$ = $1;}
                | v_iteracion {printf("v_instruccion: v_iteracion\n");}
                | v_accion_ll {printf("v_instruccion: v_accion_ll\n");}
 ;
@@ -534,36 +554,63 @@ v_asignacion: v_operando T_ASIGNACION v_expresion {
 	}
 ;
 
-
-
-v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones T_FSI {
-	printf("v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF v_instrucciones v_lista_opciones T_FSI\n");
-	backpatch(TC, $2.true, $4.quad);
-	if(!empty($5)){
-		$$.next = merge($2.false, $5.next);
-	}
-	else{
-		lista l = makelist(TC->nextquad);
-		$$.next = merge($2.false, l);
-		gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);
-	}
-	}
-	| T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones N T_SIMBOLO_ELSE v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones T_FSI{
-		printf("v_alternativa: T_SI v_expresion T_SIMBOLO_BLOQUE_IF M v_instrucciones N T_SIMBOLO_ELSE M v_instrucciones T_FSI");
-		backpatch(TC, $2.true, $4.quad);
-		backpatch(TC, $2.false, $10.quad);
-		if(!empty($11)){
-			$$.next = merge($6.next, merge($5.next, $11.next));
+v_alternativa: v_opciones v_instrucciones M T_FSI{
+		printf("v_alternativa: v_opciones T_SI\n");
+		$$.next = merge($1.next, $2.next);
+		backpatch(TC, $1.sig, $3.quad);
+		elem_lista *aux = $$.next.first;
+		while(aux!=NULL){
+			printf("%d\n", aux->valor);
+			aux = aux->next;
 		}
-		else{
-			$$.next = merge($6.next, merge($5.next, makelist(TC->nextquad)));
-			gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);
-		}
-
 	}
 ;
 
-N: {$$.next=makelist(TC->nextquad);
+v_opciones:  T_SI v_expresion T_SIMBOLO_BLOQUE_IF M{
+		printf("v_opciones:  T_SI v_expresion T_SIMBOLO_BLOQUE_IF M\n");
+		$$.sig = $2.false;
+		$$.next = makelist(-1);
+		backpatch(TC, $2.true, $4.quad);
+	}
+	|  v_opciones v_instrucciones N T_SIMBOLO_ELSE M v_expresion T_SIMBOLO_BLOQUE_IF M{
+		printf("v_opciones: v_opciones v_instrucciones N T_SIMBOLO_ELSE M v_expresion T_SIMBOLO_BLOQUE_IF M\n");
+		if (empty($2)){
+			if(empty($1)){
+				printf("AQUI entra solo 1 vez\n");
+				$$.next = $3.next;
+			}
+			else{
+				printf("AQUI ENTRA LA SEGUNDA VEZ\n");
+				$$.next = merge($1.next, $3.next);
+			}
+		}
+		else{
+			printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+			if(empty($1)){
+				lista l1 = merge($3.next, $2.next);
+				$$.next = merge($1.next, l1);
+			}
+			else{
+				printf("Va este merge\n");
+				printf("%d\n", $3.next.first->valor);
+				lista l1 = merge($1.next,$2.next);
+				//$$.next = merge($2.next, $3.next);
+				$$.next = merge(l1, $3.next);
+			}
+		}
+		backpatch(TC, $1.sig, $5.quad);
+		backpatch(TC, $6.true, $8.quad);
+		$$.sig = $6.false;
+		elem_lista *aux = $$.next.first;
+		while(aux!=NULL){
+			printf("valor: %d\n", aux->valor);
+			aux = aux->next;
+		}
+	}
+;
+
+N: {
+	$$.next=makelist(TC->nextquad);
 	gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);
 	}
 ;
@@ -634,10 +681,7 @@ int main( int argc, char **argv ) {
 	flag = yyparse();
 	imprimir_ts(TS);
 	imprimir_tc(TC);
-<<<<<<< HEAD
 
-=======
->>>>>>> 21e35112e4ac4f988aa49ad3c78c37ab6b3211d1
 	generarCodigo(TC, TS);
 	return flag;
 }

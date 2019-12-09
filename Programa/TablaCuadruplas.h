@@ -53,6 +53,7 @@ typedef struct tipo_exp{
 
 typedef struct tipo_sentencia{
 	struct lista next;
+	struct lista sig;
 }tipo_sentencia;
 
 typedef struct M{

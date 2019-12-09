@@ -1,12 +1,26 @@
-input d
-input c
-input b
-input a
-if a >= b goto 6
-goto 10
-a := b
-goto 11
-b := a
-t_1 := 4.20
-a := t_1
-a := d
+0 t_1 := 5
+1 a := b
+2 input c
+3 input b
+4 input a
+5 if a >= b goto 7
+6 goto 11
+7 if a >= c goto 9
+8 goto 11
+9 max := a
+10 goto 22
+11 if b >= a goto 13
+12 goto 17
+13 if b >= c goto 15
+14 goto 17
+15 max := b
+16 goto 22
+17 if c >= b goto 19
+18 goto 22
+19 if c >= a goto 21
+20 goto 22
+21 max := c
+22 output a
+23 output b
+24 output c
+25 output max

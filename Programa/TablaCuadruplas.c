@@ -75,12 +75,12 @@ void anadir_final(lista **nueva_lista, elem_lista * elem){
 lista merge(lista l1, lista l2){//Creo que ahora esta bien
     lista nueva_lista;
     elem_lista *recorrer;
-    nueva_lista = l1;
-    recorrer = nueva_lista.first;
-    while(recorrer->next!=NULL){
-        recorrer = recorrer->next;
-    }
-    recorrer->next = l2.first;
+	nueva_lista = l1;
+	recorrer = nueva_lista.first;
+	while(recorrer->next!=NULL){
+		recorrer = recorrer->next;
+	}
+	recorrer->next = l2.first;
     return nueva_lista;
 }
 
@@ -120,7 +120,7 @@ int empty(tipo_sentencia elem){
 
 void generarCodigo(TablaCuadruplas* tc,TablaSimbolos* ts){
 	printf("\nGenerando codigo de tres direcciones en out.proalg ...\n");
-	int fd = open("out.proalg", O_WRONLY | O_CREAT, 0644);
+	int fd = open("out.proalg", O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (fd == -1){
 		printf("Error generando codigo: no se pudo crear el archivo.");
 		exit(-1);
@@ -131,11 +131,14 @@ void generarCodigo(TablaCuadruplas* tc,TablaSimbolos* ts){
 	}
 
 	Quad* actual = tc->primer_quad;
+	int indice = 0;
   	while (actual != NULL) {
 		Simbolo *s1, *s2, *s3;
+		printf("%d ", indice);
+		indice++;
 		switch(actual->operador){
 			case TC_GOTO:
-				if(actual->destino)
+				//if(actual->destino)
 					printf("goto %d\n", actual->destino);
 				break;
 			case TC_ASIGNACION:
@@ -154,37 +157,37 @@ void generarCodigo(TablaCuadruplas* tc,TablaSimbolos* ts){
 			case TC_GOTO_OP_REL_IGUAL:
 				s1 = buscar_id(ts, actual->operando1);
 				s2 = buscar_id(ts, actual->operando2);
-				if(actual->destino)
+				//if(actual->destino)
 					printf("if %s = %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
 				break;
 			case TC_GOTO_OP_REL_MENOR:
 				s1 = buscar_id(ts, actual->operando1);
 				s2 = buscar_id(ts, actual->operando2);
-				if(actual->destino)
+				//if(actual->destino)
 					printf("if %s < %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
 				break;
 			case TC_GOTO_OP_REL_MENOR_IGUAL:
 				s1 = buscar_id(ts, actual->operando1);
 				s2 = buscar_id(ts, actual->operando2);
-				if(actual->destino)
+				//if(actual->destino)
 					printf("if %s <= %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
 				break;
 			case TC_GOTO_OP_REL_MAYOR:
 				s1 = buscar_id(ts, actual->operando1);
 				s2 = buscar_id(ts, actual->operando2);
-				if(actual->destino)
+				//if(actual->destino)
 					printf("if %s > %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
 				break;
 			case TC_GOTO_OP_REL_MAYOR_IGUAL:
 				s1 = buscar_id(ts, actual->operando1);
 				s2 = buscar_id(ts, actual->operando2);
-				if(actual->destino)
+				//if(actual->destino)
 					printf("if %s >= %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
 				break;
 			case TC_GOTO_OP_REL_DIF:
 				s1 = buscar_id(ts, actual->operando1);
 				s2 = buscar_id(ts, actual->operando2);
-				if(actual->destino)
+				//if(actual->destino)
 					printf("if %s <> %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
 				break;
 			case TC_OP_SUMA_REAL:
@@ -248,13 +251,17 @@ void generarCodigo(TablaCuadruplas* tc,TablaSimbolos* ts){
 				s1 = buscar_id(ts, actual->destino);
 				printf("input %s\n", s1->nombre);
 				break;
+			case TC_OUTPUT:
+				s1 = buscar_id(ts, actual->destino);
+				printf("output %s\n", s1->nombre);
+				break;
 			default:
 				printf("NO RECONOCIDO\n");
 				break; 
 		}       
 		actual = actual->next; 
 	}
-	close(fd);
+	//close(fd);
 }
 
 
