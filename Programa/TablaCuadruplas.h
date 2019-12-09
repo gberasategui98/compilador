@@ -51,6 +51,14 @@ typedef struct tipo_exp{
 	struct lista false;
 } tipo_exp;
 
+typedef struct tipo_exp_mientras
+{
+	struct lista true;
+	struct lista false;
+	int id_iterado;
+	int id_sumador; 
+}tipo_exp_mientras;
+
 typedef struct tipo_sentencia{
 	struct lista next;
 	struct lista sig;
@@ -77,7 +85,7 @@ typedef struct TablaCuadruplas{
 
 TablaCuadruplas* crear_TC();
 void gen(TablaCuadruplas*,int,float,float,int);
-void imprimir_tc(TablaCuadruplas*);
+void imprimir_tc();
 lista makelist(int);
 lista merge(lista, lista);
 void backpatch(TablaCuadruplas*, lista, int);

@@ -40,6 +40,7 @@ void generar_instrucciones_output(TablaSimbolos *TS, TablaCuadruplas *TC){
 	struct tipo_exp exp;
 	struct M m;
 	struct tipo_sentencia sentencia;
+	struct tipo_exp_mientras exp_mientras;
 }
 
 %token <int_val> T_LITERAL_ENTERO T_LITERAL_BOOLEANO 
@@ -71,10 +72,11 @@ void generar_instrucciones_output(TablaSimbolos *TS, TablaCuadruplas *TC){
 %token T_PUNTO
 
 %type<int_val> v_lista_id v_d_tipo v_tipo_base
-%type<exp> v_exp v_literal_numerico v_expresion
+%type<exp> v_exp v_literal_numerico v_expresion 
+%type<exp_mientras> v_it_cota_fija_exp
 %type<str_val> v_operando
 %type<m> M
-%type <sentencia> v_instrucciones v_instruccion N v_it_cota_exp v_alternativa v_opciones
+%type <sentencia> v_instrucciones v_instruccion N v_it_cota_exp v_alternativa v_opciones v_it_cota_fija
 
 %left T_PUNTO T_INICIO_ARRAY T_REF
 %left T_Y T_O
@@ -131,7 +133,7 @@ v_lista_d_tipo: T_ID T_CREAR_TIPO v_d_tipo T_COMP_SECUENCIAL v_lista_d_tipo { pr
 
 
 v_d_tipo: T_TUPLA v_lista_campos T_FTUPLA { printf("v_d_tipo: T_TUPLA v_lista_campos T_FTUPLA\n"); }
-	| T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo { printf("v_d_tipo: T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo\n"); }
+	| T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo {printf("v_d_tipo: T_TABLA T_INICIO_ARRAY v_expresion_t T_SUBRANGO v_expresion_t T_FIN_ARRAY T_DE v_d_tipo\n");}
 	| T_ID { 
 		printf("v_d_tipo: T_ID\n");
 		//Falta almacenar el $$ el int correspondiente a este nuevo tipo (para que sea igual que con los tipos base)
@@ -177,7 +179,7 @@ v_lista_d_var: v_lista_id T_COMP_SECUENCIAL v_lista_d_var {
 
 v_lista_id: T_ID T_SEPARADOR v_lista_id { 
 		printf("v_lista_id: T_ID T_SEPARADOR v_lista_id\n");
-		int id_simbolo = insertar_en_TS(TS, $1, ent_sal);
+		int id_simbolo = insertar_variable_en_TS(TS, $1, ent_sal);
 		if (id_simbolo==-1){
 			char* mensaje = (char*) malloc(sizeof(char));
 			sprintf(mensaje, "Error: Variable %s declarada anteriormente", $1);
@@ -189,7 +191,7 @@ v_lista_id: T_ID T_SEPARADOR v_lista_id {
 		}
 	| T_ID T_DEF_TIPO v_d_tipo { 
 		printf("v_lista_id: T_ID T_DEF_TIPO v_d_tipo \n");
-		int id_simbolo = insertar_en_TS(TS, $1, ent_sal);
+		int id_simbolo = insertar_variable_en_TS(TS, $1, ent_sal);
 		if (id_simbolo==-1){
 			char* mensaje = (char*) malloc(sizeof(char));
 			sprintf(mensaje, "Error: Variable %s declarada anteriormente", $1);
@@ -339,8 +341,6 @@ v_exp: v_exp T_OP_SUMA v_exp {//Bien
             printf("v_exp: v_exp_a T_OP_DIV_ENT v_exp_a\n");
             int T_id = newtemp(TS);
 			$$.place = T_id;
-			imprimir_ts(TS);
-			printf("%d, %d\n", $1.type, $3.type);
 			if (($1.type == ENTERO) && ($3.type == ENTERO)){
 			   	modificar_tipo_TS(TS, T_id, ENTERO);
 			  	gen(TC, TC_OP_DIVISION_ENTERA, $1.place, $3.place, T_id);
@@ -359,7 +359,6 @@ v_exp: v_exp T_OP_SUMA v_exp {//Bien
 			   $$.true = $2.true;
 			   $$.false = $2.false;
 		   }
-		   printf("%d\n", $$.type);
 		   }
        | v_operando {//Duda:¿Como saber cuando se lee un operando si es para exp_aritmetica o booleana
 	   				//Otra duda: ¿Como podemos evitar que el operando en el caso de los booleanos cree sus correspondientes
@@ -374,14 +373,10 @@ v_exp: v_exp T_OP_SUMA v_exp {//Bien
 		   //Caso exp_artimetica
 		   $$.place = sim->id;
 		   $$.type = consulta_tipo(TS, $1);
+
 		   //Caso exp_booleana
-		   
 		   $$.true= makelist(TC->nextquad);
 		   $$.false= makelist((TC->nextquad)+1);
-		   
-		   /*
-		   gen(TC, TC_GOTO_OP_REL_IGUAL, sim->id, TC_VERDADERO, TC_NULO);
-		   gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);*/
 		   }
        | v_literal_numerico {
             printf("v_exp: v_literal_numerico\n");
@@ -576,36 +571,25 @@ v_opciones:  T_SI v_expresion T_SIMBOLO_BLOQUE_IF M{
 		printf("v_opciones: v_opciones v_instrucciones N T_SIMBOLO_ELSE M v_expresion T_SIMBOLO_BLOQUE_IF M\n");
 		if (empty($2)){
 			if(empty($1)){
-				printf("AQUI entra solo 1 vez\n");
 				$$.next = $3.next;
 			}
 			else{
-				printf("AQUI ENTRA LA SEGUNDA VEZ\n");
 				$$.next = merge($1.next, $3.next);
 			}
 		}
 		else{
-			printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 			if(empty($1)){
 				lista l1 = merge($3.next, $2.next);
 				$$.next = merge($1.next, l1);
 			}
 			else{
-				printf("Va este merge\n");
-				printf("%d\n", $3.next.first->valor);
 				lista l1 = merge($1.next,$2.next);
-				//$$.next = merge($2.next, $3.next);
 				$$.next = merge(l1, $3.next);
 			}
 		}
 		backpatch(TC, $1.sig, $5.quad);
 		backpatch(TC, $6.true, $8.quad);
 		$$.sig = $6.false;
-		elem_lista *aux = $$.next.first;
-		while(aux!=NULL){
-			printf("valor: %d\n", aux->valor);
-			aux = aux->next;
-		}
 	}
 ;
 
@@ -623,6 +607,7 @@ v_it_cota_exp: T_MIENTRAS M v_expresion T_HACER M v_instrucciones T_FMIENTRAS {
 	backpatch(TC, $3.true, $5.quad);
 	if(!empty($6)){
 		backpatch(TC, $6.next, $2.quad);
+		gen(TC, TC_GOTO, TC_NULO, TC_NULO, $2.quad);
 	}
 	else{
 		gen(TC, TC_GOTO, TC_NULO, TC_NULO, $2.quad);
@@ -631,7 +616,39 @@ v_it_cota_exp: T_MIENTRAS M v_expresion T_HACER M v_instrucciones T_FMIENTRAS {
 	}
 ;
 
-v_it_cota_fija: T_PARA T_ID T_ASIGNACION v_expresion T_HASTA v_expresion T_HACER v_instrucciones T_FPARA {printf("v_it_cota_fija: T_PARA T_ID T_ASIGNACION v_expresion T_HASTA v_expresion T_HACER v_instrucciones T_FPARA\n");}
+v_it_cota_fija: T_PARA v_it_cota_fija_exp T_HACER M v_instrucciones T_FPARA {
+	printf("v_it_cota_fija: T_PARA T_ID T_ASIGNACION v_expresion T_HASTA v_expresion T_HACER v_instrucciones T_FPARA\n");
+	backpatch(TC, $2.true, $4.quad);
+	if(!empty($5)){
+		backpatch(TC, $5.next, TC->nextquad);
+	}
+	gen(TC, TC_OP_SUMA_ENT, $2.id_iterado, $2.id_sumador, $2.id_iterado);
+	gen(TC, TC_GOTO, TC_NULO, TC_NULO, $4.quad- 2);
+	$$.next = $2.false;
+	}
+;
+
+v_it_cota_fija_exp: T_ID T_ASIGNACION v_expresion T_HASTA v_expresion{
+	printf("v_it_cota_fija_exp: T_ID T_ASIGNACION v_expresion T_HASTA v_expresion\n");
+	Simbolo *sim = buscar_nombre(TS, $1);
+	if (sim==NULL){
+		char* mensaje = (char*) malloc(sizeof(char));
+		sprintf(mensaje, "Error: Variable %s no declarada", $1);
+		yyerror(mensaje);
+	}
+	if(consulta_tipo(TS, $1)!=ENTERO || $5.type!=ENTERO){
+		yyerror("Error: las expresiones del la sentencia mientras tienen que ser enteros\n");
+	}
+	int id_iterador = newtemp(TS);
+	gen(TC, TC_ASIG_LITERAL_ENTERO, 1, TC_NULO, id_iterador);
+	$$.id_sumador = id_iterador;
+	$$.id_iterado = sim->id;
+	gen(TC, TC_ASIGNACION, $3.place, TC_NULO, sim->id);
+	$$.true= makelist(TC->nextquad);
+	$$.false= makelist((TC->nextquad)+1);
+	gen(TC, TC_GOTO_OP_REL_MENOR_IGUAL, sim->id, $5.place, TC_NULO);
+	gen(TC, TC_GOTO, TC_NULO, TC_NULO, TC_NULO);
+	}
 ;
 
 v_accion_d: T_ACCION v_a_cabecera v_bloque T_FACCION { printf("v_accion_d: T_ACCION v_a_cabecera bloque T_FACCION\n"); }
@@ -680,9 +697,10 @@ int main( int argc, char **argv ) {
 	yyin = fopen( argv[1], "r" );
 	flag = yyparse();
 	imprimir_ts(TS);
-	imprimir_tc(TC);
+	imprimir_tc();
 
 	generarCodigo(TC, TS);
+	
 	return flag;
 }
 

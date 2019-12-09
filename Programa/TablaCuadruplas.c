@@ -7,6 +7,7 @@
 #include <fcntl.h>
 
 
+extern TablaCuadruplas *TC;
 
 TablaCuadruplas* crear_TC(){
     TablaCuadruplas *TC = (TablaCuadruplas*) malloc(sizeof(TablaCuadruplas));
@@ -37,9 +38,9 @@ void gen(TablaCuadruplas *tc, int operador, float operando1, float operando2, in
     }
 }
 
-void imprimir_tc(TablaCuadruplas *tc){
+void imprimir_tc(){
 	printf("\n----------------------- Tabla de Cuadruplas -----------------------\n");
-	Quad* actual = tc->primer_quad;
+	Quad* actual = TC->primer_quad;
     	int indice = 0;
   	while (actual != NULL) {
 		printf("%d -- Operador: %d. Operando1: %.2f. Operando2: %.2f. Destino: %d.\n", indice, actual->operador, actual->operando1, actual->operando2, actual->destino);

@@ -28,7 +28,7 @@ int existe_simbolo(TablaSimbolos *ts, char *nombre, int i_o){
     return 0;
 }
 
-int insertar_en_TS(TablaSimbolos *ts, char *nombre, int i_o){
+int insertar_variable_en_TS(TablaSimbolos *ts, char *nombre, int i_o){
     if (existe_simbolo(ts, nombre, i_o)){
         return -1;
     }
@@ -64,8 +64,7 @@ Simbolo* buscar_id(TablaSimbolos *ts, int id){
 	Simbolo* actual = ts->primer_simbolo;
 
     while (actual != NULL) {
-	if(actual->id == id) return actual;
-        //printf("Nombre variable: %s. Tipo variable: %d. Id: %d\n", actual->nombre, actual->tipo_variable, actual->id);
+	    if(actual->id == id) return actual;
         actual = actual->next;
     }
 	return NULL;
@@ -76,7 +75,6 @@ Simbolo* buscar_nombre(TablaSimbolos *ts, char* nombre){
 
     while (actual != NULL) {
 		if(!strcmp(actual->nombre,nombre)) return actual;
-        //printf("Nombre variable: %s. Tipo variable: %d. Id: %d\n", actual->nombre, actual->tipo_variable, actual->id);
         actual = actual->next;
     }
 	return NULL;
@@ -98,7 +96,6 @@ void modificar_tipo_TS(TablaSimbolos *ts, int id, int tipo){
     while (actual != NULL) {
 		if(actual->id == id){
             actual->tipo_variable=tipo;
-            printf("Nombre variable: %s. Tipo variable: %d\n", actual->nombre, actual->tipo_variable);
             return;
         }
         actual = actual->next;

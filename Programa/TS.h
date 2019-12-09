@@ -50,7 +50,7 @@ typedef struct TablaSimbolos{
 
 
 TablaSimbolos* crear_TS();
-int insertar_en_TS(TablaSimbolos*, char*,int);
+int insertar_variable_en_TS(TablaSimbolos*, char*,int);
 int newtemp(TablaSimbolos*);
 Simbolo* buscar_id(TablaSimbolos*, int);
 Simbolo* buscar_nombre(TablaSimbolos *, char*);

@@ -1,20 +1,18 @@
-algoritmo orden3;
-	const a=5; fconst;
-	funcion asdf(a, b:entero;) dev entero;
-		a:=b
-		dev a
-	ffuncion
-	
-	ent a, b, c: entero;
-	sal a, b, c,max: entero; 
-	{Prec: a = A AND b = B AND c = C}
-	si a >= b y a >= c->
-		max := a
-	[] b >= a y b >= c ->
-		max := b
-	[] c >= b y c >= a ->
-		max := c
-	fsi
-{Post: a=A AND b = B AND c= C ...}
+algoritmo sumacomb;
+	ent n, m: entero;
+	sal suma: entero;
+	{Prec: n= N AND m = M AND M >= N >0}
+	var
+		i, comb: entero;
+	fvar;
+
+	i:= 0;
+	suma:= 0;
+	comb:= m;
+	para i:=0 hasta n hacer
+		suma := suma + comb;
+		comb := comb * (m - i -1) div (i + 2)
+	fpara
+{Post: n =N AND suma = SUMATORIO(i=1..N)(M sobre i)}
 falgoritmo.
 
