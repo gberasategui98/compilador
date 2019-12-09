@@ -5,12 +5,16 @@
 
 #define TC_NULO 0
 #define TC_GOTO 1 //
-#define TC_OP_SUMA_ENT 3 //
-#define TC_OP_RESTA_ENT 4 //
-#define TC_OP_MULTI_ENT 5 //
-#define TC_OP_DIV_ENT 8 //
-#define TC_ASIGNACION 9 //
-#define TC_INTTOREAL 11 //
+#define TC_GOTO_OP_REL_IGUAL 2 //
+#define TC_GOTO_OP_REL_MENOR 3 //
+#define TC_GOTO_OP_REL_MENOR_IGUAL 4 //
+#define TC_GOTO_OP_REL_MAYOR 5 //
+#define TC_GOTO_OP_REL_MAYOR_IGUAL 6 //
+#define TC_GOTO_OP_REL_DIF 7 //
+#define TC_OP_SUMA_ENT 8 //
+#define TC_OP_RESTA_ENT 9 //
+#define TC_OP_MULTI_ENT 10 //
+#define TC_OP_DIV_ENT 11 //
 #define TC_OP_SUMA_REAL 12 //
 #define TC_OP_MULTI_REAL 13 //
 #define TC_OP_RESTA_REAL 14 //
@@ -21,18 +25,14 @@
 #define TC_OP_RESTA_UNI_REAL 19 //
 #define TC_OP_SUMA_UNI_ENT 20 //
 #define TC_OP_SUMA_UNI_REAL 21 //
-#define TC_ASIG_LITERAL_ENTERO 22 //
-#define TC_ASIG_LITERAL_REAL 23 //
-#define TC_GOTO_OP_REL_IGUAL 24 //
-#define TC_GOTO_OP_REL_MENOR 25 //
-#define TC_GOTO_OP_REL_MENOR_IGUAL 26 //
-#define TC_GOTO_OP_REL_MAYOR 27 //
-#define TC_GOTO_OP_REL_MAYOR_IGUAL 28 //
-#define TC_GOTO_OP_REL_DIF 29 //
-#define TC_VERDADERO 30
-#define TC_FALSO 31
-#define TC_INPUT 33
-#define TC_OUTPUT 34
+#define TC_ASIGNACION 22 //
+#define TC_INTTOREAL 23 //
+#define TC_ASIG_LITERAL_ENTERO 24 //
+#define TC_ASIG_LITERAL_REAL 25 //
+#define TC_VERDADERO 26
+#define TC_FALSO 27
+#define TC_INPUT 28
+#define TC_OUTPUT 29
 
 
 typedef struct elem_lista{
