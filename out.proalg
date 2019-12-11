@@ -1,25 +1,7 @@
-0 input m
-1 input n
-2 t_1 := 0
-3 i := t_1
-4 t_2 := 0
-5 suma := t_2
-6 comb := m
-7 t_3 := 0
-8 t_4 := 1
-9 i := t_3
-10 if i <= n goto 12
-11 goto 24
-12 t_5 := suma + comb
-13 suma := t_5
-14 t_6 := m - i
-15 t_7 := 1
-16 t_8 := t_6 - t_7
-17 t_9 := comb * t_8
-18 t_10 := 2
-19 t_11 := i + t_10
-20 t_12 := t_9 div t_11
-21 comb := t_12
-22 i := i + t_4
-23 goto 10
-24 output suma
+0 input b
+1 input a
+2 aux := a
+3 a := b
+4 b := aux
+5 output a
+6 output b
