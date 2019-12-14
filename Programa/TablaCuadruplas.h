@@ -1,7 +1,12 @@
 #ifndef BC_TC_H
 #define BC_TC_H
 
+/*
+* Autores: Ioar Crespo y Guilllermo Berasategui
+*/
+
 #include "TS.h"
+#include <float.h>
 
 #define TC_NULO 0
 #define TC_GOTO 1 //

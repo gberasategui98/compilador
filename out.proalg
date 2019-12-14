@@ -1,7 +1,0 @@
-0 input b
-1 input a
-2 aux := a
-3 a := b
-4 b := aux
-5 output a
-6 output b

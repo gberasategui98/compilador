@@ -1,9 +1,7 @@
-/*
-* Scanner para proAlg por Ioar Crespo y Guillermo Berasategui
-* 07/10/2019
-*/
-
 %{
+/*
+* Autores: Ioar Crespo y Guilllermo Berasategui
+*/
 #include <math.h>
 #include "TablaCuadruplas.h"
 #include "ProAlg.tab.h"
@@ -95,147 +93,178 @@ DR_VAR var
 DR_PUNTO "."
 %%
 
-{DR_ACCION}  	{printf("accion: %s\n", yytext); return T_ACCION;}
+{DR_ACCION}  	{return T_ACCION;}
 
-{DR_ALGORITMO}  {printf("algoritmo: %s\n", yytext); return T_ALGORITMO;}
+{DR_ALGORITMO}  { return T_ALGORITMO;}
 
-{DR_CONSTANTE} 	{printf("const: %s\n", yytext); return T_CONSTANTE;}
+{DR_CONSTANTE} 	{return T_CONSTANTE;}
 
-{DR_CONTINUAR} 	{printf("continuar: %s\n", yytext); return T_CONTINUAR;}
+{DR_CONTINUAR} 	{return T_CONTINUAR;}
 
-{DR_DE} 	{printf("de: %s\n", yytext); return T_DE;}
+{DR_DE} 	{return T_DE;}
 
-{DR_DEV}	 {printf("dev: %s\n", yytext); return T_DEV;}
+{DR_DEV}	 {return T_DEV;}
 
-{DR_ENT} 	{printf("ent: %s\n", yytext); return T_ENT;}
+{DR_ENT} 	{return T_ENT;}
 
-{DR_E_S} 	{printf("e/s: %s\n", yytext); return T_E_S;}
+{DR_E_S} 	{return T_E_S;}
 
-{DR_FACCION}	 {printf("faccion: %s\n", yytext); return T_FACCION;}
+{DR_FACCION}	 {return T_FACCION;}
 
-{DR_FALGORITMO} {printf("falgoritmo: %s\n", yytext); return T_FALGORITMO;}
+{DR_FALGORITMO} {return T_FALGORITMO;}
 
-{DR_FCONST}	 {printf("fconst: %s\n", yytext); return T_FCONST;}
+{DR_FCONST}	 {return T_FCONST;}
 
-{DR_FFUNCION}	 {printf("ffuncion: %s\n", yytext); return T_FFUNCION;}
+{DR_FFUNCION}	 {return T_FFUNCION;}
 
-{DR_FMIENTRAS} 	{printf("fmientras: %s\n", yytext); return T_FMIENTRAS;}
+{DR_FMIENTRAS} 	{return T_FMIENTRAS;}
 
-{DR_FPARA} 	{printf("fpara: %s\n", yytext); return T_FPARA;}
+{DR_FPARA} 	{return T_FPARA;}
 
-{DR_FSI}	 {printf("fsi: %s\n", yytext); return T_FSI;}
+{DR_FSI}	 {return T_FSI;}
 
-{DR_FTIPO}	 {printf("ftipo: %s\n", yytext); return T_FTIPO;}
+{DR_FTIPO}	 {return T_FTIPO;}
 
-{DR_FTUPLA}	 {printf("ftupla: %s\n", yytext); return T_FTUPLA;}
+{DR_FTUPLA}	 {return T_FTUPLA;}
 
-{DR_FUNCION}	 {printf("funcion: %s\n", yytext); return T_FUNCION;}
+{DR_FUNCION}	 {return T_FUNCION;}
 
-{DR_FVAR}	 {printf("fvar: %s\n", yytext); return T_FVAR;}
+{DR_FVAR}	 {return T_FVAR;}
 
-{DR_HACER}	 {printf("hacer: %s\n", yytext); return T_HACER;}
+{DR_HACER}	 {return T_HACER;}
 
-{DR_HASTA}	 {printf("hasta: %s\n", yytext); return T_HASTA;}
+{DR_HASTA}	 {return T_HASTA;}
 
-{DR_MIENTRAS}	 {printf("mientras: %s\n", yytext); return T_MIENTRAS;}
+{DR_MIENTRAS}	 {return T_MIENTRAS;}
 
-{DR_NO} 	{printf("no: %s\n", yytext); return T_NO;}
+{DR_NO} 	{return T_NO;}
 
-{DR_O}	 {printf("o: %s\n", yytext); return T_O;}
+{DR_O}	 {return T_O;}
 
-{DR_Y}          {printf("y: %s\n", yytext); return T_Y;}
+{DR_Y}          {return T_Y;}
 
-{DR_PARA} 	{printf("para: %s\n", yytext); return T_PARA;}
+{DR_PARA} 	{return T_PARA;}
 
-{DR_REF} 	{printf("ref: %s\n", yytext); return T_REF;}
+{DR_REF} 	{return T_REF;}
 
-{DR_SAL} 	{printf("sal: %s\n", yytext); return T_SAL;}
+{DR_SAL} 	{return T_SAL;}
 
-{DR_SI}		{printf("si: %s\n", yytext); return T_SI;}
+{DR_SI}		{return T_SI;}
 
-{DR_TABLA} 	{printf("tabla: %s\n", yytext); return T_TABLA;}
+{DR_TABLA} 	{return T_TABLA;}
 
-{DR_TIPO} 	{printf("tipo: %s\n", yytext); return T_TIPO;}
+{DR_TIPO} 	{return T_TIPO;}
 
-{DR_TUPLA} 	{printf("tupla: %s\n", yytext); return T_TUPLA;}
+{DR_TUPLA} 	{return T_TUPLA;}
 
-{DR_VAR} 	{printf("var: %s\n", yytext); return T_VAR;}
+{DR_VAR} 	{return T_VAR;}
 
-{DR_OP_RESTA} 	{printf("Operador resta: %s\n", yytext); return T_OP_RESTA;}
+{DR_OP_RESTA} 	{return T_OP_RESTA;}
 
-{DR_OP_SUMA} 	{printf("Operador suma: %s\n", yytext); return T_OP_SUMA;}
+{DR_OP_SUMA} 	{return T_OP_SUMA;}
 
-{DR_OP_MULTI} 	{printf("Operador multiplicaión: %s\n", yytext); return T_OP_MULTI;}
+{DR_OP_MULTI} 	{return T_OP_MULTI;}
 
-{DR_OP_DIV} 	{printf("operador división: %s\n", yytext); return T_OP_DIV;}
+{DR_OP_DIV} 	{return T_OP_DIV;}
 
-{DR_OP_DIV_ENT} {printf("operador división entera: %s\n", yytext); return T_OP_DIV_ENT;}
+{DR_OP_DIV_ENT} {return T_OP_DIV_ENT;}
 
-{DR_OP_MOD} 	{printf("Operador mod: %s\n", yytext); return T_OP_MOD;}
+{DR_OP_MOD} 	{return T_OP_MOD;}
 
-{DR_LITERAL_ENTERO}	{printf("Literal entero: %d \n", atoi(yytext)); yylval.int_val = atoi(yytext); return T_LITERAL_ENTERO;}
+{DR_LITERAL_ENTERO}	{
+                        yylval.int_val = atoi(yytext);
+                        return T_LITERAL_ENTERO;
+                    }
 
-{DR_LITERAL_REAL}	{printf("Literal real: %lf \n", atof(yytext)); yylval.float_val = atof(yytext); return T_LITERAL_REAL ;}
+{DR_LITERAL_REAL}	{
+                        yylval.float_val = atof(yytext);
+                        return T_LITERAL_REAL ;
+                    }
 
-{DR_LITERAL_BOOLEANO} {printf("Literal booleano: %s \n", yytext); yylval.int_val = verd_o_falso(yytext); return T_LITERAL_BOOLEANO;}
+{DR_LITERAL_BOOLEANO} {
+                        yylval.int_val = verd_o_falso(yytext);
+                        return T_LITERAL_BOOLEANO;
+                    }
 
-{DR_LITERAL_CADENA} {printf( "Literal cadena: %s\n", yytext); yylval.str_val = malloc(yyleng * sizeof(char));
+{DR_LITERAL_CADENA} {
+                        yylval.str_val = malloc(yyleng * sizeof(char));
+                        strcpy(yylval.str_val, yytext);  
+                        return T_LITERAL_CADENA;
+                    }
 
-                    strcpy(yylval.str_val, yytext);  return T_LITERAL_CADENA;}
+{DR_LITERAL_CARACTER}   {
+                        yylval.char_val = yytext[0];
+                        return T_LITERAL_CARACTER;
+                        }
 
-{DR_LITERAL_CARACTER} {printf( "Literal caracter: %s\n", yytext); yylval.char_val = yytext[0]; return T_LITERAL_CARACTER;}
+{DR_ASIGNACION} {return T_ASIGNACION;}
 
-{DR_ASIGNACION} {printf("Asignación: %s\n", yytext); return T_ASIGNACION;}
+{DR_COMP_SECUENCIAL} {return T_COMP_SECUENCIAL;}
 
-{DR_COMP_SECUENCIAL} {printf("Composición secuencial: %s\n", yytext); return T_COMP_SECUENCIAL;}
+{DR_SEPARADOR} {return T_SEPARADOR;}
 
-{DR_SEPARADOR} {printf("Separador: %s\n", yytext); return T_SEPARADOR;}
+{DR_SUBRANGO} {return T_SUBRANGO;}
 
-{DR_SUBRANGO} {printf("Subrango: %s\n", yytext); return T_SUBRANGO;}
+{DR_DEF_TIPO} {return T_DEF_TIPO;}
 
-{DR_DEF_TIPO} {printf("Definir tipos: %s\n", yytext); return T_DEF_TIPO;}
+{DR_SIMBOLO_BLOQUE_IF} {return T_SIMBOLO_BLOQUE_IF;}
 
-{DR_SIMBOLO_BLOQUE_IF} {printf("Simbolo if: %s\n", yytext); return T_SIMBOLO_BLOQUE_IF;}
+{DR_SIMBOLO_ELSE} {return T_SIMBOLO_ELSE;}
 
-{DR_SIMBOLO_ELSE} {printf("Simbolo else: %s\n", yytext); return T_SIMBOLO_ELSE;}
+{DR_INICIO_ARRAY} {return T_INICIO_ARRAY;}
 
-{DR_INICIO_ARRAY} {printf("Simbolo crear tipo: %s\n", yytext); return T_INICIO_ARRAY;}
+{DR_TIPO_BOOLEANO} {
+                    yylval.int_val = BOOLEANO;
+                    return T_TIPO_BOOLEANO;
+                    }
 
-{DR_TIPO_BOOLEANO} {printf("Booleano: %s\n", yytext); yylval.int_val = BOOLEANO; return T_TIPO_BOOLEANO;}
+{DR_TIPO_CARACTER} {
+                    yylval.int_val = CARACTER;
+                    return T_TIPO_CARACTER;
+                    }
 
-{DR_TIPO_CARACTER} {printf("Caracter: %s\n", yytext); yylval.int_val = CARACTER; return T_TIPO_CARACTER;}
+{DR_TIPO_ENTERO} {
+                    yylval.int_val = ENTERO; 
+                    return T_TIPO_ENTERO;
+                }
 
-{DR_TIPO_ENTERO} {printf("Entero: %s\n", yytext); yylval.int_val = ENTERO;  return T_TIPO_ENTERO;}
+{DR_TIPO_REAL} {
+                yylval.int_val = REAL;
+                return T_TIPO_REAL;
+                }
 
-{DR_TIPO_REAL} {printf("Real: %s\n", yytext); yylval.int_val = REAL; return T_TIPO_REAL;}
+{DR_TIPO_CADENA} {
+                yylval.int_val = CADENA;
+                return T_TIPO_CADENA;
+                }
 
-{DR_TIPO_CADENA} {printf("Cadena: %s\n", yytext); yylval.int_val = CADENA; return T_TIPO_CADENA;}
+{DR_ID}        {
+                yylval.str_val = malloc(yyleng * sizeof(char));
+                strcpy(yylval.str_val, yytext);
+                return T_ID;
+                }
 
-{DR_ID}        {printf("Identificador: %s\n", yytext );  yylval.str_val = malloc(yyleng * sizeof(char));
+{DR_PARENTESIS_APERTURA} {return T_PARENTESIS_APERTURA;}
 
-                    strcpy(yylval.str_val, yytext); return T_ID;}
+{DR_PARENTESIS_CLAUSURA} {return T_PARENTESIS_CLAUSURA;}
 
-{DR_PARENTESIS_APERTURA} {printf("Parentesis apertura: %s\n", yytext); return T_PARENTESIS_APERTURA;}
+{DR_OP_REL_MENOR} {return T_OP_REL_MENOR;}
 
-{DR_PARENTESIS_CLAUSURA} {printf("Parentesis clausura: %s\n", yytext); return T_PARENTESIS_CLAUSURA;}
+{DR_OP_REL_MAYOR} {return T_OP_REL_MAYOR;}
 
-{DR_OP_REL_MENOR} {printf("Operador relacional menor: %s\n", yytext); return T_OP_REL_MENOR;}
+{DR_OP_REL_IGUAL} {return T_OP_REL_IGUAL;}
 
-{DR_OP_REL_MAYOR} {printf("Operador relacional mayor: %s\n", yytext); return T_OP_REL_MAYOR;}
+{DR_OP_REL_DIF} {return T_OP_REL_DIF;}
 
-{DR_OP_REL_IGUAL} {printf("Operador relacional igual: %s\n", yytext); return T_OP_REL_IGUAL;}
+{DR_OP_REL_MENOR_IGUAL} {return T_OP_REL_MENOR_IGUAL;}
 
-{DR_OP_REL_DIF} {printf("Operador relacional diferente: %s\n", yytext); return T_OP_REL_DIF;}
+{DR_OP_REL_MAYOR_IGUAL} {return T_OP_REL_MAYOR_IGUAL;}
 
-{DR_OP_REL_MENOR_IGUAL} {printf("Operador relacional menor o igual: %s\n", yytext); return T_OP_REL_MENOR_IGUAL;}
-
-{DR_OP_REL_MAYOR_IGUAL} {printf("Operador relacional mayor o igual: %s\n", yytext); return T_OP_REL_MAYOR_IGUAL;}
-
-{DR_COMENTARIO} {printf("Comentario: %s\n", yytext); return T_COMENTARIO;}
+{DR_COMENTARIO} {return T_COMENTARIO;}
 
 {DR_SPACE} {}
 
-{DR_PUNTO} {printf("Punto: %s\n", yytext); return T_PUNTO;}
+{DR_PUNTO} {return T_PUNTO;}
 
 .           {printf( "TOKEN SIN RECONOCER: %s\n", yytext );}
 

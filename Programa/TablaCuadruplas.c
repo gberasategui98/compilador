@@ -1,3 +1,7 @@
+/*
+* Autores: Ioar Crespo y Guilllermo Berasategui
+*/
+
 #include "TablaCuadruplas.h"
 #include "TS.h"
 #include <stdlib.h>
@@ -9,6 +13,7 @@
 
 extern TablaCuadruplas *TC;
 
+/* Función que crea la TC vacia*/
 TablaCuadruplas* crear_TC(){
     TablaCuadruplas *TC = (TablaCuadruplas*) malloc(sizeof(TablaCuadruplas));
     TC->nextquad = 0;
@@ -16,6 +21,7 @@ TablaCuadruplas* crear_TC(){
     return TC;
 }
 
+/* Añade una instruccion a la tabla de cuadruplas*/
 void gen(TablaCuadruplas *tc, int operador, float operando1, float operando2, int destino){
     Quad *new_quad = (struct Quad*) malloc(sizeof(struct Quad));
 	Quad *aux;
@@ -38,18 +44,20 @@ void gen(TablaCuadruplas *tc, int operador, float operando1, float operando2, in
     }
 }
 
+/*Imprime la tabla de cuadruplas por la pantalla*/
 void imprimir_tc(){
 	printf("\n----------------------- Tabla de Cuadruplas -----------------------\n");
 	Quad* actual = TC->primer_quad;
     	int indice = 0;
   	while (actual != NULL) {
-		printf("%d -- Operador: %d. Operando1: %.2f. Operando2: %.2f. Destino: %d.\n", indice, actual->operador, actual->operando1, actual->operando2, actual->destino);
+		printf("%d -- Operador: %d. Operando1: %.3f. Operando2: %.3f. Destino: %d.\n", indice, actual->operador, actual->operando1, actual->operando2, actual->destino);
 		actual = actual->next;
 		indice +=1;
     	}
 	printf("--------------------------------------------------------------------\n");
 }
 
+/*Crea una lista con primer valor 'val'*/
 lista makelist(int val){
     lista *l = (lista*) malloc(sizeof(struct lista));
     l->first = (elem_lista*) malloc(sizeof(struct elem_lista));
@@ -57,23 +65,9 @@ lista makelist(int val){
     l->first->next = NULL;
     return *l;
 }
-/*
-void anadir_final(lista **nueva_lista, elem_lista * elem){
-    elem_lista * aux;
-    aux = (*nueva_lista)->first;
-    printf("Nada mas entrar: %p, %p\n", aux, aux->next);
-    
-    while(aux->next!=NULL){
-        sleep(5);
-        aux = aux->next;
-        printf("%p, %p, %d\n", aux, aux->next,aux->valor);
-    }
-    aux->next = elem;
-    
-    return;
-}*/
 
-lista merge(lista l1, lista l2){//Creo que ahora esta bien
+/*Une dos listas*/
+lista merge(lista l1, lista l2){
     lista nueva_lista;
     elem_lista *recorrer;
 	nueva_lista = l1;
@@ -85,10 +79,10 @@ lista merge(lista l1, lista l2){//Creo que ahora esta bien
     return nueva_lista;
 }
 
+/*Comprueba si una dirección esta en la lista*/
 int quad_en_lista(int indice, lista list){
     elem_lista *recorrer = list.first;
     while(recorrer!=NULL){
-        //printf("%d, %d\n", indice, recorrer->valor);
         if(indice==recorrer->valor){
             return 1;
         }
@@ -97,6 +91,7 @@ int quad_en_lista(int indice, lista list){
     return 0;
 }
 
+/*Añade el 'valor' a todas los gotos sin completar especificados en 'list'*/ 
 void backpatch(TablaCuadruplas* TC, lista list, int valor){
     int indice = 0;
     Quad *recorrer = TC->primer_quad;
@@ -110,6 +105,7 @@ void backpatch(TablaCuadruplas* TC, lista list, int valor){
     return;
 }
 
+/*Comprueba si una lista esta vacia*/
 int empty(tipo_sentencia elem){
     if(elem.next.first==NULL){
         return 1;
@@ -119,8 +115,9 @@ int empty(tipo_sentencia elem){
     }
 }
 
+/*Genera el codigo de tres direcciones en un fichero*/
 void generarCodigo(TablaCuadruplas* tc,TablaSimbolos* ts){
-	printf("\nGenerando codigo de tres direcciones en out.proalg ...\n");
+	printf("\nGenerado codigo de tres direcciones en out.proalg ...\n");
 	int fd = open("out.proalg", O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (fd == -1){
 		printf("Error generando codigo: no se pudo crear el archivo.");
@@ -139,8 +136,7 @@ void generarCodigo(TablaCuadruplas* tc,TablaSimbolos* ts){
 		indice++;
 		switch(actual->operador){
 			case TC_GOTO:
-				//if(actual->destino)
-					printf("goto %d\n", actual->destino);
+				printf("goto %d\n", actual->destino);
 				break;
 			case TC_ASIGNACION:
 				s1 = buscar_id(ts, actual->destino);
@@ -158,38 +154,32 @@ void generarCodigo(TablaCuadruplas* tc,TablaSimbolos* ts){
 			case TC_GOTO_OP_REL_IGUAL:
 				s1 = buscar_id(ts, actual->operando1);
 				s2 = buscar_id(ts, actual->operando2);
-				//if(actual->destino)
-					printf("if %s = %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
+				printf("if %s = %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
 				break;
 			case TC_GOTO_OP_REL_MENOR:
 				s1 = buscar_id(ts, actual->operando1);
 				s2 = buscar_id(ts, actual->operando2);
-				//if(actual->destino)
-					printf("if %s < %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
+				printf("if %s < %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
 				break;
 			case TC_GOTO_OP_REL_MENOR_IGUAL:
 				s1 = buscar_id(ts, actual->operando1);
 				s2 = buscar_id(ts, actual->operando2);
-				//if(actual->destino)
-					printf("if %s <= %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
+				printf("if %s <= %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
 				break;
 			case TC_GOTO_OP_REL_MAYOR:
 				s1 = buscar_id(ts, actual->operando1);
 				s2 = buscar_id(ts, actual->operando2);
-				//if(actual->destino)
-					printf("if %s > %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
+				printf("if %s > %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
 				break;
 			case TC_GOTO_OP_REL_MAYOR_IGUAL:
 				s1 = buscar_id(ts, actual->operando1);
 				s2 = buscar_id(ts, actual->operando2);
-				//if(actual->destino)
-					printf("if %s >= %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
+				printf("if %s >= %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
 				break;
 			case TC_GOTO_OP_REL_DIF:
 				s1 = buscar_id(ts, actual->operando1);
 				s2 = buscar_id(ts, actual->operando2);
-				//if(actual->destino)
-					printf("if %s <> %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
+				printf("if %s <> %s goto %d\n", s1->nombre, s2->nombre, actual->destino);
 				break;
 			case TC_OP_SUMA_REAL:
 			case TC_OP_SUMA_ENT:
@@ -262,7 +252,7 @@ void generarCodigo(TablaCuadruplas* tc,TablaSimbolos* ts){
 		}       
 		actual = actual->next; 
 	}
-	//close(fd);
+	close(fd);
 }
 
 

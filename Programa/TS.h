@@ -1,6 +1,13 @@
 #ifndef BC_TS_H
 #define BC_TS_H
 
+/*
+* Autores: Ioar Crespo y Guilllermo Berasategui
+*/
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 #define ETIQUETA 0
 #define VARIABLE 1
@@ -14,11 +21,6 @@
 #define CARACTER 43
 #define BOOLEANO 44
 
-#define PASO_VALOR 60
-#define PASO_REFERENCIA 61
-
-
-
 struct Param{
     int tipo_param;
     int tipo_paso;
@@ -30,12 +32,11 @@ struct Atributo{
 };
 
 typedef struct Simbolo{
-    /*Info general*/
     char *nombre;
     int tipo_simbolo;
     int id;
-    int tipo_variable; //Tipo de la variable, del array o el valor de returno de la funcion
-    int i_o_variable; //0:Variable de entrada, 1:Variable de salida y 2:Variable de ejecución
+    int tipo_variable; 
+    int i_o_variable; //0:Variable de entrada, 1:Variable de salida y 2:Otras variables
 
     struct Simbolo *next;
 }Simbolo;
