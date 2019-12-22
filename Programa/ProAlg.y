@@ -652,15 +652,21 @@ int main( int argc, char **argv ) {
 	TC = crear_TC(); // Crear tabla de cuadruplas
 	
 	int flag;
-	yyin = fopen( argv[1], "r" );
-	flag = yyparse();
+	if(yyin = fopen( argv[1], "r" )){
+		flag = yyparse();
 	
-	imprimir_ts(TS);
-	imprimir_tc();
+		imprimir_ts(TS);
+		imprimir_tc();
 
-	generarCodigo(TC, TS);
+		generarCodigo(TC, TS);
+		
+		return flag;
+	}
+	else{
+		printf("No existe el archivo %s\n", argv[1]);
+		return 0;
+	}
 	
-	return flag;
 }
 
 void yyerror(const char* s) {

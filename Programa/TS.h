@@ -21,16 +21,6 @@
 #define CARACTER 43
 #define BOOLEANO 44
 
-struct Param{
-    int tipo_param;
-    int tipo_paso;
-};
-
-struct Atributo{
-    char *nombre;
-    int tipo;
-};
-
 typedef struct Simbolo{
     char *nombre;
     int tipo_simbolo;
